@@ -24,7 +24,8 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="Ingresar" HorizontalAlignment="Center" Style="{StaticResource TitleTextViewStyle}">
                                 </TextBlock>
@@ -54,6 +55,10 @@
                                 </Grid>
                                 <TextBlock Grid.Row="6" Text="Olvidé mi contraseña" Style="{StaticResource InstructionsTextViewStyle}" Foreground="{StaticResource StrongPinkBrush}" TextDecorations="Underline" Cursor="Hand" MouseDown="ForgotPassword_Click" />
                                 <Button x:Name="btnLogin" Grid.Row="7" Width="200" Content="Iniciar sesión" Style="{StaticResource ButtonStyle}" Click="BtnLogin_Click" />
+                                <StackPanel Grid.Row="8" Orientation="Vertical" HorizontalAlignment="Center">
+                                    <TextBlock Text="¿No tienes una cuenta?" Style="{StaticResource InstructionsTextViewStyle}" />
+                                    <TextBlock Text="Registrate aquí" Style="{StaticResource InstructionsTextViewStyle}" HorizontalAlignment="Center" Foreground="{StaticResource StrongPinkBrush}" TextDecorations="Underline" Cursor="Hand" MouseDown="SignUp_Click" />
+                                </StackPanel>
                             </Grid>
                         </Border>
                     </StackPanel>

@@ -24,5 +24,10 @@ namespace CycleCare.Views
         {
             InitializeComponent();
         }
+
+        private void BtnSendMail_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

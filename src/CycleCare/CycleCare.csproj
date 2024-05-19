@@ -201,5 +201,11 @@
   <ItemGroup>
     <Resource Include="Views\Resources\Icons\goBackIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\password_box_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\email_circle.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

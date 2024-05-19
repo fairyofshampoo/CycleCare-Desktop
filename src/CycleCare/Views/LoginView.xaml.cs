@@ -196,5 +196,11 @@ namespace CycleCare.Views
         {
 
         }
+
+        private void SignUp_Click(object sender, MouseButtonEventArgs e)
+        {
+            SignUpView signUpView = new SignUpView();
+            NavigationService.Navigate(signUpView);
+        }
     }
 }

@@ -116,7 +116,7 @@
 
     <!-- Estilo para TextBlock -->
     <Style x:Key="TitleTextViewStyle" TargetType="TextBlock">
-        <Setter Property="FontWeight" Value="Black"/>
+        <Setter Property="FontWeight" Value="Heavy"/>
         <Setter Property="FontSize" Value="40"/>
         <Setter Property="Foreground" Value="{StaticResource MainPinkBrush}"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>

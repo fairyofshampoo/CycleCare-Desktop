@@ -35,13 +35,13 @@ namespace CycleCare.Service
 
                     if (httpResponseMessage != null)
                     {
-                        response.Code = (int)httpResponseMessage.StatusCode;
-
                         if (httpResponseMessage.IsSuccessStatusCode)
                         {
                             string json = await httpResponseMessage.Content.ReadAsStringAsync();
                             response = JsonConvert.DeserializeObject<Response>(json);
                         }
+
+                        response.Code = (int)httpResponseMessage.StatusCode;
                     }
                     else
                     {

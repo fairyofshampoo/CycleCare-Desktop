@@ -40,6 +40,7 @@ namespace CycleCare.Views
 
         private void DisplayMainMenuView()
         {
+            DialogManager.ShowSuccessMessageBox("Bienvenido tonoto");
         }
 
 
@@ -51,11 +52,12 @@ namespace CycleCare.Views
                 string username = txtUsername.Text;
                 string password = GetPassword();
                 string passwordHashed = EncriptionUtil.ToSHA2Hash(password);
+                //LUEGO DEBO MANDAR PASSWORD HASHED
 
                 var user = new User()
                 {
                     Username = username,
-                    Password = passwordHashed
+                    Password = password
                 };
 
                 RequestLogin(user);
@@ -71,15 +73,12 @@ namespace CycleCare.Views
             Response response = await UserService.Login(user);
             switch (response.Code)
             {
-                case (int)HttpStatusCode.OK:
+                case (int)HttpStatusCode.Created:
                     SaveToken(response.Token);
                     DisplayMainMenuView();
                     break;
                 case (int)HttpStatusCode.BadRequest:
                     DialogManager.ShowWarningMessageBox("Usuario o contraseña incorrectos. Revisa tus credenciales.");
-                    break;
-                default:
-                    DialogManager.ShowErrorMessageBox("Intente de nuevo más tarde.");
                     break;
             }
         }
@@ -184,13 +183,18 @@ namespace CycleCare.Views
 
                 if (imgPasswordIcon != null)
                 {
-                    imgPasswordIcon.Source = new BitmapImage(new Uri($"/UserInterfaceLayer/Resources/Icons/{iconPassword}", UriKind.Relative));
+                    imgPasswordIcon.Source = new BitmapImage(new Uri($"/Views/Resources/Icons/{iconPassword}", UriKind.Relative));
                 }
             }
             catch (UriFormatException)
             {
                 DialogManager.ShowErrorMessageBox("No se pudo encontrar el archivo de iconos para contraseña");
             }
+        }
+
+        private void ForgotPassword_Click(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

@@ -40,7 +40,8 @@ namespace CycleCare.Views
 
         private void DisplayMainMenuView()
         {
-            DialogManager.ShowSuccessMessageBox("Bienvenido tonoto");
+            RemindersView remindersView = new RemindersView();
+            NavigationService.Navigate(remindersView);
         }
 
 
@@ -194,7 +195,8 @@ namespace CycleCare.Views
 
         private void ForgotPassword_Click(object sender, MouseButtonEventArgs e)
         {
-
+            ForgotPasswordView forgotPasswordView = new ForgotPasswordView();
+            NavigationService.Navigate(forgotPasswordView);
         }
 
         private void SignUp_Click(object sender, MouseButtonEventArgs e)

@@ -29,5 +29,25 @@ namespace CycleCare.Views
         {
 
         }
+
+        private void BtnGoBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
+        private void BtnConfirmCode_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnResendCode_Click(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void BtnSavePassword_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

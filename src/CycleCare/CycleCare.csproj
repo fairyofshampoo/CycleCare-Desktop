@@ -79,11 +79,17 @@
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MenuBar.xaml.cs">
+      <DependentUpon>MenuBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewReminderView.xaml.cs">
       <DependentUpon>NewReminderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RemindersView.xaml.cs">
       <DependentUpon>RemindersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReminderUC.xaml.cs">
+      <DependentUpon>ReminderUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Resources\DialogWindow.xaml.cs">
       <DependentUpon>DialogWindow.xaml</DependentUpon>
@@ -125,11 +131,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MenuBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NewReminderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RemindersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReminderUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,6 +220,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Resources\Icons\email_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\calendar-icon.png" />
+    <Resource Include="Views\Resources\Icons\chart-icon.png" />
+    <Resource Include="Views\Resources\Icons\news-icon.png" />
+    <Resource Include="Views\Resources\Icons\reminders-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

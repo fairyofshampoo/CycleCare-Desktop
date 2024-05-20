@@ -24,5 +24,10 @@ namespace CycleCare.Views
         {
             InitializeComponent();
         }
+
+        private void BtnSaveReminder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

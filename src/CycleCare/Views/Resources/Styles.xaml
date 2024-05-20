@@ -137,4 +137,45 @@
         <Setter Property="Foreground" Value="{StaticResource GrayBlueBrush}"/>
         <Setter Property="FontFamily" Value="{StaticResource PoppinsFont}"/>
     </Style>
+
+    <!-- Estilo para Calendario -->
+    <Style x:Key="DatePickerStyle" TargetType="DatePicker">
+        <Setter Property="Foreground" Value="{StaticResource BlackBrush}" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="BorderBrush" Value="LightGray" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="FontFamily" Value="{StaticResource PoppinsFont}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DatePicker">
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10">
+                            <DatePickerTextBox x:Name="PART_TextBox" 
+                                           Foreground="{TemplateBinding Foreground}"
+                                           Background="Transparent"
+                                           BorderThickness="0"
+                                           Padding="{TemplateBinding Padding}" />
+                        </Border>
+                        <Popup x:Name="PART_Popup"
+                           AllowsTransparency="True"
+                           Placement="Bottom"
+                           StaysOpen="False">
+                            <Border Background="White"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1">
+                                <Calendar x:Name="PART_Calendar" />
+                            </Border>
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

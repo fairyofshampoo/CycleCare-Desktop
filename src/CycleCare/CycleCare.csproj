@@ -227,5 +227,11 @@
     <Resource Include="Views\Resources\Icons\news-icon.png" />
     <Resource Include="Views\Resources\Icons\reminders-icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\health-heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\delete-icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

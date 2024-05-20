@@ -24,5 +24,15 @@ namespace CycleCare.Views
         {
             InitializeComponent();
         }
+
+        private void Reminder_Clicked(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

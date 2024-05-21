@@ -18,5 +18,10 @@ namespace CycleCare.Views
             NewReminderView newReminderView = new NewReminderView();
             NavigationService.Navigate(newReminderView);
         }
+
+        private void BtnGoBack_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }

@@ -34,5 +34,10 @@ namespace CycleCare.Views
         {
 
         }
+
+        private void Supplier_Click(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

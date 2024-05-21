@@ -4,6 +4,7 @@ using CycleCare.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,12 +33,8 @@ namespace CycleCare.Views
         {
             if (IsEmailValid(txtMail.Text))
             {
-                var user = new User()
-                {
-                    Email = txtMail.Text
-                };
 
-                SendMail(user);
+                SendMail(txtMail.Text);
             }
             else
             {
@@ -65,9 +62,19 @@ namespace CycleCare.Views
         }
 
 
-        private async void SendMail(User user)
+        private async void SendMail(string email)
         {
-            Response response = await UserService.Login(user);
+            Response response = await UserService.RequestResetPassword(email);
+            switch (response.Code)
+            {
+                case (int)HttpStatusCode.Created:
+                    codeStackPanel.Visibility = Visibility.Visible;
+                    mailStackPanel.Visibility = Visibility.Collapsed;
+                    break;
+                case(int)HttpStatusCode.NotFound:
+                    DialogManager.ShowWarningMessageBox("No se encontró el email ingresado. Intenta nuevamente");
+                    break;
+            }
         }
 
         private void BtnGoBack_Click(object sender, RoutedEventArgs e)
@@ -77,17 +84,81 @@ namespace CycleCare.Views
 
         private void BtnConfirmCode_Click(object sender, RoutedEventArgs e)
         {
+            if(ValidateCode(txtCode.Text))
+            {
+                codeStackPanel.Visibility = Visibility.Collapsed;
+                passwordStackPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                DialogManager.ShowWarningMessageBox("El código ingresado no es válido.");
+            }
+        }
 
+        private bool ValidateCode(string text)
+        {
+            return !string.IsNullOrEmpty(text) && text.Length <= 8;
         }
 
         private void BtnResendCode_Click(object sender, MouseButtonEventArgs e)
         {
-
+            SendMail(txtMail.Text);
         }
 
         private void BtnSavePassword_Click(object sender, RoutedEventArgs e)
         {
+            if (ValidatePasswords(txtPassword.Text, txtConfirmPassword.Text))
+            {
+                UpdatePassword();
+            }
+        }
 
+        private async void UpdatePassword()
+        {
+            string passwordHashed = EncriptionUtil.ToSHA2Hash(txtPassword.Text);
+            string confirmPasswordHashed = EncriptionUtil.ToSHA2Hash(txtConfirmPassword.Text);
+            var request = new ChangePasswordRequest()
+            {
+                NewPassword = passwordHashed,
+                ConfirmPassword = confirmPasswordHashed,
+                Token = txtCode.Text
+            };
+
+            Response response = await UserService.UpdatePassword(txtMail.Text, request);
+            switch (response.Code)
+            {
+                case (int)HttpStatusCode.OK:
+                    DialogManager.ShowSuccessMessageBox("Contraseña actualizada correctamente");
+                    NavigationService.GoBack();
+                    break;
+                case (int)HttpStatusCode.BadRequest:
+                    DialogManager.ShowWarningMessageBox("Las contraseñas no coinciden");
+                    break;
+                case(int)HttpStatusCode.NotFound:
+                    DialogManager.ShowWarningMessageBox("No se encontró el email ingresado. Intenta nuevamente");
+                    break;
+                case(int)HttpStatusCode.Unauthorized:
+                    DialogManager.ShowWarningMessageBox("El código ingresado es inválido o ha experidado. Intenta nuevamente");
+                    break;
+            }
+        }
+
+        private bool ValidatePasswords(string txtPassword, string txtPasswordConfirm)
+        {
+            if (string.IsNullOrEmpty(txtPassword) || txtPassword.Length < 8)
+            {
+                return false;
+            }
+
+            if (txtPassword != txtPasswordConfirm)
+            {
+                return false;
+            }
+
+            var passwordRegex = new System.Text.RegularExpressions.Regex(
+                @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+
+            return passwordRegex.IsMatch(txtPassword);
         }
     }
 }

@@ -47,11 +47,9 @@ namespace CycleCare.Views
         private async void CreateReminder(Reminder reminder)
         {
             Response response = await ReminderService.CreateReminder(reminder);
-            switch (response.Code)
+            if(response.Code == (int)HttpStatusCode.Created)
             {
-                case (int)HttpStatusCode.Created:
-                    DialogManager.ShowSuccessMessageBox("Recordatorio creado exitosamente");
-                    break;
+                DialogManager.ShowSuccessMessageBox("Recordatorio creado exitosamente");
             }
         }
 

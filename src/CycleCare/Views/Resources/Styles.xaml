@@ -196,4 +196,12 @@
         </Setter>
     </Style>
 
+    <Style x:Key="NoItemsLabelStyle" TargetType="Label">
+        <Setter Property="Content" Value="No hay elementos registrados"/>
+        <Setter Property="FontFamily" Value="{StaticResource PoppinsFont}"/>
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="{StaticResource DarkGrayBrush}" />
+    </Style>
+
 </ResourceDictionary>

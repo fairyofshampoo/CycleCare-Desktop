@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CycleCare.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,19 @@ namespace CycleCare.Views
     /// </summary>
     public partial class ReminderUC : UserControl
     {
+        public RemindersView RemindersView { get; set; }
+        private Reminder ReminderData = new Reminder();
         public ReminderUC()
         {
             InitializeComponent();
+        }
+
+        public void SetReminderData(Reminder reminder)
+        {
+            ReminderData = reminder;
+            var reminderDate = reminder.CreationDate.ToLocalTime();
+            txtDate.Text = reminderDate.ToString();
+            txtTitle.Text = reminder.Title;
         }
 
         private void Reminder_Clicked(object sender, MouseButtonEventArgs e)

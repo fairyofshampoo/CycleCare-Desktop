@@ -24,18 +24,17 @@ namespace CycleCare.Views
         {
             if (IsReminderValid())
             {
+                int hours = Convert.ToInt32(((ComboBoxItem)cbHours.SelectedItem).Content.ToString());
+                int minutes = Convert.ToInt32(((ComboBoxItem)cbMinutes.SelectedItem).Content.ToString());
+                DateTime date = dpReminderDate.SelectedDate.GetValueOrDefault().Date;
+
                 var reminder = new Reminder()
                 {
                     Title = txtTitle.Text,
                     Description = txtDescription.Text,
-                    Date = dpReminderDate.SelectedDate.GetValueOrDefault(),
-                    Time = new DateTime(dpReminderDate.SelectedDate.GetValueOrDefault().Year,
-                                 dpReminderDate.SelectedDate.GetValueOrDefault().Month,
-                                 dpReminderDate.SelectedDate.GetValueOrDefault().Day,
-                                 (int)cbHours.SelectedItem,
-                                 (int)cbMinutes.SelectedItem,0)
+                    CreationDate = date.AddHours(hours).AddMinutes(minutes).AddSeconds(0)
                 };
-
+                Console.WriteLine("Reminder created at: " + reminder.CreationDate);
                 CreateReminder(reminder);
             }
             else

@@ -1,7 +1,10 @@
 ﻿using CycleCare.Models;
+using CycleCare.Service;
+using CycleCare.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -43,12 +46,26 @@ namespace CycleCare.Views
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            DeleteReminder();
         }
 
-        private void Supplier_Click(object sender, MouseButtonEventArgs e)
+        private async void DeleteReminder()
         {
-
+            string reminderId = ReminderData.Id.ToString();
+            Response response = await ReminderService.DeleteReminder(reminderId);
+            switch (response.Code)
+            {
+                case (int)HttpStatusCode.OK:
+                    DialogManager.ShowSuccessMessageBox("Recordatorio eliminado exitosamente.");
+                    RemindersView.RemoveReminder(this);
+                    break;
+                case (int)HttpStatusCode.Forbidden:
+                    DialogManager.ShowWarningMessageBox("No tienes permisos para eliminar este recordatorio.");
+                    break;
+                case (int)HttpStatusCode.NotFound:
+                    DialogManager.ShowWarningMessageBox("No se encontró el recordatorio.");
+                    break;
+            }
         }
     }
 }

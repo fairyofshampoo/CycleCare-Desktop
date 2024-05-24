@@ -75,5 +75,10 @@ namespace CycleCare.Views
         {
             NavigationService.GoBack();
         }
+
+        public void RemoveReminder(ReminderUC reminderUC)
+        {
+            lstReminders.Items.Remove(reminderUC);
+        }
     }
 }

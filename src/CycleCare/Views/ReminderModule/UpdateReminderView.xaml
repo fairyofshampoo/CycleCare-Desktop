@@ -14,7 +14,7 @@
                         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Height="70" Margin="28,11,0,0" BorderThickness="0" Click="BtnGoBack_Click" Cursor="Hand">
                             <Button.Template>
                                 <ControlTemplate>
-                                    <Image Source="./Resources/Icons/goBackIcon.png" Stretch="UniformToFill">
+                                    <Image Source="../Resources/Icons/goBackIcon.png" Stretch="UniformToFill">
                                     </Image>
                                 </ControlTemplate>
                             </Button.Template>
@@ -32,7 +32,7 @@
                         <TextBox x:Name="txtDescription" TextWrapping="Wrap" Style="{StaticResource EditTextForDescriptionStyle}" Background="{StaticResource LightGrayBrush}" />
 
                         <TextBlock Text="FECHA DEL RECORDATORIO" Margin="50,20,0,0" Grid.Row="2" Style="{StaticResource InstructionsTextViewStyle}" />
-                        <DatePicker x:Name="dpReminderDate" Width="400" Style="{StaticResource DatePickerStyle}" Background="{StaticResource LightGrayBrush}" />
+                        <DatePicker x:Name="dpReminderDate" Width="400" Style="{StaticResource DatePickerStyle}" CalendarStyle="{StaticResource CalendarStyle}" Cursor="Hand" Background="{StaticResource LightGrayBrush}" MouseDown="ShowCalendar" />
 
                         <TextBlock Text="HORA DEL RECORDATORIO" Margin="50,20,0,0" Grid.Row="2" Style="{StaticResource InstructionsTextViewStyle}" />
                         <StackPanel Orientation="Horizontal" Margin="50,0,0,0">

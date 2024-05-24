@@ -15,7 +15,7 @@
                 BorderThickness="0" Click="BtnGoBack_Click" Cursor="Hand">
                             <Button.Template>
                                 <ControlTemplate>
-                                    <Image Source="./Resources/Icons/goBackIcon.png" Stretch="UniformToFill">
+                                    <Image Source="../Resources/Icons/goBackIcon.png" Stretch="UniformToFill">
                                     </Image>
                                 </ControlTemplate>
                             </Button.Template>

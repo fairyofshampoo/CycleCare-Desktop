@@ -174,5 +174,13 @@ namespace CycleCare.Views
 
             return true;
         }
+
+        private void ShowCalendar(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is DatePicker datePicker)
+            {
+                datePicker.IsDropDownOpen = true;
+            }
+        }
     }
 }

@@ -44,12 +44,12 @@
                                     <ToggleButton x:Name = "tgbtnPasswordVisibility" Grid.Column = "1" Cursor = "Hand" Checked = "TgbtnPasswordVisibility_Checked" Margin="5,0,0,0" Unchecked = "TgbtnPasswordVisibility_Unchecked">
                                         <ToggleButton.Template>
                                             <ControlTemplate>
-                                                <Image x:Name="imgPasswordIcon" Source="./Resources/Icons/VisibleIcon.png" Width = "30" Height = "30"/>
+                                                <Image x:Name="imgPasswordIcon" Source="../Resources/Icons/VisibleIcon.png" Width = "30" Height = "30"/>
                                             </ControlTemplate>
                                         </ToggleButton.Template>
                                     </ToggleButton>
                                     <Grid x:Name="gridPasswordDisplay" HorizontalAlignment="Left"  Grid.Column="0" Visibility="Collapsed" IsEnabled="False">
-                                        <TextBox x:Name="txtPasswordDisplay" Style="{StaticResource EditTextStyle}"> </TextBox>
+                                        <TextBox x:Name="txtPasswordDisplay" Style="{StaticResource EditTextStyle}" Width="330"> </TextBox>
                                     </Grid>
                                 </Grid>
                                 <TextBlock Grid.Row="6" Text="Olvidé mi contraseña" Style="{StaticResource InstructionsTextViewStyle}" Foreground="{StaticResource StrongPinkBrush}" TextDecorations="Underline" Cursor="Hand" MouseDown="ForgotPassword_Click" />

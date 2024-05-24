@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Frame x:Name="NavigationFrame" Width="Auto" Height="Auto" Grid.Row="0" 
-               NavigationUIVisibility="Hidden" Source="Views/LoginView.xaml" Margin="0" />
+               NavigationUIVisibility="Hidden" Source="Views/UserModule/LoginView.xaml" Margin="0" />
 
     </Grid>
 </Window>

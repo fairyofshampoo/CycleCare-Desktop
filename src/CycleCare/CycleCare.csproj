@@ -236,5 +236,8 @@
   <ItemGroup>
     <Resource Include="Views\Resources\Icons\delete-icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

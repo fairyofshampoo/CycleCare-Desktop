@@ -20,8 +20,11 @@
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>
+                        <ScrollViewer>
                         <Grid HorizontalAlignment="Center" Margin="10">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto"/>
@@ -50,22 +53,27 @@
                                 </TextBlock>
                             </StackPanel>
                             <TextBlock Text="INTRODUCE TU NOMBRE" Margin="50,0,0,0" Grid.Row="2" Style="{StaticResource InstructionsTextViewStyle}" />
-                            <TextBox x:Name="txtName"  Grid.Row="3" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
-                            <TextBlock Text="INGRESA TU CORREO ELECTRÓNICO" Margin="50,0,0,0" Grid.Row="4" Style="{StaticResource InstructionsTextViewStyle}" />
-                            <TextBox x:Name="txtEmail"  Grid.Row="5" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
-                            <TextBlock Text="INTRODUCE TU USUARIO" Margin="50,0,0,0" Grid.Row="6" Style="{StaticResource InstructionsTextViewStyle}" />
-                            <TextBox x:Name="txtUsername"  Grid.Row="7" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
-                            <TextBlock Text="INTRODUCE TU CONTRASEÑA" Margin="50,0,0,0" Grid.Row="8" Style="{StaticResource InstructionsTextViewStyle}" />
-                            <TextBox x:Name="txtPassword"  Grid.Row="9" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
-                            <TextBlock Grid.Row="10" Text="La contraseña debe tener al menso 8 caracteres e incluir al menos una mayúscula, minúscula, un número y un carácter especial" Margin="0,0,0,20" FontSize="12"  Width="450" TextWrapping="Wrap" Style="{StaticResource InstructionsTextViewStyle}" Foreground="{StaticResource StrongPinkBrush}"/>
-                            <TextBlock Text="¿CÓMO ES TU CICLO?" Margin="50,0,0,0" Grid.Row="11" Style="{StaticResource InstructionsTextViewStyle}" />
-                            <ComboBox x:Name="cmbCycle" Grid.Row="12" Width="400" Margin="0,0,0,20" Background="{StaticResource LightGrayBrush}" />
-                            <TextBlock Text="USUALMENTE ¿CUÁNTO DURA TU PERIODO?" Margin="50,0,0,0" Grid.Row="13" Style="{StaticResource InstructionsTextViewStyle}" />
-                            <TextBox x:Name="txtPeriodDuration"  Grid.Row="14" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
-                            <TextBlock Text="USUALMENTE ¿CUÁNTO DURA TU CICLO?" Margin="50,0,0,0" Grid.Row="15" Style="{StaticResource InstructionsTextViewStyle}" />
-                            <TextBox x:Name="txtCycleDuration"  Grid.Row="16" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
-                            <Button x:Name="btnRegister" Margin="0,20,0,0" Grid.Row="17" Width="200" Content="Registrar" Style="{StaticResource ButtonStyle}" Click="BtnRegister_Click" />
+                            <TextBox x:Name="txtName"  Grid.Row="3" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" /> 
+                            <TextBlock Text="INTRODUCE TU PRIMER APELLIDO" Margin="50,0,0,0" Grid.Row="4" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtFirstLastName"  Grid.Row="5" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
+                            <TextBlock Text="INTRODUCE TU SEGUNDO APELLIDO" Margin="50,0,0,0" Grid.Row="6" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtSecondLastName"  Grid.Row="7" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
+                            <TextBlock Text="INGRESA TU CORREO ELECTRÓNICO" Margin="50,0,0,0" Grid.Row="8" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtEmail"  Grid.Row="9" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
+                            <TextBlock Text="INTRODUCE TU USUARIO" Margin="50,0,0,0" Grid.Row="10" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtUsername"  Grid.Row="11" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
+                            <TextBlock Text="INTRODUCE TU CONTRASEÑA" Margin="50,0,0,0" Grid.Row="12" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtPassword"  Grid.Row="13" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
+                            <TextBlock Grid.Row="14" Text="La contraseña debe tener al menso 8 caracteres e incluir al menos una mayúscula, minúscula, un número y un carácter especial" Margin="0,0,0,20" FontSize="12"  Width="450" TextWrapping="Wrap" Style="{StaticResource InstructionsTextViewStyle}" Foreground="{StaticResource StrongPinkBrush}"/>
+                            <TextBlock Text="¿CÓMO ES TU CICLO?" Margin="50,0,0,0" Grid.Row="15" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <ComboBox x:Name="cmbCycle" Grid.Row="16" Width="400" Margin="0,0,0,20" Background="{StaticResource LightGrayBrush}" />
+                            <TextBlock Text="USUALMENTE ¿CUÁNTO DURA TU PERIODO?" Margin="50,0,0,0" Grid.Row="17" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtPeriodDuration"  Grid.Row="18" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
+                            <TextBlock Text="USUALMENTE ¿CUÁNTO DURA TU CICLO?" Margin="50,0,0,0" Grid.Row="19" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtCycleDuration"  Grid.Row="20" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
+                            <Button x:Name="btnRegister" Margin="0,20,0,0" Grid.Row="21" Width="200" Content="Registrar" Style="{StaticResource ButtonStyle}" Click="BtnRegister_Click" />
                         </Grid>
+                        </ScrollViewer>
                     </Grid>
                 </Grid>
             </StackPanel>

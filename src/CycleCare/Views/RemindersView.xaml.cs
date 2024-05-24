@@ -35,6 +35,9 @@ namespace CycleCare.Views
                 case (int)HttpStatusCode.NotFound:
                     ShowNoItemsLabel();
                     break;
+                case (int)HttpStatusCode.InternalServerError:
+                    DialogManager.ShowErrorMessageBox("Error al recuperar los recordatorios. Intente más tarde.");
+                    break;
             }
         }
 

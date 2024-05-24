@@ -18,14 +18,30 @@ namespace CycleCare.Views
         public NewReminderView()
         {
             InitializeComponent();
+            PopulateHoursAndMinutes();
         }
 
+        private void PopulateHoursAndMinutes()
+        {
+            cbHours.Items.Clear();
+            cbMinutes.Items.Clear();
+
+            for (int i = 0; i < 24; i++)
+            {
+                cbHours.Items.Add(i.ToString("D2"));
+            }
+
+            for (int i = 0; i < 60; i++)
+            {
+                cbMinutes.Items.Add(i.ToString("D2"));
+            }
+        }
         private void BtnSaveReminder_Click(object sender, RoutedEventArgs e)
         {
             if (IsReminderValid())
             {
-                int hours = Convert.ToInt32(((ComboBoxItem)cbHours.SelectedItem).Content.ToString());
-                int minutes = Convert.ToInt32(((ComboBoxItem)cbMinutes.SelectedItem).Content.ToString());
+                int hours = Convert.ToInt32(cbHours.SelectedItem.ToString());
+                int minutes = Convert.ToInt32(cbMinutes.SelectedItem.ToString());
                 DateTime date = dpReminderDate.SelectedDate.GetValueOrDefault().Date;
 
                 var reminder = new Reminder()
@@ -34,7 +50,6 @@ namespace CycleCare.Views
                     Description = txtDescription.Text,
                     CreationDate = date.AddHours(hours).AddMinutes(minutes).AddSeconds(0)
                 };
-                Console.WriteLine("Reminder created at: " + reminder.CreationDate);
                 CreateReminder(reminder);
             }
             else
@@ -49,6 +64,9 @@ namespace CycleCare.Views
             if(response.Code == (int)HttpStatusCode.Created)
             {
                 DialogManager.ShowSuccessMessageBox("Recordatorio creado exitosamente");
+            } else
+            {
+                DialogManager.ShowErrorMessageBox("Error al crear el recordatorio. Por favor, intente nuevamente.");
             }
         }
 
@@ -57,13 +75,14 @@ namespace CycleCare.Views
             return IsTitleValid(txtTitle.Text) &&
                    IsDescriptionValid(txtDescription.Text) &&
                    IsDateValid(dpReminderDate.SelectedDate) &&
-                   IsTimeValid(cbHours.SelectedItem as ComboBoxItem, cbMinutes.SelectedItem as ComboBoxItem);
+                   IsTimeValid();
         }
 
         private bool IsTitleValid(string title)
         {
             if (string.IsNullOrWhiteSpace(title) || title.Length > 70)
             {
+                Console.WriteLine("Title is not valid");
                 return false;
             }
             return true;
@@ -73,6 +92,7 @@ namespace CycleCare.Views
         {
             if (string.IsNullOrWhiteSpace(description) || description.Length > 200)
             {
+                Console.WriteLine("Description is not valid");
                 return false;
             }
             return true;
@@ -80,32 +100,40 @@ namespace CycleCare.Views
 
         private bool IsDateValid(DateTime? selectedDate)
         {
-            if (!selectedDate.HasValue || selectedDate.Value.Date <= DateTime.Now.Date)
+            if (!selectedDate.HasValue)
             {
+                Console.WriteLine("Date is not valid");
                 return false;
             }
             return true;
         }
 
-        private bool IsTimeValid(ComboBoxItem cbHours, ComboBoxItem cbMinutes)
+        private bool IsTimeValid()
         {
             if (cbHours == null || cbMinutes == null)
             {
+                Console.WriteLine("Time is not valid");
                 return false;
             }
-            int hours = int.Parse(cbHours.Content.ToString());
-            int minutes = int.Parse(cbMinutes.Content.ToString());
 
-            if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59)
+            int hours = Convert.ToInt32(cbHours.SelectedItem.ToString());
+            int minutes = Convert.ToInt32(cbMinutes.SelectedItem.ToString());
+            DateTime date = dpReminderDate.SelectedDate.GetValueOrDefault().Date;
+            date.AddHours(hours).AddMinutes(minutes).AddSeconds(0);
+            DateTime now = DateTime.Now;
+
+            if (date <= now)
             {
                 return false;
             }
+
             return true;
         }
 
         private void BtnGoBack_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            RemindersView remindersView = new RemindersView();
+            NavigationService.Navigate(remindersView);
         }
 
         private void ShowCalendar(object sender, RoutedEventArgs e)
@@ -114,11 +142,6 @@ namespace CycleCare.Views
             {
                 datePicker.IsDropDownOpen = true;
             }
-        }
-
-        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

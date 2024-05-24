@@ -54,7 +54,7 @@ namespace CycleCare.Views
                 var user = new User()
                 {
                     Username = username,
-                    Password = passwordHashed
+                    Password = password
                 };
 
                 RequestLogin(user);

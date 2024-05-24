@@ -41,7 +41,8 @@ namespace CycleCare.Views
 
         private void Reminder_Clicked(object sender, MouseButtonEventArgs e)
         {
-
+            UpdateReminderView updateReminderView = new UpdateReminderView(ReminderData);
+            RemindersView.NavigationService.Navigate(updateReminderView);
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -53,6 +54,7 @@ namespace CycleCare.Views
         {
             string reminderId = ReminderData.Id.ToString();
             Response response = await ReminderService.DeleteReminder(reminderId);
+
             switch (response.Code)
             {
                 case (int)HttpStatusCode.OK:
@@ -64,6 +66,9 @@ namespace CycleCare.Views
                     break;
                 case (int)HttpStatusCode.NotFound:
                     DialogManager.ShowWarningMessageBox("No se encontró el recordatorio.");
+                    break;
+                case (int)HttpStatusCode.InternalServerError:
+                    DialogManager.ShowWarningMessageBox("Error al borrar el recordatorio. Intente nuevamente.");
                     break;
             }
         }

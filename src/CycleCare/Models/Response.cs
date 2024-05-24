@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace CycleCare.Models
 {
@@ -33,5 +34,8 @@ namespace CycleCare.Models
 
         [JsonProperty("role")]
         public string Role { get; set; }
+
+        [JsonProperty("reminders")]
+        public List<Reminder> Reminders { get; set; }
     }
 }

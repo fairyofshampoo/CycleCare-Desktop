@@ -62,8 +62,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\ChangePasswordRequest.cs" />
+    <Compile Include="Models\Reminder.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Service\ReminderService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Utilities\DialogManager.cs" />
     <Compile Include="Utilities\EncriptionUtil.cs" />
@@ -73,17 +76,29 @@
     <Compile Include="Views\ContentsView.xaml.cs">
       <DependentUpon>ContentsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CycleLogs.xaml.cs">
+      <DependentUpon>CycleLogs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ForgotPasswordView.xaml.cs">
       <DependentUpon>ForgotPasswordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MenuBar.xaml.cs">
+      <DependentUpon>MenuBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewCycleLog.xaml.cs">
+      <DependentUpon>NewCycleLog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewReminderView.xaml.cs">
       <DependentUpon>NewReminderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RemindersView.xaml.cs">
       <DependentUpon>RemindersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReminderUC.xaml.cs">
+      <DependentUpon>ReminderUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Resources\DialogWindow.xaml.cs">
       <DependentUpon>DialogWindow.xaml</DependentUpon>
@@ -93,6 +108,9 @@
     </Compile>
     <Compile Include="Views\SleepStatsView.xaml.cs">
       <DependentUpon>SleepStatsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpdateCycleLog.xaml.cs">
+      <DependentUpon>UpdateCycleLog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UpdateReminderView.xaml.cs">
       <DependentUpon>UpdateReminderView.xaml</DependentUpon>
@@ -117,6 +135,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CycleLogs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ForgotPasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -125,11 +147,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MenuBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewCycleLog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NewReminderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RemindersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReminderUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,6 +184,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SleepStatsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UpdateCycleLog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,6 +238,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Resources\Icons\goBackIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\password_box_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\email_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\calendar-icon.png" />
+    <Resource Include="Views\Resources\Icons\chart-icon.png" />
+    <Resource Include="Views\Resources\Icons\news-icon.png" />
+    <Resource Include="Views\Resources\Icons\reminders-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\health-heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\delete-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

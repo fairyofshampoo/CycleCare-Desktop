@@ -8,13 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using CycleCare.Utilities;
 using CycleCare.Models;
 using CycleCare.Service;
@@ -40,7 +37,8 @@ namespace CycleCare.Views
 
         private void DisplayMainMenuView()
         {
-            DialogManager.ShowSuccessMessageBox("Bienvenido tonoto");
+            RemindersView remindersView = new RemindersView();
+            NavigationService.Navigate(remindersView);
         }
 
 
@@ -52,7 +50,6 @@ namespace CycleCare.Views
                 string username = txtUsername.Text;
                 string password = GetPassword();
                 string passwordHashed = EncriptionUtil.ToSHA2Hash(password);
-                //LUEGO DEBO MANDAR PASSWORD HASHED
 
                 var user = new User()
                 {
@@ -194,7 +191,8 @@ namespace CycleCare.Views
 
         private void ForgotPassword_Click(object sender, MouseButtonEventArgs e)
         {
-
+            ForgotPasswordView forgotPasswordView = new ForgotPasswordView();
+            NavigationService.Navigate(forgotPasswordView);
         }
 
         private void SignUp_Click(object sender, MouseButtonEventArgs e)

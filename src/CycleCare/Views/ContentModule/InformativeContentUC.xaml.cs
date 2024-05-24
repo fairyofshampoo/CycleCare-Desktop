@@ -13,16 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CycleCare.Views
+namespace CycleCare.Views.ContentModule
 {
     /// <summary>
-    /// Interaction logic for ContentsView.xaml
+    /// Interaction logic for InformativeContentUC.xaml
     /// </summary>
-    public partial class ContentsView : Page
+    public partial class InformativeContentUC : UserControl
     {
-        public ContentsView()
+        public InformativeContentUC()
         {
             InitializeComponent();
+        }
+
+        private void Content_Clicked(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

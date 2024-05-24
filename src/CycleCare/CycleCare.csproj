@@ -76,49 +76,55 @@
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Utilities\DialogManager.cs" />
     <Compile Include="Utilities\EncriptionUtil.cs" />
-    <Compile Include="Views\ContentDetailView.xaml.cs">
+    <Compile Include="Views\ChartModule\ViewSleepChart.xaml.cs">
+      <DependentUpon>ViewSleepChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContentModule\ContentDetailView.xaml.cs">
       <DependentUpon>ContentDetailView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ContentsView.xaml.cs">
+    <Compile Include="Views\ContentModule\ContentsView.xaml.cs">
       <DependentUpon>ContentsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CycleLogs.xaml.cs">
+    <Compile Include="Views\ContentModule\InformativeContentUC.xaml.cs">
+      <DependentUpon>InformativeContentUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CycleModule\CycleLogs.xaml.cs">
       <DependentUpon>CycleLogs.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ForgotPasswordView.xaml.cs">
+    <Compile Include="Views\UserModule\ForgotPasswordView.xaml.cs">
       <DependentUpon>ForgotPasswordView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\LoginView.xaml.cs">
+    <Compile Include="Views\UserModule\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MenuBar.xaml.cs">
       <DependentUpon>MenuBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewCycleLog.xaml.cs">
+    <Compile Include="Views\CycleModule\NewCycleLog.xaml.cs">
       <DependentUpon>NewCycleLog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewReminderView.xaml.cs">
+    <Compile Include="Views\ReminderModule\NewReminderView.xaml.cs">
       <DependentUpon>NewReminderView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RemindersView.xaml.cs">
+    <Compile Include="Views\ReminderModule\RemindersView.xaml.cs">
       <DependentUpon>RemindersView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ReminderUC.xaml.cs">
+    <Compile Include="Views\ReminderModule\ReminderUC.xaml.cs">
       <DependentUpon>ReminderUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Resources\DialogWindow.xaml.cs">
       <DependentUpon>DialogWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SignUpView.xaml.cs">
+    <Compile Include="Views\UserModule\SignUpView.xaml.cs">
       <DependentUpon>SignUpView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SleepStatsView.xaml.cs">
+    <Compile Include="Views\UserModule\SleepStatsView.xaml.cs">
       <DependentUpon>SleepStatsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UpdateCycleLog.xaml.cs">
+    <Compile Include="Views\CycleModule\UpdateCycleLog.xaml.cs">
       <DependentUpon>UpdateCycleLog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UpdateReminderView.xaml.cs">
+    <Compile Include="Views\ReminderModule\UpdateReminderView.xaml.cs">
       <DependentUpon>UpdateReminderView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -133,23 +139,31 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\ContentDetailView.xaml">
+    <Page Include="Views\ChartModule\ViewSleepChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ContentsView.xaml">
+    <Page Include="Views\ContentModule\ContentDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CycleLogs.xaml">
+    <Page Include="Views\ContentModule\ContentsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ForgotPasswordView.xaml">
+    <Page Include="Views\ContentModule\InformativeContentUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LoginView.xaml">
+    <Page Include="Views\CycleModule\CycleLogs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserModule\ForgotPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserModule\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -157,19 +171,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NewCycleLog.xaml">
+    <Page Include="Views\CycleModule\NewCycleLog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NewReminderView.xaml">
+    <Page Include="Views\ReminderModule\NewReminderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RemindersView.xaml">
+    <Page Include="Views\ReminderModule\RemindersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ReminderUC.xaml">
+    <Page Include="Views\ReminderModule\ReminderUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -185,19 +199,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SignUpView.xaml">
+    <Page Include="Views\UserModule\SignUpView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SleepStatsView.xaml">
+    <Page Include="Views\UserModule\SleepStatsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UpdateCycleLog.xaml">
+    <Page Include="Views\CycleModule\UpdateCycleLog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UpdateReminderView.xaml">
+    <Page Include="Views\ReminderModule\UpdateReminderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -263,5 +277,9 @@
   <ItemGroup>
     <Resource Include="Views\Resources\Icons\delete-icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

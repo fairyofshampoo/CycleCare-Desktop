@@ -76,6 +76,9 @@
     <Compile Include="Views\ContentsView.xaml.cs">
       <DependentUpon>ContentsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CycleLogs.xaml.cs">
+      <DependentUpon>CycleLogs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ForgotPasswordView.xaml.cs">
       <DependentUpon>ForgotPasswordView.xaml</DependentUpon>
     </Compile>
@@ -84,6 +87,9 @@
     </Compile>
     <Compile Include="Views\MenuBar.xaml.cs">
       <DependentUpon>MenuBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewCycleLog.xaml.cs">
+      <DependentUpon>NewCycleLog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewReminderView.xaml.cs">
       <DependentUpon>NewReminderView.xaml</DependentUpon>
@@ -102,6 +108,9 @@
     </Compile>
     <Compile Include="Views\SleepStatsView.xaml.cs">
       <DependentUpon>SleepStatsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpdateCycleLog.xaml.cs">
+      <DependentUpon>UpdateCycleLog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UpdateReminderView.xaml.cs">
       <DependentUpon>UpdateReminderView.xaml</DependentUpon>
@@ -126,6 +135,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CycleLogs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ForgotPasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -135,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MenuBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewCycleLog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -167,6 +184,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SleepStatsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UpdateCycleLog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

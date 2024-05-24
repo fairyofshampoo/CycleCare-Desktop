@@ -50,7 +50,6 @@ namespace CycleCare.Views
                 string username = txtUsername.Text;
                 string password = GetPassword();
                 string passwordHashed = EncriptionUtil.ToSHA2Hash(password);
-                //LUEGO DEBO MANDAR PASSWORD HASHED
 
                 var user = new User()
                 {

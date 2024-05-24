@@ -156,7 +156,7 @@ namespace CycleCare.Views
             }
 
             var passwordRegex = new System.Text.RegularExpressions.Regex(
-                @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+                @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$");
 
             return passwordRegex.IsMatch(txtPassword);
         }

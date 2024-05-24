@@ -7,11 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="900" Background="Transparent">
 
-    <Grid MouseDown="Reminder_Clicked">
+    <Grid MouseDown="Reminder_Clicked" ToolTip="Ver recordatorio">
         <Rectangle RadiusX="23.333"  RadiusY="23.333" 
                    Fill="{StaticResource LightGrayBrush}"   Stroke="Transparent" 
                    Height="200"/>
-        <Border Margin="20" Background="{StaticResource LightGrayBrush}" CornerRadius="20" Height="150" MouseDown="Supplier_Click">
+        <Border Margin="20" Background="{StaticResource LightGrayBrush}" CornerRadius="20" Height="150">
             <Grid Height="150">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -21,11 +21,11 @@
                 <Image Source="./Resources/Icons/health-heart.png" Grid.Column="0"/>
                 
                 <StackPanel Grid.Column="1">
-                    <TextBlock Style="{StaticResource InstructionsTextViewStyle}" Text="TITULO DE REMINDER" FontSize="40" Width="600" TextWrapping="Wrap" FontWeight="Black" Foreground="{StaticResource StrongPinkBrush}" Margin="0,15,0,0" />
-                    <TextBlock Style="{StaticResource InstructionsTextViewStyle}" Text="24/06/2024 9:50AM" FontSize="25" Foreground="{StaticResource StrongPinkBrush}" />
+                    <TextBlock x:Name="txtTitle" Style="{StaticResource InstructionsTextViewStyle}" Text="TITULO DE REMINDER" FontSize="40" Width="600" TextWrapping="Wrap" FontWeight="Black" Foreground="{StaticResource StrongPinkBrush}" Margin="0,15,0,0" />
+                    <TextBlock x:Name="txtDate" Style="{StaticResource InstructionsTextViewStyle}" Text="24/06/2024 9:50AM" FontSize="25" Foreground="{StaticResource StrongPinkBrush}" />
                 </StackPanel>
                 
-                <Button Click="BtnDelete_Click" Height="60" Width="60" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,15,0" Grid.Column="2">
+                <Button Click="BtnDelete_Click" Height="60" Width="60" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,15,0" Grid.Column="2" ToolTip="Eliminar recordatorio">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border x:Name="border" BorderThickness="0" Background="{StaticResource StrongPinkBrush}" CornerRadius="30">

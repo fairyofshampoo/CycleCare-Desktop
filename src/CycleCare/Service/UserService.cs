@@ -14,7 +14,6 @@ namespace CycleCare.Service
 {
     public class UserService
     {
-        private static readonly string TOKEN = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location).AppSettings.Settings["TOKEN"].Value;
         private static readonly string URL = string.Concat(Properties.Resources.BASE_URL, "users/");
 
         public static async Task<Response> Login(User user)

@@ -7,15 +7,27 @@
       mc:Ignorable="d" d:DesignHeight="720" d:DesignWidth="1280">
 
     <Viewbox Stretch="Fill">
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <StackPanel Background="{StaticResource WhiteBrush}" Width="1280" Height="720">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                      HorizontalScrollBarVisibility="Auto">
+            <StackPanel 
+                Background="{StaticResource WhiteBrush}" 
+                Width="1280" 
+                Height="720">
                 <Grid>
-                    <Grid Margin="0,20,0,0">
-                        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Height="70" Margin="28,11,0,0"
-                BorderThickness="0" Click="BtnGoBack_Click" Cursor="Hand">
+                    <Grid>
+                        <Button 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Top" 
+                            Width="70" 
+                            Height="70" 
+                            Margin="28,11,0,0"
+                            BorderThickness="0" 
+                            Click="BtnGoBack_Click" 
+                            Cursor="Hand">
                             <Button.Template>
                                 <ControlTemplate>
-                                    <Image Source="../Resources/Icons/goBackIcon.png" Stretch="UniformToFill">
+                                    <Image Source="../Resources/Icons/goBackIcon.png" 
+                                           Stretch="UniformToFill">
                                     </Image>
                                 </ControlTemplate>
                             </Button.Template>

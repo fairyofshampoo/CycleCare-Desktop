@@ -79,6 +79,9 @@
     <Compile Include="Views\ChartModule\ViewSleepChart.xaml.cs">
       <DependentUpon>ViewSleepChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ContentModule\ContentDetailsForMedic.xaml.cs">
+      <DependentUpon>ContentDetailsForMedic.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ContentModule\ContentDetailView.xaml.cs">
       <DependentUpon>ContentDetailView.xaml</DependentUpon>
     </Compile>
@@ -87,6 +90,15 @@
     </Compile>
     <Compile Include="Views\ContentModule\InformativeContentUC.xaml.cs">
       <DependentUpon>InformativeContentUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContentModule\MyContentByMedic.xaml.cs">
+      <DependentUpon>MyContentByMedic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContentModule\RegisterInformativeContent.xaml.cs">
+      <DependentUpon>RegisterInformativeContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContentModule\RegisterInformativeContentWithVideo.xaml.cs">
+      <DependentUpon>RegisterInformativeContentWithVideo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CycleModule\CycleLogs.xaml.cs">
       <DependentUpon>CycleLogs.xaml</DependentUpon>
@@ -140,6 +152,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ContentModule\ContentDetailsForMedic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ContentModule\ContentDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -149,6 +165,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ContentModule\InformativeContentUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContentModule\MyContentByMedic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContentModule\RegisterInformativeContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContentModule\RegisterInformativeContentWithVideo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -273,6 +301,11 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\UploadContentIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\EditIcon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

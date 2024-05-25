@@ -17,7 +17,7 @@ namespace CycleCare.Views
         public RemindersView()
         {
             InitializeComponent();
-            menuFrame.Content = new MenuBar(this);
+            menuFrame.Content = new UserMenu(this);
             SetRemindersInPage();
         }
 

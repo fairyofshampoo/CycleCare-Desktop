@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CycleCare.Views.ChartModule;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,12 +17,12 @@ using System.Windows.Shapes;
 namespace CycleCare.Views
 {
     /// <summary>
-    /// Interaction logic for MenuBar.xaml
+    /// Interaction logic for UserMenu.xaml
     /// </summary>
-    public partial class MenuBar : Page
+    public partial class UserMenu : Page
     {
         private Page page;
-        public MenuBar(Page page)
+        public UserMenu(Page page)
         {
             InitializeComponent();
             this.page = page;
@@ -46,7 +47,7 @@ namespace CycleCare.Views
 
         private void BtnStats_Click(object sender, RoutedEventArgs e)
         {
-            SleepStatsView sleepStatsView = new SleepStatsView();
+            ViewSleepChart sleepStatsView = new ViewSleepChart();
             page.NavigationService.Navigate(sleepStatsView);
         }
     }

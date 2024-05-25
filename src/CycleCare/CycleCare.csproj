@@ -97,8 +97,8 @@
     <Compile Include="Views\UserModule\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuBar.xaml.cs">
-      <DependentUpon>MenuBar.xaml</DependentUpon>
+    <Compile Include="Views\Menus\UserMenu.xaml.cs">
+      <DependentUpon>UserMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CycleModule\NewCycleLog.xaml.cs">
       <DependentUpon>NewCycleLog.xaml</DependentUpon>
@@ -117,9 +117,6 @@
     </Compile>
     <Compile Include="Views\UserModule\SignUpView.xaml.cs">
       <DependentUpon>SignUpView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserModule\SleepStatsView.xaml.cs">
-      <DependentUpon>SleepStatsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CycleModule\UpdateCycleLog.xaml.cs">
       <DependentUpon>UpdateCycleLog.xaml</DependentUpon>
@@ -167,7 +164,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MenuBar.xaml">
+    <Page Include="Views\Menus\UserMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,10 +197,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserModule\SignUpView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UserModule\SleepStatsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

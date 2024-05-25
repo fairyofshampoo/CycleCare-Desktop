@@ -6,6 +6,7 @@ using System;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Navigation;
 
 namespace CycleCare.Views
@@ -136,7 +137,7 @@ namespace CycleCare.Views
             NavigationService.Navigate(remindersView);
         }
 
-        private void ShowCalendar(object sender, RoutedEventArgs e)
+        private void ShowCalendar(object sender, MouseButtonEventArgs e)
         {
             if (sender is DatePicker datePicker)
             {

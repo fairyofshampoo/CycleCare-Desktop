@@ -77,6 +77,9 @@ namespace CycleCare.Views
                 case (int)HttpStatusCode.BadRequest:
                     DialogManager.ShowWarningMessageBox("Usuario o contraseña incorrectos. Revisa tus credenciales.");
                     break;
+                case (int)HttpStatusCode.InternalServerError:
+                    DialogManager.ShowErrorMessageBox("Error interno del servidor. Inténtalo más tarde.");
+                    break;
             }
         }
 

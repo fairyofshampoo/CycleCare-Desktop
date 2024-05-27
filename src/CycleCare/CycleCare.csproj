@@ -72,6 +72,8 @@
     <Compile Include="Models\Reminder.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Service\ContentService.cs" />
+    <Compile Include="Service\CycleService.cs" />
     <Compile Include="Service\ReminderService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Utilities\DialogManager.cs" />
@@ -100,8 +102,14 @@
     <Compile Include="Views\ContentModule\RegisterInformativeContentWithVideo.xaml.cs">
       <DependentUpon>RegisterInformativeContentWithVideo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CycleModule\CycleLogs.xaml.cs">
-      <DependentUpon>CycleLogs.xaml</DependentUpon>
+    <Compile Include="Views\CycleModule\CustomCalendar.xaml.cs">
+      <DependentUpon>CustomCalendar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CycleModule\CycleCalendarView.xaml.cs">
+      <DependentUpon>CycleCalendarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CycleModule\CycleLogsView.xaml.cs">
+      <DependentUpon>CycleLogsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserModule\ForgotPasswordView.xaml.cs">
       <DependentUpon>ForgotPasswordView.xaml</DependentUpon>
@@ -112,8 +120,8 @@
     <Compile Include="Views\Menus\UserMenu.xaml.cs">
       <DependentUpon>UserMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CycleModule\NewCycleLog.xaml.cs">
-      <DependentUpon>NewCycleLog.xaml</DependentUpon>
+    <Compile Include="Views\CycleModule\NewCycleLogView.xaml.cs">
+      <DependentUpon>NewCycleLogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReminderModule\NewReminderView.xaml.cs">
       <DependentUpon>NewReminderView.xaml</DependentUpon>
@@ -130,8 +138,8 @@
     <Compile Include="Views\UserModule\SignUpView.xaml.cs">
       <DependentUpon>SignUpView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CycleModule\UpdateCycleLog.xaml.cs">
-      <DependentUpon>UpdateCycleLog.xaml</DependentUpon>
+    <Compile Include="Views\CycleModule\UpdateCycleLogView.xaml.cs">
+      <DependentUpon>UpdateCycleLogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReminderModule\UpdateReminderView.xaml.cs">
       <DependentUpon>UpdateReminderView.xaml</DependentUpon>
@@ -180,7 +188,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CycleModule\CycleLogs.xaml">
+    <Page Include="Views\CycleModule\CustomCalendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CycleModule\CycleCalendarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CycleModule\CycleLogsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -196,7 +212,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CycleModule\NewCycleLog.xaml">
+    <Page Include="Views\CycleModule\NewCycleLogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -228,7 +244,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CycleModule\UpdateCycleLog.xaml">
+    <Page Include="Views\CycleModule\UpdateCycleLogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

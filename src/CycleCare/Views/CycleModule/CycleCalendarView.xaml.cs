@@ -13,21 +13,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CycleCare.Views
+namespace CycleCare.Views.CycleModule
 {
     /// <summary>
-    /// Interaction logic for ContentDetailView.xaml
+    /// Interaction logic for CycleCalendarView.xaml
     /// </summary>
-    public partial class ContentDetailView : Page
+    public partial class CycleCalendarView : Page
     {
-        public ContentDetailView()
+        public CycleCalendarView()
         {
             InitializeComponent();
-        }
-
-        private void BtnGoBack_Click(object sender, RoutedEventArgs e)
-        {
-
+            menuFrame.Content = new UserMenu(this);
         }
     }
 }

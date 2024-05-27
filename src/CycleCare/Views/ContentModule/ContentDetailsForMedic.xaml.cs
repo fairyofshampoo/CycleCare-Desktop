@@ -26,5 +26,10 @@ namespace CycleCare.Views.ContentModule
         {
 
         }
+
+        private void BtnGoBack_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

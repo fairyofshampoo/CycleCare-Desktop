@@ -26,5 +26,15 @@ namespace CycleCare.Views.ContentModule
         {
 
         }
+
+        private void BtnGoBack_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UploadContent_Clicked(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

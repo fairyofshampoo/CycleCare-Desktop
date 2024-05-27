@@ -1,4 +1,5 @@
 ﻿using CycleCare.Views.ChartModule;
+using CycleCare.Views.CycleModule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,8 @@ namespace CycleCare.Views
 
         private void BtnCalendar_Click(object sender, RoutedEventArgs e)
         {
-            //Falta el view de Calendar
+            CycleCalendarView cycleCalendarView = new CycleCalendarView();
+            page.NavigationService.Navigate(cycleCalendarView);
         }
 
         private void BtnContent_Click(object sender, RoutedEventArgs e)

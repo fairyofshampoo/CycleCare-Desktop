@@ -10,9 +10,6 @@ This repository hosts all the source code and resources related to the developme
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
-- [API Integration](#api-integration)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 

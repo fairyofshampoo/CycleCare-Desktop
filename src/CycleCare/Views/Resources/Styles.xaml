@@ -79,6 +79,12 @@
     <Style x:Key="EditTextForDescriptionStyle" TargetType="TextBox" BasedOn="{StaticResource EditTextStyle}">
         <Setter Property="Background" Value="LightGray"/>
     </Style>
+    
+    <!--Estilo para TextBox para Descripciones largas-->
+    <Style x:Key="EditTextForLongDescriptionStyle" TargetType="TextBox" BasedOn="{StaticResource EditTextStyle}">
+        <Setter Property="Background" Value="LightGray"/>
+        <Setter Property="Height" Value="160"/>
+    </Style>
 
     <!-- Estilo para Button -->
     <Style x:Key="ButtonStyle" TargetType="Button">

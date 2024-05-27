@@ -108,9 +108,6 @@
     <Compile Include="Views\CycleModule\CycleCalendarView.xaml.cs">
       <DependentUpon>CycleCalendarView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CycleModule\CycleLogsView.xaml.cs">
-      <DependentUpon>CycleLogsView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\UserModule\ForgotPasswordView.xaml.cs">
       <DependentUpon>ForgotPasswordView.xaml</DependentUpon>
     </Compile>
@@ -193,10 +190,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CycleModule\CycleCalendarView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CycleModule\CycleLogsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -322,6 +315,32 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Resources\Icons\EditIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\ic_angry.png" />
+    <Resource Include="Views\Resources\Icons\ic_anxious.png" />
+    <Resource Include="Views\Resources\Icons\ic_energetic.png" />
+    <Resource Include="Views\Resources\Icons\ic_flow_aqueous.png" />
+    <Resource Include="Views\Resources\Icons\ic_flow_cream.png" />
+    <Resource Include="Views\Resources\Icons\ic_flow_dry.png" />
+    <Resource Include="Views\Resources\Icons\ic_flow_elastic.png" />
+    <Resource Include="Views\Resources\Icons\ic_flow_sticky.png" />
+    <Resource Include="Views\Resources\Icons\ic_focused.png" />
+    <Resource Include="Views\Resources\Icons\ic_happy.png" />
+    <Resource Include="Views\Resources\Icons\ic_irritable.png" />
+    <Resource Include="Views\Resources\Icons\ic_relaxed.png" />
+    <Resource Include="Views\Resources\Icons\ic_sad.png" />
+    <Resource Include="Views\Resources\Icons\ic_stressed.png" />
+    <Resource Include="Views\Resources\Icons\ic_tired.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\ic_flow_heavy.png" />
+    <Resource Include="Views\Resources\Icons\ic_flow_light.png" />
+    <Resource Include="Views\Resources\Icons\ic_flow_medium.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\ic_edit.png" />
+    <Resource Include="Views\Resources\Icons\ic_note.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

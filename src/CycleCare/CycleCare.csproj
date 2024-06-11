@@ -68,10 +68,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\BirthControl.cs" />
     <Compile Include="Models\ChangePasswordRequest.cs" />
+    <Compile Include="Models\CycleLog.cs" />
+    <Compile Include="Models\CycleLogByMonthYearRequest.cs" />
+    <Compile Include="Models\Medication.cs" />
+    <Compile Include="Models\MenstrualFlow.cs" />
+    <Compile Include="Models\Mood.cs" />
+    <Compile Include="Models\Pill.cs" />
     <Compile Include="Models\Reminder.cs" />
     <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\Symptom.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\VaginalFlow.cs" />
     <Compile Include="Service\ContentService.cs" />
     <Compile Include="Service\CycleService.cs" />
     <Compile Include="Service\ReminderService.cs" />

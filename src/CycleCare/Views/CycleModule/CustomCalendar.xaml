@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CycleCare.Views.CycleModule"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="600">
     <Grid Width="600">
-        <StackPanel>
+        <StackPanel x:Name="calendarStackPanel" Visibility="Collapsed">
             <!-- Navigation Bar -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="btnPrevious" Content="&lt;" Click="BtnPrevious_Click" FontSize="30" Foreground="{StaticResource DarkGrayBrush}" Cursor="Hand" Background="Transparent" BorderBrush="Transparent"/>
@@ -54,6 +54,9 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
             </Grid>
+        </StackPanel>
+        <StackPanel x:Name="loadingStackPanel" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Cargando..." FontSize="20" Style="{StaticResource DescriptionTextViewStyle}"/>
         </StackPanel>
     </Grid>
 </UserControl>

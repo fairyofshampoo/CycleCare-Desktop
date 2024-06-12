@@ -22,35 +22,41 @@ namespace CycleCare.Views.CycleModule
         {
             InitializeComponent();
             _currentDate = DateTime.Now;
-            SetCalendarElements();
+            SetCycleLogs();
         }
 
         public async void SetCycleLogs()
         {
-            CycleLogByMonthYearRequest request = new CycleLogByMonthYearRequest
+            Response cycleLogs = await CycleService.GetCycleLogsByUser((int)_currentDate.Month, (int)_currentDate.Year);
+            switch (cycleLogs.Code)
             {
-                Month = (int)_currentDate.Month,
-                Year = (int)_currentDate.Year
-            };
-            var cycleLogs = await CycleService.GetCycleLogsByUser(request);
-            if (cycleLogs.Code == 200)
-            {
-                foreach (var cycleLog in cycleLogs.CycleLogs)
-                {
-                    // Mostrar los cyclelogs en el calendario con un círculo color #FF0065 detrás del número cuyo foreground color debe ser blanco 
-                    int day = cycleLog.CreationDate.Day;
-                    TextBlock dayText = GetDayTextBlock(day);
-                    Border dayBorder = CreateDayBorder(dayText, day, (int)cycleLog.CreationDate.DayOfWeek);
-                    dayBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF0065"));
-                    dayText.Foreground = Brushes.White;
-                }
-
-                // Si la lista está vacía mostrar dialog de que no hay cyclelogs y mostrar calendario normal
-                if (cycleLogs.CycleLogs.Count == 0)
-                {
-                    DialogManager.ShowWarningMessageBox("No hay registros disponibles.");
+                case 200:
+                    DisplayCycleLogs(cycleLogs);
+                    break;
+                case 404:
                     SetCalendarElements();
-                }
+                    break;
+                case 500:
+                    DialogManager.ShowErrorMessageBox("Error interno del servidor.");
+                    SetCalendarElements();
+                    break;
+                default:
+                    DialogManager.ShowErrorMessageBox("Error desconocido.");
+                    SetCalendarElements();
+                    break;
+            }
+        }
+
+        private void DisplayCycleLogs(Response cycleLogs)
+        {
+            foreach (var cycleLog in cycleLogs.CycleLogs)
+            {
+                // Mostrar los cyclelogs en el calendario con un círculo color #FF0065 detrás del número cuyo foreground color debe ser blanco 
+                int day = cycleLog.CreationDate.Day;
+                TextBlock dayText = GetDayTextBlock(day);
+                Border dayBorder = CreateDayBorder(dayText, day, (int)cycleLog.CreationDate.DayOfWeek);
+                dayBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF0065"));
+                dayText.Foreground = Brushes.White;
             }
         }
 

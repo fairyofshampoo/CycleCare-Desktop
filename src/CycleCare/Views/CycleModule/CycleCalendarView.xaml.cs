@@ -25,5 +25,11 @@ namespace CycleCare.Views.CycleModule
             InitializeComponent();
             menuFrame.Content = new UserMenu(this);
         }
+
+        private void BtnNewEntry_Click(object sender, RoutedEventArgs e)
+        {
+            NewCycleLog newCycleLogView = new NewCycleLog();
+            NavigationService.Navigate(newCycleLogView);
+        }
     }
 }

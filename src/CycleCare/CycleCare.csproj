@@ -71,7 +71,6 @@
     <Compile Include="Models\BirthControl.cs" />
     <Compile Include="Models\ChangePasswordRequest.cs" />
     <Compile Include="Models\CycleLog.cs" />
-    <Compile Include="Models\CycleLogByMonthYearRequest.cs" />
     <Compile Include="Models\Medication.cs" />
     <Compile Include="Models\MenstrualFlow.cs" />
     <Compile Include="Models\Mood.cs" />

@@ -52,7 +52,7 @@
                                 <TextBlock x:Name="tvPhaseDescription" Width="200" HorizontalAlignment="Center" Text="La fase lútea es el período entre la ovulación y el inicio de tu próximo período." Style="{StaticResource InstructionsTextViewStyle}" TextWrapping="Wrap"  Margin="0,0,0,16"/>
 
                                 <!-- Button for new entry -->
-                                <Button x:Name="btnNewEntry"  Content="Nuevo registro" Width="250"  Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" Padding="10,5"/>
+                                <Button x:Name="btnNewEntry"  Content="Nuevo registro" Width="250"  Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center" Padding="10,5" Click="BtnNewEntry_Click"/>
                             </StackPanel>
                         </ScrollViewer>
                     </Grid>

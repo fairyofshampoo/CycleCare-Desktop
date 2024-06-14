@@ -1,33 +1,37 @@
-﻿using Newtonsoft.Json;
+﻿using CycleCare.Models;
+using CycleCare.Utilities;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
-using System.Net.Http.Headers;
+using System.Linq;
 using System.Net.Http;
 using System.Net;
 using System.Reflection;
-using System.Threading.Tasks;
-using System;
 using System.Text;
-using CycleCare.Models;
-using CycleCare.Utilities;
+using System.Threading.Tasks;
 
 namespace CycleCare.Service
 {
-    public class UserService
+    public class ContentService
     {
-        private static readonly string URL = string.Concat(Properties.Resources.BASE_URL, "users/");
+        private static readonly string TOKEN = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location).AppSettings.Settings["TOKEN"].Value;
+        private static readonly string URL = string.Concat(Properties.Resources.BASE_URL, "content/");
 
-        public static async Task<Response> Login(User user)
+
+        public static async Task<Response> CreateReminder(Reminder reminder)
         {
             Response response = new Response();
             using (var httpClient = new HttpClient())
             {
                 try
                 {
+                    httpClient.DefaultRequestHeaders.Add("token", TOKEN);
                     var httpRequestMessage = new HttpRequestMessage()
                     {
-                        Content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json"),
+                        Content = new StringContent(JsonConvert.SerializeObject(reminder), Encoding.UTF8, "application/json"),
                         Method = HttpMethod.Post,
-                        RequestUri = new Uri(string.Concat(URL, "login"))
+                        RequestUri = new Uri(string.Concat(URL, "create-reminder"))
                     };
 
                     HttpResponseMessage httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
@@ -70,131 +74,76 @@ namespace CycleCare.Service
             return response;
         }
 
-        public static async Task<Response> RequestResetPassword(string email)
+        public static async Task<Response> GetCurrentInformativeContent()
         {
             Response response = new Response();
-
             using (var httpClient = new HttpClient())
             {
                 try
                 {
-                    string urlWithParam = string.Concat(URL, "request-reset/", Uri.EscapeDataString(email));
+                    httpClient.DefaultRequestHeaders.Add("token", TOKEN);
 
                     var httpRequestMessage = new HttpRequestMessage()
                     {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(string.Concat(URL, "obtain-informative-content"))
+                    };
+
+                    HttpResponseMessage httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+
+                    if (httpResponseMessage != null)
+                    {
+                        if (httpResponseMessage.IsSuccessStatusCode)
+                        {
+                            string json = await httpResponseMessage.Content.ReadAsStringAsync();
+                            response = JsonConvert.DeserializeObject<Response>(json);
+                        }
+
+                        response.Code = (int)httpResponseMessage.StatusCode;
+                    }
+                    else
+                    {
+                        response.Code = (int)HttpStatusCode.InternalServerError;
+                        response.Details = "No se recibió respuesta del servidor.";
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    response.Code = (int)HttpStatusCode.InternalServerError;
+                    response.Details = $"Error de red: {ex.Message}";
+                    DialogManager.ShowErrorMessageBox(response.Details);
+                }
+                catch (JsonException ex)
+                {
+                    response.Code = (int)HttpStatusCode.InternalServerError;
+                    response.Details = $"Error al procesar la respuesta JSON: {ex.Message}";
+                    DialogManager.ShowErrorMessageBox(response.Details);
+                }
+                catch (Exception ex)
+                {
+                    response.Code = (int)HttpStatusCode.InternalServerError;
+                    response.Details = $"Error inesperado: {ex.Message}";
+                    DialogManager.ShowErrorMessageBox(response.Details);
+                }
+            }
+            return response;
+        }
+
+        public static async Task<Response> RateInformativeContent(int informativeContentId, int rating)
+        {
+            Response response = new Response();
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    httpClient.DefaultRequestHeaders.Add("token", TOKEN);
+                    string urlWithParam = string.Concat(URL, "create-rating/", Uri.EscapeDataString(informativeContentId.ToString()));
+                    var ratingData = new { rating = rating };
+                    var httpRequestMessage = new HttpRequestMessage()
+                    {
+                        Content = new StringContent(JsonConvert.SerializeObject(ratingData), Encoding.UTF8, "application/json"),
                         Method = HttpMethod.Post,
                         RequestUri = new Uri(urlWithParam)
-                    };
-
-                    HttpResponseMessage httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
-
-                    if (httpResponseMessage != null)
-                    {
-                        if (httpResponseMessage.IsSuccessStatusCode)
-                        {
-                            string json = await httpResponseMessage.Content.ReadAsStringAsync();
-                            response = JsonConvert.DeserializeObject<Response>(json);
-                        }
-
-                        response.Code = (int)httpResponseMessage.StatusCode;
-                    }
-                    else
-                    {
-                        response.Code = (int)HttpStatusCode.InternalServerError;
-                        response.Details = "No se recibió respuesta del servidor.";
-                    }
-                }
-                catch (HttpRequestException ex)
-                {
-                    response.Code = (int)HttpStatusCode.InternalServerError;
-                    response.Details = $"Error de red: {ex.Message}";
-                    DialogManager.ShowErrorMessageBox(response.Details);
-                }
-                catch (JsonException ex)
-                {
-                    response.Code = (int)HttpStatusCode.InternalServerError;
-                    response.Details = $"Error al procesar la respuesta JSON: {ex.Message}";
-                    DialogManager.ShowErrorMessageBox(response.Details);
-                }
-                catch (Exception ex)
-                {
-                    response.Code = (int)HttpStatusCode.InternalServerError;
-                    response.Details = $"Error inesperado: {ex.Message}";
-                    DialogManager.ShowErrorMessageBox(response.Details);
-                }
-            }
-            return response;
-        }
-
-        public static async Task<Response> UpdatePassword(string email, ChangePasswordRequest request)
-        {
-            Response response = new Response();
-
-            using (var httpClient = new HttpClient())
-            {
-                try
-                {
-                    string urlWithParam = string.Concat(URL, "reset-password/", Uri.EscapeDataString(email));
-
-                    var httpRequestMessage = new HttpRequestMessage()
-                    {
-                        Method = HttpMethod.Post,
-                        Content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json"),
-                        RequestUri = new Uri(urlWithParam)
-                    };
-
-                    HttpResponseMessage httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
-
-                    if (httpResponseMessage != null)
-                    {
-                        if (httpResponseMessage.IsSuccessStatusCode)
-                        {
-                            string json = await httpResponseMessage.Content.ReadAsStringAsync();
-                            response = JsonConvert.DeserializeObject<Response>(json);
-                        }
-
-                        response.Code = (int)httpResponseMessage.StatusCode;
-                    }
-                    else
-                    {
-                        response.Code = (int)HttpStatusCode.InternalServerError;
-                        response.Details = "No se recibió respuesta del servidor.";
-                    }
-                }
-                catch (HttpRequestException ex)
-                {
-                    response.Code = (int)HttpStatusCode.InternalServerError;
-                    response.Details = $"Error de red: {ex.Message}";
-                    DialogManager.ShowErrorMessageBox(response.Details);
-                }
-                catch (JsonException ex)
-                {
-                    response.Code = (int)HttpStatusCode.InternalServerError;
-                    response.Details = $"Error al procesar la respuesta JSON: {ex.Message}";
-                    DialogManager.ShowErrorMessageBox(response.Details);
-                }
-                catch (Exception ex)
-                {
-                    response.Code = (int)HttpStatusCode.InternalServerError;
-                    response.Details = $"Error inesperado: {ex.Message}";
-                    DialogManager.ShowErrorMessageBox(response.Details);
-                }
-            }
-            return response;
-        }
-
-        public static async Task<Response> RegisterAccount(Account account)
-        {
-            Response response = new Response();
-            using (var httpClient = new HttpClient())
-            {
-                try
-                {
-                    var httpRequestMessage = new HttpRequestMessage()
-                    {
-                        Content = new StringContent(JsonConvert.SerializeObject(account), Encoding.UTF8, "application/json"),
-                        Method = HttpMethod.Post,
-                        RequestUri = new Uri(string.Concat(URL, "registerUser"))
                     };
 
                     HttpResponseMessage httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);

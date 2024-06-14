@@ -79,6 +79,12 @@
     <Style x:Key="EditTextForDescriptionStyle" TargetType="TextBox" BasedOn="{StaticResource EditTextStyle}">
         <Setter Property="Background" Value="LightGray"/>
     </Style>
+    
+    <!--Estilo para TextBox para Descripciones largas-->
+    <Style x:Key="EditTextForLongDescriptionStyle" TargetType="TextBox" BasedOn="{StaticResource EditTextStyle}">
+        <Setter Property="Background" Value="LightGray"/>
+        <Setter Property="Height" Value="160"/>
+    </Style>
 
     <!-- Estilo para Button -->
     <Style x:Key="ButtonStyle" TargetType="Button">
@@ -138,6 +144,7 @@
         <Setter Property="FontFamily" Value="{StaticResource PoppinsFont}"/>
     </Style>
 
+    <!-- Estilo para Calendario de DatePicker -->
     <Style x:Key="CalendarStyle" TargetType="{x:Type Calendar}">
         <Setter Property="Template">
             <Setter.Value>
@@ -154,7 +161,7 @@
         </Setter>
     </Style>
 
-    <!-- Estilo para Calendario -->
+    <!-- Estilo para DatePicker -->
     <Style x:Key="DatePickerStyle" TargetType="DatePicker">
         <Setter Property="Foreground" Value="{StaticResource BlackBrush}" />
         <Setter Property="Background" Value="Transparent" />
@@ -196,6 +203,7 @@
         </Setter>
     </Style>
 
+    <!-- Estilo para Label de NoItems -->
     <Style x:Key="NoItemsLabelStyle" TargetType="Label">
         <Setter Property="Content" Value="No hay elementos registrados"/>
         <Setter Property="FontFamily" Value="{StaticResource PoppinsFont}"/>

@@ -19,9 +19,6 @@ using System.Windows.Shapes;
 
 namespace CycleCare.Views
 {
-    /// <summary>
-    /// Interaction logic for ReminderUC.xaml
-    /// </summary>
     public partial class ReminderUC : UserControl
     {
         public RemindersView RemindersView { get; set; }

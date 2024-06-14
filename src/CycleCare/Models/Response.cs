@@ -37,7 +37,11 @@ namespace CycleCare.Models
 
         [JsonProperty("reminders")]
         public List<Reminder> Reminders { get; set; }
+
         [JsonProperty("cycleLogs")]
         public List<CycleLog> CycleLogs { get; set; }
+
+        [JsonProperty("InformativeContent")]
+        public List<InformativeContentJSONResponse> contents { get; set; }
     }
 }

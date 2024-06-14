@@ -35,16 +35,34 @@
                             </Button.Template>
                         </Button>
 
+                        <Button x:Name="btnLogin" 
+                                Width="200" 
+                                Content="Editar Contenido" 
+                                Style="{StaticResource ButtonStyle}" 
+                                Click="BtnEditContent_Click" 
+                                VerticalAlignment="Top"
+                                Margin="0,25,28,0"
+                                HorizontalAlignment="Right"/>
+
+
+
                         <Grid HorizontalAlignment="Center" 
                               Margin="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="1"
+                            <Image Grid.Row="0"
+                                   x:Name="img_InformativeContent"
+                                   Source="{Binding informativeContentImage}"
+                                   Height="Auto"
+                                   Width="Auto"/>
+
+                            <TextBlock     x:Name="txtTitle"
+                                           Grid.Row="1"
                                            Width="800"
                                            Style="{StaticResource TitleTextViewStyle}" 
                                            Text="¿Sabes las diferencias entre un condón masculino y uno femenino?" 
@@ -53,8 +71,9 @@
                                            TextWrapping="Wrap"
                                            Margin="0,80,0,0"
                                            Foreground="{StaticResource BlackBrush}"/>
-
-                            <TextBlock Grid.Row="2"
+                            <ScrollViewer Grid.Row="2">
+                            <TextBlock     x:Name="txtDescription"
+                                           Grid.Row="2"
                                            Width="700"
                                            Style="{StaticResource DescriptionTextViewStyle}" 
                                            Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -64,7 +83,7 @@
                                            Margin="50,25,0,0"
                                            HorizontalAlignment="Left"
                                            Foreground="{StaticResource BlackBrush}"/>
-
+                            </ScrollViewer>
                             <Button x:Name="btnRegister" 
                                     Margin="0,40,0,0" 
                                     Grid.Row="3" 
@@ -73,7 +92,7 @@
                                     HorizontalAlignment="Right"
                                     Style="{StaticResource ButtonStyle}" 
                                     Click="BtnEditContent_Click"/>
-                        </Grid>
+                            </Grid>
                     </Grid>
                 </Grid>
             </StackPanel>

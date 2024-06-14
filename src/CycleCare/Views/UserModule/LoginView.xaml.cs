@@ -20,9 +20,6 @@ using System.Reflection;
 
 namespace CycleCare.Views
 {
-    /// <summary>
-    /// Interaction logic for LoginView.xaml
-    /// </summary>
     public partial class LoginView : Page
     {
         public LoginView()
@@ -46,7 +43,6 @@ namespace CycleCare.Views
         {
             if (VerifyFields())
             {
-
                 string username = txtUsername.Text;
                 string password = GetPassword();
                 string passwordHashed = EncriptionUtil.ToSHA2Hash(password);

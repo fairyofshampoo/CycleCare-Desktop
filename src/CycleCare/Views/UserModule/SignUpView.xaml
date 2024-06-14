@@ -7,14 +7,12 @@
       mc:Ignorable="d" d:DesignHeight="720" d:DesignWidth="1280">
 
     <Viewbox Stretch="Fill">
-        <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                      HorizontalScrollBarVisibility="Auto">
-            <StackPanel 
+        <StackPanel 
                 Background="{StaticResource WhiteBrush}" 
                 Width="1280" 
                 Height="720">
+            <Grid>
                 <Grid>
-                    <Grid>
                         <Button 
                             HorizontalAlignment="Left" 
                             VerticalAlignment="Top" 
@@ -32,63 +30,94 @@
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>
-                        <ScrollViewer>
-                            <Grid HorizontalAlignment="Center" Margin="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Text="Crear una nueva cuenta" HorizontalAlignment="Center" Style="{StaticResource TitleTextViewStyle}">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <Grid HorizontalAlignment="Center" Margin="10" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Crear una nueva cuenta" HorizontalAlignment="Center" Style="{StaticResource TitleTextViewStyle}">
+                            </TextBlock>
+                            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,0" HorizontalAlignment="Center">
+                                <TextBlock Text="¿Ya te has registrado?" Style="{StaticResource DescriptionTextViewStyle}">
                                 </TextBlock>
-                                <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,10,0,0" HorizontalAlignment="Center">
-                                    <TextBlock Text="¿Ya te has registrado?" Style="{StaticResource DescriptionTextViewStyle}">
-                                    </TextBlock>
-                                    <TextBlock Text="Ingresar" Style="{StaticResource DescriptionTextViewStyle}" Foreground="{StaticResource MainPinkBrush}" Margin="10,0,0,40" TextDecorations="Underline" Cursor="Hand" MouseDown="SignIn_Click">
-                                    </TextBlock>
-                                </StackPanel>
-                                <TextBlock Text="INTRODUCE TU NOMBRE" Margin="50,0,0,0" Grid.Row="2" Style="{StaticResource InstructionsTextViewStyle}" />
-                                <TextBox x:Name="txtName"  Grid.Row="3" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
-                                <TextBlock Text="INTRODUCE TU PRIMER APELLIDO" Margin="50,0,0,0" Grid.Row="4" Style="{StaticResource InstructionsTextViewStyle}" />
-                                <TextBox x:Name="txtFirstLastName"  Grid.Row="5" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
-                                <TextBlock Text="INTRODUCE TU SEGUNDO APELLIDO" Margin="50,0,0,0" Grid.Row="6" Style="{StaticResource InstructionsTextViewStyle}" />
-                                <TextBox x:Name="txtSecondLastName"  Grid.Row="7" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
-                                <TextBlock Text="INGRESA TU CORREO ELECTRÓNICO" Margin="50,0,0,0" Grid.Row="8" Style="{StaticResource InstructionsTextViewStyle}" />
-                                <TextBox x:Name="txtEmail"  Grid.Row="9" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
-                                <TextBlock Text="INTRODUCE TU USUARIO" Margin="50,0,0,0" Grid.Row="10" Style="{StaticResource InstructionsTextViewStyle}" />
-                                <TextBox x:Name="txtUsername"  Grid.Row="11" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
-                                <TextBlock Text="INTRODUCE TU CONTRASEÑA" Margin="50,0,0,0" Grid.Row="12" Style="{StaticResource InstructionsTextViewStyle}" />
-                                <TextBox x:Name="txtPassword"  Grid.Row="13" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
-                                <TextBlock Grid.Row="14" Text="La contraseña debe tener al menso 8 caracteres e incluir al menos una mayúscula, minúscula, un número y un carácter especial" Margin="0,0,0,20" FontSize="12"  Width="450" TextWrapping="Wrap" Style="{StaticResource InstructionsTextViewStyle}" Foreground="{StaticResource StrongPinkBrush}"/>
-                                <TextBlock Text="¿CÓMO ES TU CICLO?" Margin="50,0,0,0" Grid.Row="15" Style="{StaticResource InstructionsTextViewStyle}" />
-                                <ComboBox x:Name="cmbCycle" Grid.Row="16" Width="400" Margin="0,0,0,20" Background="{StaticResource LightGrayBrush}" />
-                                <TextBlock Text="USUALMENTE ¿CUÁNTO DURA TU PERIODO?" Margin="50,0,0,0" Grid.Row="17" Style="{StaticResource InstructionsTextViewStyle}" />
-                                <TextBox x:Name="txtPeriodDuration"  Grid.Row="18" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
-                                <TextBlock Text="USUALMENTE ¿CUÁNTO DURA TU CICLO?" Margin="50,0,0,0" Grid.Row="19" Style="{StaticResource InstructionsTextViewStyle}" />
-                                <TextBox x:Name="txtCycleDuration"  Grid.Row="20" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
-                                <Button x:Name="btnRegister" Margin="0,20,0,0" Grid.Row="21" Width="200" Content="Registrar" Style="{StaticResource ButtonStyle}" Click="BtnRegister_Click" />
-                            </Grid>
-                        </ScrollViewer>
-                    </Grid>
+                                <TextBlock Text="Ingresar" Style="{StaticResource DescriptionTextViewStyle}" Foreground="{StaticResource MainPinkBrush}" Margin="10,0,0,40" TextDecorations="Underline" Cursor="Hand" MouseDown="SignIn_Click">
+                                </TextBlock>
+                            </StackPanel>
+                            <TextBlock Text="INTRODUCE TU NOMBRE" Margin="50,0,0,0" Grid.Row="2" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtName"  Grid.Row="3" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
+                            <TextBlock Text="INTRODUCE TU PRIMER APELLIDO" Margin="50,0,0,0" Grid.Row="4" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtFirstLastName"  Grid.Row="5" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
+                            <TextBlock Text="INTRODUCE TU SEGUNDO APELLIDO" Margin="50,0,0,0" Grid.Row="6" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtSecondLastName"  Grid.Row="7" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
+                            <TextBlock x:Name="lblNamesError" Grid.Row="8" Text="Debes ingresar tu nombre y apellidos correctamente" Margin="0,0,0,20" FontSize="12"  Width="450" TextWrapping="Wrap" Style="{StaticResource InstructionsTextViewStyle}" Foreground="{StaticResource StrongPinkBrush}" Visibility="Collapsed"/>
+                            <TextBlock Text="INGRESA TU CORREO ELECTRÓNICO" Margin="50,0,0,0" Grid.Row="9" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtEmail"  Grid.Row="10" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
+                            <TextBlock x:Name="lblEmaiError" Grid.Row="11" Text="Debes ingresar tu email correctamente" Margin="0,0,0,20" FontSize="12"  Width="450" TextWrapping="Wrap" Style="{StaticResource InstructionsTextViewStyle}" Foreground="{StaticResource StrongPinkBrush}" Visibility="Collapsed"/>
+
+                            <TextBlock Text="INTRODUCE TU USUARIO" Margin="50,0,0,0" Grid.Row="12" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtUsername"  Grid.Row="13" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
+                            <TextBlock x:Name="lblErrorUser" Grid.Row="14" Text="Usuario inválido" Margin="0,0,0,20" FontSize="12"  Width="450" TextWrapping="Wrap" Style="{StaticResource InstructionsTextViewStyle}" Foreground="{StaticResource StrongPinkBrush}" Visibility="Collapsed"/>
+
+
+                            <TextBlock Text="INTRODUCE TU CONTRASEÑA" Margin="50,0,0,0" Grid.Row="15" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtPassword"  Grid.Row="16" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
+                            <TextBlock x:Name="lblErrorPassword" Grid.Row="17" Text="La contraseña debe tener al menso 8 caracteres e incluir al menos una mayúscula, minúscula, un número y un carácter especial" Margin="0,0,0,20" FontSize="12"  Width="450" TextWrapping="Wrap" Style="{StaticResource InstructionsTextViewStyle}" Foreground="{StaticResource StrongPinkBrush}" Visibility="Collapsed"/>
+
+                            <TextBlock Text="¿CÓMO ES TU CICLO?" Margin="50,0,0,0" Grid.Row="18" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <ComboBox x:Name="cmbCycle" Grid.Row="19" Width="400" Margin="0,0,0,20" Background="{StaticResource LightGrayBrush}" >
+                                <ComboBoxItem Content="Regular"/>
+                                <ComboBoxItem Content="Irregular"/>
+                                <ComboBoxItem Content="No lo sé"/>
+                            </ComboBox>
+                            <TextBlock x:Name="lblCmbError" Grid.Row="20" Text="Debes seleccionar una opción" Margin="0,0,0,20" FontSize="12"  Width="450" TextWrapping="Wrap" Style="{StaticResource InstructionsTextViewStyle}" Foreground="{StaticResource StrongPinkBrush}" Visibility="Collapsed"/>
+
+
+                            <TextBlock Text="USUALMENTE ¿CUÁNTO DURA TU PERIODO?" Margin="50,0,0,0" Grid.Row="21" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtPeriodDuration"  Grid.Row="22" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
+                            <TextBlock Grid.Row="23" Text="Debes ingresar un número mayor a 0" Margin="0,0,0,20" FontSize="12"  Width="450" TextWrapping="Wrap" Style="{StaticResource InstructionsTextViewStyle}" Foreground="{StaticResource StrongPinkBrush}" Visibility="Collapsed"/>
+
+
+                            <TextBlock Text="USUALMENTE ¿CUÁNTO DURA TU CICLO?" Margin="50,0,0,0" Grid.Row="24" Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtCycleDuration"  Grid.Row="25" Style="{StaticResource EditTextStyle}" Background="{StaticResource LightGrayBrush}" />
+                            <TextBlock Name="lblNumberError" Grid.Row="26" Text="Debes ingresar un número mayor a 0" Margin="0,0,0,20" FontSize="12"  Width="450" TextWrapping="Wrap" Style="{StaticResource InstructionsTextViewStyle}" Foreground="{StaticResource StrongPinkBrush}" Visibility="Collapsed"/>
+
+
+                            <Button x:Name="btnRegister" Margin="0,20,0,0" Grid.Row="27" Width="200" Content="Registrar" Style="{StaticResource ButtonStyle}" Click="BtnRegister_Click" />
+                        </Grid>
+                    </ScrollViewer>
                 </Grid>
-            </StackPanel>
-        </ScrollViewer>
+            </Grid>
+        </StackPanel>
     </Viewbox>
 </Page>

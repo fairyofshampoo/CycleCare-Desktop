@@ -68,9 +68,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Models\BirthControl.cs" />
     <Compile Include="Models\ChangePasswordRequest.cs" />
     <Compile Include="Models\CycleLog.cs" />
+    <Compile Include="Models\InformativeContentJSONResponse.cs" />
     <Compile Include="Models\Medication.cs" />
     <Compile Include="Models\MenstrualFlow.cs" />
     <Compile Include="Models\Mood.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Utilities\DialogManager.cs" />
     <Compile Include="Utilities\EncriptionUtil.cs" />
+    <Compile Include="Utilities\ValidationManager.cs" />
     <Compile Include="Views\ChartModule\ViewSleepChart.xaml.cs">
       <DependentUpon>ViewSleepChart.xaml</DependentUpon>
     </Compile>
@@ -349,6 +352,9 @@
   <ItemGroup>
     <Resource Include="Views\Resources\Icons\ic_edit.png" />
     <Resource Include="Views\Resources\Icons\ic_note.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Resources\Icons\ic_edit_white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

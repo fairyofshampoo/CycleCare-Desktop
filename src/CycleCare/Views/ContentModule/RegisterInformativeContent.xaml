@@ -47,33 +47,57 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0"
-                                       Margin="0,20,0,0"
+                                       Margin="0,10,0,0"
                                        Text="Contenido informativo" 
                                        HorizontalAlignment="Center" 
                                        Style="{StaticResource TitleTextViewStyle}"/>
 
                             <TextBlock Text="* TÍTULO" 
-                                       Margin="50,30,0,0" 
+                                       Margin="50,10,0,0" 
                                        Grid.Row="1" 
                                        Style="{StaticResource InstructionsTextViewStyle}" />
                             <TextBox x:Name="txtTittle"  
                                      Grid.Row="2" 
                                      Style="{StaticResource EditTextStyle}" 
                                      Background="{StaticResource LightGrayBrush}"/>
+                            
+                            <TextBlock x:Name="lblTitleError" 
+                                       Grid.Row="3" 
+                                       Text="El título es incorrecto" 
+                                       Margin="0,0,0,20" 
+                                       FontSize="12"  
+                                       Width="450"
+                                       TextWrapping="Wrap" 
+                                       Style="{StaticResource InstructionsTextViewStyle}" 
+                                       Foreground="{StaticResource StrongPinkBrush}" 
+                                       Visibility="Collapsed"/>
+
+
+
 
                             <TextBlock Text="* Contenido Multimedia" 
-                                       Margin="50,30,0,0" 
-                                       Grid.Row="3" 
+                                       Margin="50,10,0,0" 
+                                       Grid.Row="4" 
                                        Style="{StaticResource InstructionsTextViewStyle}" />
 
-                            <Grid Grid.Row="4"
+                            
+                            <Image x:Name="informativeContentImage" 
+                                   Grid.Row="5"
+                                   Height="120" Width="360" 
+                                   Visibility="Visible"/>
+                            
+                            <Grid Grid.Row="5"
                                   Width="360"
                                   Height="120"
                                   Background="LightGray"
-                                  MouseDown="UploadContent_Clicked">
+                                  Visibility="Visible">
 
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -111,22 +135,64 @@
 
                             </Grid>
                             
+                            <TextBlock x:Name="lblImageError" 
+                                       Grid.Row="6" 
+                                       Text="Debes seleccionar una imagen" 
+                                       Margin="0,0,0,20" 
+                                       FontSize="12"  
+                                       Width="450"
+                                       TextWrapping="Wrap" 
+                                       Style="{StaticResource InstructionsTextViewStyle}" 
+                                       Foreground="{StaticResource StrongPinkBrush}" 
+                                       Visibility="Collapsed"/>
+
+
+
+                            <Button x:Name="btnAddImage" 
+                                    Margin="0,10,0,0" 
+                                    Grid.Row="7" 
+                                    Width="200" 
+                                    Content="Seleccionar imagen" 
+                                    Style="{StaticResource ButtonStyle}" 
+                                    Click="BtnUploadImage_Click" />
+
                             <TextBlock Text="* DESCRIPCIÓN" 
-                                       Margin="50,20,0,0" 
-                                       Grid.Row="5" 
+                                       Margin="50,10,0,0" 
+                                       Grid.Row="8" 
                                        Style="{StaticResource InstructionsTextViewStyle}" />
                             <TextBox x:Name="txtDescription"   
-                                     Grid.Row="6" 
+                                     Grid.Row="9" 
                                      Style="{StaticResource EditTextForLongDescriptionStyle}" 
                                      Background="{StaticResource LightGrayBrush}"/>
 
+                            <TextBlock x:Name="lblDescriptionError" 
+                                       Grid.Row="10" 
+                                       Text="La descripción es incorrecta" 
+                                       Margin="0,0,0,20" 
+                                       FontSize="12"  
+                                       Width="450"
+                                       TextWrapping="Wrap" 
+                                       Style="{StaticResource InstructionsTextViewStyle}" 
+                                       Foreground="{StaticResource StrongPinkBrush}" 
+                                       Visibility="Collapsed"/>
+
                             <Button x:Name="btnPublishContent" 
-                                    Margin="0,40,0,0" 
-                                    Grid.Row="7" 
+                                    Margin="0,20,0,0" 
+                                    Grid.Row="11" 
                                     Width="200" 
                                     Content="Publicar" 
                                     Style="{StaticResource ButtonStyle}" 
-                                    Click="BtnPublishContent_Click" />
+                                    Click="BtnPublishContent_Click"
+                                    Visibility="Collapsed"/>
+
+                            <Button x:Name="btnEditContent" 
+                                    Margin="0,20,0,0" 
+                                    Grid.Row="11" 
+                                    Width="200" 
+                                    Content="Editar" 
+                                    Style="{StaticResource ButtonStyle}" 
+                                    Click="BtnEditContent_Click"
+                                    Visibility="Collapsed"/>
 
                         </Grid>
                     </Grid>

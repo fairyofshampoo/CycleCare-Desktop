@@ -38,15 +38,18 @@
                             <TextBlock Text="Contenido informativo" HorizontalAlignment="Center" Style="{StaticResource TitleTextViewStyle}">
                             </TextBlock>
 
-                            <ScrollViewer
-                            Grid.Row="1"
-                            Width="1000"
-                            Margin="0,50,0,0">
-                                <Grid Name="OrdersGrid"
-                            Width = "850"
-                            Height = "500"/>
-                            </ScrollViewer>
-
+                            <StackPanel Grid.Row="1" Height="500" Margin="50,50,50,0" Width="800">
+                                <ListBox x:Name="lstInformativeContent" 
+                                         Height="500" 
+                                         Width="Auto" 
+                                         Margin="40,0,40,0" 
+                                         Background="{StaticResource WhiteBrush}" 
+                                         BorderThickness="0" 
+                                         ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                                         ScrollViewer.VerticalScrollBarVisibility="Visible" />
+                            </StackPanel>
+                            
+                            
                         </Grid>
                     </Grid>
                 </Grid>

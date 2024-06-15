@@ -101,6 +101,9 @@
     <Compile Include="Views\ContentModule\ContentsView.xaml.cs">
       <DependentUpon>ContentsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ContentModule\InformativeContentForMedicUC.xaml.cs">
+      <DependentUpon>InformativeContentForMedicUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ContentModule\InformativeContentUC.xaml.cs">
       <DependentUpon>InformativeContentUC.xaml</DependentUpon>
     </Compile>
@@ -177,6 +180,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ContentModule\ContentsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContentModule\InformativeContentForMedicUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

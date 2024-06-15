@@ -50,7 +50,7 @@ namespace CycleCare.Views
                 txtAuthor.Text = "Por: " + informativeContent.username;
                 var bi = new BitmapImage();
                 bi.BeginInit();
-                bi.UriSource = new Uri("http://192.168.1.77:8085/images/" + informativeContent.media);
+                bi.UriSource = new Uri("http://localhost:8085/images/" + informativeContent.media);
                 bi.EndInit();
                 img_informativeContent.Source = bi;
             }

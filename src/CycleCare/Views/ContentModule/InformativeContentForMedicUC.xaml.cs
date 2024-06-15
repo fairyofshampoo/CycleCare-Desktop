@@ -18,18 +18,16 @@ using System.Windows.Shapes;
 namespace CycleCare.Views.ContentModule
 {
 
-    public partial class InformativeContentUC : UserControl
+    public partial class InformativeContentForMedicUC : UserControl
     {
-
         private InformativeContentJSONResponse data;
 
-        public ContentsView ContentsView { get; set; }
+        public MyContentByMedic myContent { get; set; }
 
-        public InformativeContentUC()
+        public InformativeContentForMedicUC()
         {
             InitializeComponent();
         }
-
 
         public void SetInformativeContentData(InformativeContentJSONResponse informativeContent)
         {
@@ -53,10 +51,11 @@ namespace CycleCare.Views.ContentModule
 
         private void Content_Clicked(object sender, MouseButtonEventArgs e)
         {
-            ContentDetailView contentDetail = new ContentDetailView();
+            ContentDetailsForMedic contentDetail = new ContentDetailsForMedic();
             contentDetail.SetInformativeContent(data);
-            ContentsView.NavigationService.Navigate(contentDetail);
+            myContent.NavigationService.Navigate(contentDetail);
         }
+
 
     }
 }

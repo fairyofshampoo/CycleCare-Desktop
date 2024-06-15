@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CycleCare.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +16,24 @@ using System.Windows.Shapes;
 
 namespace CycleCare.Views.ContentModule
 {
-    /// <summary>
-    /// Interaction logic for MyContentByMedic.xaml
-    /// </summary>
     public partial class MyContentByMedic : Page
     {
         public MyContentByMedic()
         {
             InitializeComponent();
+            SetInformativeContent();
+        }
+
+        private void SetInformativeContent()
+        {
+
+        }
+
+        public void AddInformativeContentToList(InformativeContentJSONResponse informativeContent)
+        {
+            InformativeContentForMedicUC informativeContentForMedicUC = new InformativeContentForMedicUC();
+            informativeContentForMedicUC.myContent = this;
+
         }
 
         private void BtnGoBack_Click(object sender, RoutedEventArgs e)
@@ -37,7 +48,7 @@ namespace CycleCare.Views.ContentModule
 
         private void BtnRegisterNewContent_Click(object sender, RoutedEventArgs e)
         {
-
+            //Debe enviar a la pantalla de crear contenido
         }
     }
 }

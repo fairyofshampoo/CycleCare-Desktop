@@ -61,8 +61,25 @@ namespace CycleCare.Views.ContentModule
                 showErrors(errors);
             }else
             {
+               Article newArticle =  CreateArticle();
                 //Publicar contenido
             }
+        }
+
+        private Article CreateArticle()
+        {
+            Article article = new Article();
+            article.title = txtTittle.Text;
+            article.description = txtDescription.Text;
+            article.image = base64String;
+            article.creationDate = getCreationDate();
+            return article;
+        }
+
+        private String getCreationDate() 
+        {
+            DateTime currentDate = DateTime.Now;
+            return currentDate.ToString("yyyy-MM-dd");
         }
 
 
@@ -97,7 +114,7 @@ namespace CycleCare.Views.ContentModule
                         lblTitleError.Visibility = Visibility.Visible;
                         break;
                     case 1:
-                        lblTitleError.Visibility = Visibility.Visible;
+                        lblDescriptionError.Visibility = Visibility.Visible;
                         break;
                     case 2:
                         lblImageError.Visibility = Visibility.Visible;

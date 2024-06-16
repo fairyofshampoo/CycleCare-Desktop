@@ -34,7 +34,6 @@ namespace CycleCare.Views
             switch (response.Code)
             {
                 case(int) HttpStatusCode.OK:
-                    DialogManager.ShowWarningMessageBox("Sí te los regresé we.");
                     ShowInformativeContent(response.contents);
                     break;
                 case (int)HttpStatusCode.NotFound:

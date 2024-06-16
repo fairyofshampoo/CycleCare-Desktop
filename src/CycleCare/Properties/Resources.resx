@@ -120,4 +120,7 @@
   <data name="BASE_URL" xml:space="preserve">
     <value>http://localhost:8085/apicyclecare/</value>
   </data>
+  <data name="GRPC_URL" xml:space="preserve">
+    <value>http://localhost:3000</value>
+  </data>
 </root>

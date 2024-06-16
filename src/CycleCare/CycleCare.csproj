@@ -69,6 +69,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Article.cs" />
     <Compile Include="Models\BirthControl.cs" />
     <Compile Include="Models\ChangePasswordRequest.cs" />
     <Compile Include="Models\CycleLog.cs" />

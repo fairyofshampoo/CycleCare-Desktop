@@ -1,7 +1,10 @@
 ﻿using CycleCare.Models;
+using CycleCare.Service;
+using CycleCare.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,15 +27,38 @@ namespace CycleCare.Views.ContentModule
             SetInformativeContent();
         }
 
-        private void SetInformativeContent()
+        private async void SetInformativeContent()
         {
-
+            Response response = await ContentService.GetCurrentInformativeContent();
+            switch (response.Code)
+            {
+                case (int)HttpStatusCode.OK:
+                    ShowInformativeContent(response.contents);
+                    break;
+                case (int)HttpStatusCode.NotFound:
+                    DialogManager.ShowWarningMessageBox("No tiene contenido registrado.");
+                    break;
+                case (int)HttpStatusCode.InternalServerError:
+                    DialogManager.ShowErrorMessageBox("Error al recuperar tu contenido informativo. Inténtelo más tarde.");
+                    break;
+            }
         }
 
-        public void AddInformativeContentToList(InformativeContentJSONResponse informativeContent)
+        public void ShowInformativeContent(List<InformativeContentJSONResponse> content)
+        {
+            lstInformativeContent.Items.Clear();
+            foreach (var informativeContent in content)
+            {
+                AddInformativeContentToList(informativeContent);
+            }
+        }
+
+        public void AddInformativeContentToList(InformativeContentJSONResponse content)
         {
             InformativeContentForMedicUC informativeContentForMedicUC = new InformativeContentForMedicUC();
             informativeContentForMedicUC.myContent = this;
+            informativeContentForMedicUC.SetInformativeContentData(content);
+            lstInformativeContent.Items.Add(informativeContentForMedicUC);
 
         }
 
@@ -43,12 +69,13 @@ namespace CycleCare.Views.ContentModule
 
         private void BtnUploadVideo_Click(object sender, RoutedEventArgs e)
         {
-
+            //Tal vez quitemos esto
         }
 
         private void BtnRegisterNewContent_Click(object sender, RoutedEventArgs e)
         {
-            //Debe enviar a la pantalla de crear contenido
+            RegisterInformativeContent registerInformativeContent = new RegisterInformativeContent();
+            NavigationService.Navigate(registerInformativeContent);
         }
     }
 }

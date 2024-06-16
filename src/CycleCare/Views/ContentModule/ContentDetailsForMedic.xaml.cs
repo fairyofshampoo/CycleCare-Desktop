@@ -18,8 +18,7 @@ namespace CycleCare.Views.ContentModule
 {
     public partial class ContentDetailsForMedic : Page
     {
-
-        public InformativeContentJSONResponse informativeContentData { get; set; }
+        public InformativeContentJSONResponse informativeContent { get; set; }
 
         public ContentDetailsForMedic()
         {
@@ -27,13 +26,19 @@ namespace CycleCare.Views.ContentModule
             ShowInformativeContentDetails();
         }
 
+        public void SetInformativeContent(InformativeContentJSONResponse content)
+        {
+            this.informativeContent = content;
+            ShowInformativeContentDetails();
+        }
+
         private void ShowInformativeContentDetails()
         {
-            txtTitle.Text = informativeContentData.title;
-            txtDescription.Text = informativeContentData.description;
+            txtTitle.Text = informativeContent.title;
+            txtDescription.Text = informativeContent.description;
             var bi = new BitmapImage();
             bi.BeginInit();
-            bi.UriSource = new Uri("" + informativeContentData.media); //AQUÍ FALTA PONER CORRECTAMENTE LA URL BASE
+            bi.UriSource = new Uri("http://localhost:8085/images/" + informativeContent.media); 
             bi.EndInit();
             img_InformativeContent.Source = bi;
         }

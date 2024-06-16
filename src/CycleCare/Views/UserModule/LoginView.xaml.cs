@@ -17,6 +17,7 @@ using CycleCare.Models;
 using CycleCare.Service;
 using System.Configuration;
 using System.Reflection;
+using CycleCare.Views.ContentModule;
 
 namespace CycleCare.Views
 {
@@ -32,12 +33,23 @@ namespace CycleCare.Views
             HandleLoginAttempt();
         }
 
-        private void DisplayMainMenuView()
+        private void DisplayMainMenuView(string role)
         {
-            RemindersView remindersView = new RemindersView();
-            NavigationService.Navigate(remindersView);
+            switch (role)
+            {
+                case "USER":
+                    RemindersView remindersView = new RemindersView();
+                    NavigationService.Navigate(remindersView);
+                    break;
+                case "MEDIC":
+                    MyContentByMedic contentByMedicView = new MyContentByMedic();
+                    NavigationService.Navigate(contentByMedicView);
+                    break;
+                default:
+                    DialogManager.ShowErrorMessageBox("No se pudo determinar el rol del usuario");
+                    break;
+            }
         }
-
 
         private void HandleLoginAttempt()
         {
@@ -69,7 +81,7 @@ namespace CycleCare.Views
             {
                 case (int)HttpStatusCode.Created:
                     SaveToken(response.Token);
-                    DisplayMainMenuView();
+                    DisplayMainMenuView(response.Role);
                     break;
                 case (int)HttpStatusCode.BadRequest:
                     DialogManager.ShowWarningMessageBox("Usuario o contraseña incorrectos. Revisa tus credenciales.");

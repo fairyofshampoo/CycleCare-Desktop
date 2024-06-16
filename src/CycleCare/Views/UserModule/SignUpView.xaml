@@ -30,7 +30,7 @@
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer Height="720" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <Grid HorizontalAlignment="Center" Margin="10" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>

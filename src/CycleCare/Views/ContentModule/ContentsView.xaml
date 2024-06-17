@@ -5,41 +5,48 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CycleCare.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="720" d:DesignWidth="1280"
       Title="ContentsView">
 
     <Viewbox Stretch="Fill">
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <StackPanel Background="{StaticResource WhiteBrush}" Width="1280" Height="720">
                 <Grid>
-                    <Grid Margin="0,20,0,0">
-                        <Button HorizontalAlignment="Left" 
-                                VerticalAlignment="Top" 
-                                Width="70" 
-                                Height="70" 
-                                Margin="28,11,0,0"
-                                BorderThickness="0" 
-                                Click="BtnGoBack_Click" 
-                                Cursor="Hand">
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Image Source="./Resourcse/Icons/goBackIcon.png" Stretch="UniformToFill">
-                                    </Image>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
+                    <Grid HorizontalAlignment="Center" Margin="10">
                         
-                        
-                        <Grid HorizontalAlignment="Center" Margin="10">
-                            <Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Text="Contenido informativo" HorizontalAlignment="Center" Style="{StaticResource TitleTextViewStyle}">
+                            
+                            <TextBlock Grid.Row="0" 
+                                       Text="Contenido informativo" 
+                                       HorizontalAlignment="Center"
+                                       Style="{StaticResource TitleTextViewStyle}">
                             </TextBlock>
+                            
+                            <Button x:Name="btnArticles" 
+                                Grid.Row="1" 
+                                Width="200" 
+                                HorizontalAlignment="Left"
+                                Margin="200,10,0,0"
+                                Content="Articulos" 
+                                Style="{StaticResource ButtonStyle}" 
+                                Click="BtnArticles_Click" />
+                            
+                            <Button x:Name="btnVideos" 
+                                Grid.Row="1" 
+                                HorizontalAlignment="Right"
+                                Width="200" 
+                                Margin="0,10,200,0"
+                                Content="Videos" 
+                                Style="{StaticResource ButtonStyle}" 
+                                Click="BtnVideos_Click" />
 
-                            <StackPanel Grid.Row="1" Height="500" Margin="50,50,50,0" Width="800">
-                                <ListBox x:Name="lstInformativeContent" 
+
+                        <StackPanel Grid.Row="2" Height="500" Margin="50,50,50,0" Width="800">
+                            <ListBox x:Name="lstInformativeContent" 
                                          Height="500" 
                                          Width="Auto" 
                                          Margin="40,0,40,0" 
@@ -47,10 +54,7 @@
                                          BorderThickness="0" 
                                          ScrollViewer.HorizontalScrollBarVisibility="Auto" 
                                          ScrollViewer.VerticalScrollBarVisibility="Visible" />
-                            </StackPanel>
-                            
-                            
-                        </Grid>
+                        </StackPanel>
                     </Grid>
                 </Grid>
             </StackPanel>

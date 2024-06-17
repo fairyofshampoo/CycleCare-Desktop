@@ -28,7 +28,7 @@ namespace CycleCare.Views.CycleModule
 
         private void BtnNewEntry_Click(object sender, RoutedEventArgs e)
         {
-            NewCycleLog newCycleLogView = new NewCycleLog();
+            NewCycleLogView newCycleLogView = new NewCycleLogView();
             NavigationService.Navigate(newCycleLogView);
         }
     }

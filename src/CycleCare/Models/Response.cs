@@ -42,6 +42,6 @@ namespace CycleCare.Models
         public List<CycleLog> CycleLogs { get; set; }
 
         [JsonProperty("InformativeContent")]
-        public List<InformativeContentJSONResponse> contents { get; set; }
+        public List<InformativeContentJSONResponse> Contents { get; set; }
     }
 }

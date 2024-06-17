@@ -34,7 +34,7 @@ namespace CycleCare.Views
             switch (response.Code)
             {
                 case(int) HttpStatusCode.OK:
-                    ShowInformativeContent(response.contents);
+                    ShowInformativeContent(response.Contents);
                     break;
                 case (int)HttpStatusCode.NotFound:
                     DialogManager.ShowWarningMessageBox("No hay contenido disponible.");

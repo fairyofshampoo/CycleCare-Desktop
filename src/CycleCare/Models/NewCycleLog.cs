@@ -1,13 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CycleCare.Models
 {
-    public class CycleLog
+    public class NewCycleLog
     {
         [JsonProperty("cycleLogId")]
         public int CycleLogId { get; set; }
@@ -24,11 +21,11 @@ namespace CycleCare.Models
         [JsonProperty("note")]
         public string Note { get; set; }
 
-        [JsonProperty("menstrualFlow")]
-        public MenstrualFlow MenstrualFlow { get; set; }
+        [JsonProperty("menstrualFlowId")]
+        public int MenstrualFlowId { get; set; }
 
-        [JsonProperty("vaginalFlow")]
-        public VaginalFlow VaginalFlow { get; set; }
+        [JsonProperty("vaginalFlowId")]
+        public int VaginalFlowId { get; set; }
 
         [JsonProperty("symptoms")]
         public List<Symptom> Symptoms { get; set; }

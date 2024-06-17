@@ -33,7 +33,7 @@ namespace CycleCare.Views.ContentModule
             switch (response.Code)
             {
                 case (int)HttpStatusCode.OK:
-                    ShowInformativeContent(response.contents);
+                    ShowInformativeContent(response.Contents);
                     break;
                 case (int)HttpStatusCode.NotFound:
                     DialogManager.ShowWarningMessageBox("No tiene contenido registrado.");

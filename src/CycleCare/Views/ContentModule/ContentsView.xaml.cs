@@ -26,6 +26,7 @@ namespace CycleCare.Views
         {
             InitializeComponent();
             SetInformativeContentInPage();
+            menuFrame.Content = new UserMenu(this);
         }
 
         private async void SetInformativeContentInPage()
@@ -62,19 +63,19 @@ namespace CycleCare.Views
             lstInformativeContent.Items.Add(informativeContentUC);
         }
 
-        private void BtnGoBack_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void BtnArticles_Click(object sender, RoutedEventArgs e)
         {
-
+            SetInformativeContentInPage();
         }
 
         private void BtnVideos_Click(object sender, RoutedEventArgs e)
         {
+            ShowVideos();
+        }
 
+        private void ShowVideos()
+        {
+            lstInformativeContent.Items.Clear();
         }
     }
 }

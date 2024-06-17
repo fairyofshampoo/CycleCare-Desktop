@@ -23,6 +23,12 @@ namespace CycleCare.Views.ContentModule
         public WatchVideo()
         {
             InitializeComponent();
+            SetVideoInPage();
+        }
+
+        private void SetVideoInPage()
+        {
+            throw new NotImplementedException();
         }
 
         private void BtnGoBack_Click(object sender, RoutedEventArgs e)

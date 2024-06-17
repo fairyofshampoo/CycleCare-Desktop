@@ -52,7 +52,7 @@
                                            Foreground="{StaticResource BlackBrush}"/>
 
                         <StackPanel Grid.Row="2" Height="450" Margin="50,50,50,0" Width="800">
-                            <MediaElement Height="350" Width="600" Margin="50" Name="mediaPlayer"/>
+                            <MediaElement Height="450" Width="800" Name="videoPlayer" LoadedBehavior="Manual" UnloadedBehavior="Manual"/>
                         </StackPanel>
                     </Grid>
                 </Grid>

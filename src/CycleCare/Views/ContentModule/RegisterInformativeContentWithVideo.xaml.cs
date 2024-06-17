@@ -27,7 +27,8 @@ namespace CycleCare.Views.ContentModule
 
         private void BtnGoBack_Click(object sender, RoutedEventArgs e)
         {
-
+            MyContentByMedic myContentByMedic = new MyContentByMedic();
+            NavigationService.Navigate(myContentByMedic);
         }
 
         private void UploadContent_Clicked(object sender, MouseButtonEventArgs e)

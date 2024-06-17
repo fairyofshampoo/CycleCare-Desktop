@@ -5,14 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CycleCare.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="1280"
-      Title="ContentsView">
+      d:DesignHeight="720" d:DesignWidth="1280">
 
     <Viewbox Stretch="Fill">
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <StackPanel Background="{StaticResource WhiteBrush}" Width="1280" Height="720">
-                <Grid>
-                    <Grid HorizontalAlignment="Center" Margin="10">
+                <Grid Height="720">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="1180"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame x:Name="menuFrame" />
+                    <Grid Grid.Column="1" HorizontalAlignment="Center" Margin="10">
                         
                         <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>

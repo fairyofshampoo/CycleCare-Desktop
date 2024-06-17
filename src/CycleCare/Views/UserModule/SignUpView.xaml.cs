@@ -25,11 +25,6 @@ namespace CycleCare.Views
             NavigationService.GoBack();
         }
 
-        private void BtnGoBack_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
-        }
-
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
             clearErrorLabels();

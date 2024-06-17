@@ -49,5 +49,30 @@ namespace CycleCare.GrpcClients
             }
         }
 
+        public async Task UploadVideo(string fileName, byte[] data)
+        {
+            try
+            {
+                using (var call = _client.uploadVideo())
+                {
+                    await call.RequestStream.WriteAsync(new VideoChunkResponse
+                    {
+                        Data = ByteString.CopyFrom(data),
+                        Filename = fileName
+                    });
+
+                    await call.RequestStream.CompleteAsync();
+                }
+            }
+            catch (RpcException e)
+            {
+                Console.WriteLine($"Error al subir el archivo: {e}");
+            }
+            finally
+            {
+                _channel.ShutdownAsync().Wait();
+            }
+        }
+
     }
 }

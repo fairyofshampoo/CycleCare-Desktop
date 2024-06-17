@@ -13,23 +13,6 @@
                 Height="720">
             <Grid>
                 <Grid>
-                        <Button 
-                            HorizontalAlignment="Left" 
-                            VerticalAlignment="Top" 
-                            Width="70" 
-                            Height="70" 
-                            Margin="28,11,0,0"
-                            BorderThickness="0" 
-                            Click="BtnGoBack_Click" 
-                            Cursor="Hand">
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Image Source="../Resources/Icons/goBackIcon.png" 
-                                           Stretch="UniformToFill">
-                                    </Image>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
                     <ScrollViewer Height="720" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                         <Grid HorizontalAlignment="Center" Margin="10" >
                             <Grid.RowDefinitions>

@@ -54,7 +54,8 @@ namespace CycleCare.Views.ContentModule
 
         private void BtnGoBack_Click(object sender, RoutedEventArgs e)
         {
-            //Mandar a la pantalla anterior
+            MyContentByMedic myContentByMedic = new MyContentByMedic();
+            NavigationService.Navigate(myContentByMedic);
         }
     }
 }

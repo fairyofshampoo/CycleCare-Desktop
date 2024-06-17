@@ -25,6 +25,7 @@ namespace CycleCare.Views.ChartModule
         {
             InitializeComponent();
             GetSleepHours();
+            menuFrame.Content = new UserMenu(this);
         }
 
         private async void GetSleepHours()
@@ -96,12 +97,6 @@ namespace CycleCare.Views.ChartModule
             }
             double average = hours.Average();
             SleepHoursAVG.Text = average.ToString() + " Horas";
-        }
-
-
-        private void BtnGoBack_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

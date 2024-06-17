@@ -6,8 +6,7 @@
       xmlns:local="clr-namespace:CycleCare.Views.ChartModule"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" 
       mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="1280"
-      Title="ViewSleepChart">
+      d:DesignHeight="720" d:DesignWidth="1280">
 
     <Viewbox Stretch="Fill">
         <ScrollViewer VerticalScrollBarVisibility="Auto" 
@@ -16,25 +15,13 @@
                 Background="{StaticResource WhiteBrush}" 
                 Width="1280" 
                 Height="720">
-                <Grid>
-                    <Grid Margin="0,20,0,0">
-                        <Button 
-                            HorizontalAlignment="Left" 
-                            VerticalAlignment="Top" 
-                            Width="70" 
-                            Height="70" 
-                            Margin="28,11,0,0"
-                            BorderThickness="0" 
-                            Click="BtnGoBack_Click" 
-                            Cursor="Hand">
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Image Source="../Resources/Icons/goBackIcon.png" 
-                                           Stretch="UniformToFill">
-                                    </Image>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
+                <Grid Height="720">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="1180"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame x:Name="menuFrame" />
+                    <Grid Grid.Column="1" Margin="0,20,0,0">
 
                         <Grid HorizontalAlignment="Center" Margin="10">
                             <Grid.RowDefinitions>

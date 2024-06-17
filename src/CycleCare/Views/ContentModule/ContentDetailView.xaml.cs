@@ -38,7 +38,8 @@ namespace CycleCare.Views
 
         private void BtnGoBack_Click(object sender, RoutedEventArgs e)
         {
-
+            ContentsView contentsView = new ContentsView();
+            NavigationService.Navigate(contentsView);
         }
 
         private void ShowInformativeContentData()

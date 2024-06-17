@@ -66,5 +66,15 @@ namespace CycleCare.Views
         {
 
         }
+
+        private void BtnArticles_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnVideos_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

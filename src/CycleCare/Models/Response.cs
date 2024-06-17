@@ -51,5 +51,9 @@ namespace CycleCare.Models
         [JsonProperty("nextPeriodEndDate")]
         public DateTime NextPeriodEndDate { get; set; }
 
+        public List<InformativeContentJSONResponse> contents { get; set; }
+
+        [JsonProperty("SleepHours")]
+        public List<SleepHours> sleepHours { get; set; }    
     }
 }

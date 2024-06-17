@@ -4,26 +4,26 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
-using CycleCare.GrpcClients;
 using System.Collections.Generic;
 using CycleCare.Utilities;
 using System.Linq;
 using CycleCare.Models;
 using CycleCare.Service;
 using System.Net;
+//using CycleCare.GrpcClients;
 
 namespace CycleCare.Views.ContentModule
 {
     public partial class RegisterInformativeContentWithVideo : Page
     {
-        private GrpcVideoClient _grpcVideoClient;
+        // private GrpcVideoClient _grpcVideoClient;
 
         private bool isVideoSelected = false;
 
         public RegisterInformativeContentWithVideo()
         {
             InitializeComponent();
-            _grpcVideoClient = new GrpcVideoClient();
+            // _grpcVideoClient = new GrpcVideoClient();
         }
 
         private void BtnGoBack_Click(object sender, RoutedEventArgs e)
@@ -55,7 +55,7 @@ namespace CycleCare.Views.ContentModule
             try
             {
                 byte[] fileData = await ReadFileAsync(fileName);
-                await _grpcVideoClient.UploadVideo(fileName, fileData);
+                //await _grpcVideoClient.UploadVideo(fileName, fileData);
                 MessageBox.Show("Video subido exitosamente.");
             }
             catch (Exception ex)

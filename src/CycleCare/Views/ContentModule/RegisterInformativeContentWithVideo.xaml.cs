@@ -36,7 +36,7 @@ namespace CycleCare.Views.ContentModule
                 string fileName = openFileDialog.FileName;
                 videoGrid.Visibility = Visibility.Collapsed;
                 lblVideoUploaded.Visibility = Visibility.Visible;
-                lblVideoUploaded.Content = fileName + " subido";
+                lblVideoUploaded.Content = fileName;
                 UploadVideoAsync(fileName);
             }
         }

@@ -190,19 +190,35 @@ namespace CycleCare.Views.CycleModule
 
         private void NavigateToUpdateCycleLog(CycleLog cycleLogResponse)
         {
-            var parentWindow = Window.GetWindow(this) as MainWindow;
-            if (parentWindow != null)
+            try
             {
-                parentWindow.NavigationFrame.Navigate(new UpdateCycleLog(cycleLogResponse));
+                MainWindow parentWindow = Window.GetWindow(this) as MainWindow;
+                if (parentWindow != null)
+                {
+                    parentWindow.NavigationFrame.Navigate(new UpdateCycleLogView(cycleLogResponse));
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones
+                MessageBox.Show($"Ocurrió un error al navegar: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void NavigateToNewCycleLog()
         {
-            var parentWindow = Window.GetWindow(this) as MainWindow;
-            if (parentWindow != null)
+            try
             {
-                parentWindow.NavigationFrame.Navigate(new NewCycleLogView);
+                MainWindow parentWindow = Window.GetWindow(this) as MainWindow;
+                if (parentWindow != null)
+                {
+                    parentWindow.NavigationFrame.Navigate(new NewCycleLogView());
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones
+                MessageBox.Show($"Ocurrió un error al navegar: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

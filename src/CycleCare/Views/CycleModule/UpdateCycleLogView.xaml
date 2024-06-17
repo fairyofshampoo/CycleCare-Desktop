@@ -1,4 +1,4 @@
-﻿<Page x:Class="CycleCare.Views.UpdateCycleLog"
+﻿<Page x:Class="CycleCare.Views.UpdateCycleLogView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -33,17 +33,17 @@
 
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20,0">
                                     <!-- Opciones de flujo menstrual -->
-                                    <StackPanel Tag="1" Width="100" Height="90" Background="White" Margin="0,0,8,0" MouseDown="MenstrualFlow_Click">
+                                    <StackPanel x:Name="lightFlowPanel" Tag="1" Width="100" Height="90" Background="White" Margin="0,0,8,0" MouseDown="MenstrualFlow_Click">
                                         <Image Source="../Resources/Icons/ic_flow_light.png" Width="60" Height="50" HorizontalAlignment="Center"/>
                                         <TextBlock Text="Ligero" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
                                     </StackPanel>
 
-                                    <StackPanel Tag="2" Width="100" Height="90" Background="White" Margin="0,0,8,0" MouseDown="MenstrualFlow_Click">
+                                    <StackPanel x:Name="mediumFlowPanel" Tag="2" Width="100" Height="90" Background="White" Margin="0,0,8,0" MouseDown="MenstrualFlow_Click">
                                         <Image Source="../Resources/Icons/ic_flow_medium.png" Width="48" Height="48" HorizontalAlignment="Center"/>
                                         <TextBlock Text="Moderado" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
                                     </StackPanel>
 
-                                    <StackPanel Tag="3" Width="100" Height="90" Background="White" MouseDown="MenstrualFlow_Click">
+                                    <StackPanel x:Name="heavyFlowPanel" Tag="3" Width="100" Height="90" Background="White" MouseDown="MenstrualFlow_Click">
                                         <Image Source="../Resources/Icons/ic_flow_heavy.png" Width="48" Height="48" HorizontalAlignment="Center"/>
                                         <TextBlock Text="Abundante" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
                                     </StackPanel>

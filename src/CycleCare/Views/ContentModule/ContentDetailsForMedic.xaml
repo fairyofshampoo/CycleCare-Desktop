@@ -58,7 +58,7 @@
                             <Image Grid.Row="0"
                                    x:Name="img_InformativeContent"
                                    Source="{Binding informativeContentImage}"
-                                   Height="Auto"
+                                   Height="200"
                                    Width="Auto"/>
 
                             <TextBlock     x:Name="txtTitle"
@@ -72,7 +72,7 @@
                                            Margin="0,80,0,0"
                                            Foreground="{StaticResource BlackBrush}"/>
                             <ScrollViewer Grid.Row="2">
-                            <TextBlock     x:Name="txtDescription"
+                                <TextBlock     x:Name="txtDescription"
                                            Grid.Row="2"
                                            Width="700"
                                            Style="{StaticResource DescriptionTextViewStyle}" 
@@ -84,15 +84,7 @@
                                            HorizontalAlignment="Left"
                                            Foreground="{StaticResource BlackBrush}"/>
                             </ScrollViewer>
-                            <Button x:Name="btnRegister" 
-                                    Margin="0,40,0,0" 
-                                    Grid.Row="3" 
-                                    Width="200" 
-                                    Content="Editar contenido" 
-                                    HorizontalAlignment="Right"
-                                    Style="{StaticResource ButtonStyle}" 
-                                    Click="BtnEditContent_Click"/>
-                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </StackPanel>

@@ -19,6 +19,61 @@ namespace CycleCare.Service
         private static readonly string TOKEN = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location).AppSettings.Settings["TOKEN"].Value;
         private static readonly string URL = string.Concat(Properties.Resources.BASE_URL, "logs/");
 
+        public static async Task<Response> GetSleepHours()
+        {
+            Response response = new Response();
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    httpClient.DefaultRequestHeaders.Add("token", TOKEN);
+
+                    var httpRequestMessage = new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(string.Concat(Properties.Resources.BASE_URL, "chart/obtain-sleep-hours"))
+                    };
+
+                    HttpResponseMessage httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+
+                    if (httpResponseMessage != null)
+                    {
+                        if (httpResponseMessage.IsSuccessStatusCode)
+                        {
+                            string json = await httpResponseMessage.Content.ReadAsStringAsync();
+                            response = JsonConvert.DeserializeObject<Response>(json);
+                        }
+
+                        response.Code = (int)httpResponseMessage.StatusCode;
+                    }
+                    else
+                    {
+                        response.Code = (int)HttpStatusCode.InternalServerError;
+                        response.Details = "No se recibió respuesta del servidor.";
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    response.Code = (int)HttpStatusCode.InternalServerError;
+                    response.Details = $"Error de red: {ex.Message}";
+                    DialogManager.ShowErrorMessageBox(response.Details);
+                }
+                catch (JsonException ex)
+                {
+                    response.Code = (int)HttpStatusCode.InternalServerError;
+                    response.Details = $"Error al procesar la respuesta JSON: {ex.Message}";
+                    DialogManager.ShowErrorMessageBox(response.Details);
+                }
+                catch (Exception ex)
+                {
+                    response.Code = (int)HttpStatusCode.InternalServerError;
+                    response.Details = $"Error inesperado: {ex.Message}";
+                    DialogManager.ShowErrorMessageBox(response.Details);
+                }
+            }
+            return response;
+        }
+
         public static async Task<Response> GetCycleLogsByUser(int month, int year)
         {
             Response response = new Response();

@@ -74,7 +74,7 @@ namespace CycleCare.Views.ContentModule
 
         private void BtnRegisterNewContent_Click(object sender, RoutedEventArgs e)
         {
-            RegisterInformativeContent registerInformativeContent = new RegisterInformativeContent();
+            RegisterInformativeContent registerInformativeContent = new RegisterInformativeContent(false, null);
             NavigationService.Navigate(registerInformativeContent);
         }
     }

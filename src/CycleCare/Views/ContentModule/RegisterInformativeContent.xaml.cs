@@ -1,9 +1,11 @@
 ﻿using CycleCare.Models;
+using CycleCare.Service;
 using CycleCare.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,17 +16,16 @@ namespace CycleCare.Views.ContentModule
 
         private string base64String = string.Empty;
 
-        public bool isEdition { get; set; }
-
         public InformativeContentJSONResponse informativeContent { get; set; }
 
-        public RegisterInformativeContent()
+        public RegisterInformativeContent(bool isEdition, InformativeContentJSONResponse content)
         {
             InitializeComponent();
-            ShowDetails();
+            this.informativeContent = content;
+            ShowDetails(isEdition);
         }
 
-        private void ShowDetails() 
+        private void ShowDetails(bool isEdition) 
         {
             if (isEdition)
             {
@@ -38,9 +39,12 @@ namespace CycleCare.Views.ContentModule
 
         private void ShowEditionDetails()
         {
-            txtTittle.Text = informativeContent.title;
-            txtDescription.Text = informativeContent.description;
-            btnEditContent.Visibility = Visibility.Visible;
+            if(informativeContent != null)
+            {
+                txtTittle.Text = informativeContent.title;
+                txtDescription.Text = informativeContent.description;
+                btnEditContent.Visibility = Visibility.Visible;
+            }
         }
 
         private void ShowCreationDetails() 
@@ -52,7 +56,7 @@ namespace CycleCare.Views.ContentModule
         }
 
 
-        private void BtnPublishContent_Click(object sender, RoutedEventArgs e)
+        private async void BtnPublishContent_Click(object sender, RoutedEventArgs e)
         {
             List<int> errors = validateFields();
             clearErrors();
@@ -62,7 +66,46 @@ namespace CycleCare.Views.ContentModule
             }else
             {
                Article newArticle =  CreateArticle();
-                //Publicar contenido
+               Response response = await ContentService.PublishArticle(newArticle);
+               switch (response.Code)
+               {
+                    case (int)HttpStatusCode.Created:
+                        DialogManager.ShowSuccessMessageBox("Se ha publicado el artículo correctamente");
+                        break;
+                    case (int)HttpStatusCode.BadRequest:
+                        DialogManager.ShowWarningMessageBox("No se ha podido registrar el artículo.");
+                        break;
+                    case (int)HttpStatusCode.InternalServerError:
+                        DialogManager.ShowErrorMessageBox("Error interno del servidor. Inténtalo más tarde.");
+                        break;
+                }
+            }
+        }
+
+        private async void BtnEditContent_Click(object sender, RoutedEventArgs e)
+        {
+            List<int> errors = validateFields();
+            clearErrors();
+            if (errors.Any())
+            {
+                showErrors(errors);
+            }
+            else
+            {
+                ArticleUpdated articleUpdated = CreateArticleUpdated();
+                Response response = await ContentService.EditArticle(articleUpdated);
+                switch (response.Code)
+                {
+                    case (int)HttpStatusCode.OK:
+                        DialogManager.ShowSuccessMessageBox("Se ha editado el artículo correctamente");
+                        break;
+                    case (int)HttpStatusCode.BadRequest:
+                        DialogManager.ShowWarningMessageBox("No se ha podido editar el artículo.");
+                        break;
+                    case (int)HttpStatusCode.InternalServerError:
+                        DialogManager.ShowErrorMessageBox("Error interno del servidor. Inténtalo más tarde.");
+                        break;
+                }
             }
         }
 
@@ -82,19 +125,15 @@ namespace CycleCare.Views.ContentModule
             return currentDate.ToString("yyyy-MM-dd");
         }
 
-
-        private void BtnEditContent_Click(object sender, RoutedEventArgs e)
+        private ArticleUpdated CreateArticleUpdated()
         {
-            List<int> errors = validateFields();
-            clearErrors();
-            if (errors.Any())
-            {
-                showErrors(errors);
-            }
-            else
-            {
-                //Editar el contenido
-            }
+            ArticleUpdated articleUpdated = new ArticleUpdated();
+            articleUpdated.contentId = informativeContent.contentId;
+            articleUpdated.imageName = informativeContent.media;
+            articleUpdated.title = txtTittle.Text;
+            articleUpdated.description = txtDescription.Text;
+            articleUpdated.newImage = base64String;
+            return articleUpdated;
         }
 
         private void clearErrors()

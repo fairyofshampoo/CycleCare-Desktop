@@ -43,5 +43,8 @@ namespace CycleCare.Models
 
         [JsonProperty("InformativeContent")]
         public List<InformativeContentJSONResponse> contents { get; set; }
+
+        [JsonProperty("SleepHours")]
+        public List<SleepHours> sleepHours { get; set; }    
     }
 }

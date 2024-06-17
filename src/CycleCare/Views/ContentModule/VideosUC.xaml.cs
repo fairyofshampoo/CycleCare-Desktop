@@ -24,5 +24,10 @@ namespace CycleCare.Views.ContentModule
         {
             InitializeComponent();
         }
+
+        private void Content_Clicked(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

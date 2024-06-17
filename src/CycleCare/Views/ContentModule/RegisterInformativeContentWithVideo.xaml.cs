@@ -5,12 +5,20 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
 using CycleCare.GrpcClients;
+using System.Collections.Generic;
+using CycleCare.Utilities;
+using System.Linq;
+using CycleCare.Models;
+using CycleCare.Service;
+using System.Net;
 
 namespace CycleCare.Views.ContentModule
 {
     public partial class RegisterInformativeContentWithVideo : Page
     {
         private GrpcVideoClient _grpcVideoClient;
+
+        private bool isVideoSelected = false;
 
         public RegisterInformativeContentWithVideo()
         {
@@ -37,6 +45,7 @@ namespace CycleCare.Views.ContentModule
                 videoGrid.Visibility = Visibility.Collapsed;
                 lblVideoUploaded.Visibility = Visibility.Visible;
                 lblVideoUploaded.Content = fileName;
+                isVideoSelected = true;
                 UploadVideoAsync(fileName);
             }
         }
@@ -66,9 +75,87 @@ namespace CycleCare.Views.ContentModule
             return buffer;
         }
 
-        private void BtnPublishContent_Click(object sender, RoutedEventArgs e)
+        private async void BtnPublishContent_Click(object sender, RoutedEventArgs e)
         {
-            // Si el título cumple lo de ValidationManager.IsTitleValid(txtTittle.Text) y hay un videoSeleccionado
+            ClearErrors();
+            List<int> errors = ValidationData();
+            if (errors.Any())
+            {
+                ShowErrors(errors);
+            }else
+            {
+                Video video =  CreateVideo();
+                Response response = await ContentService.PublishVideo(video);
+                switch (response.Code)
+                {
+                    case (int)HttpStatusCode.Created:
+                        DialogManager.ShowSuccessMessageBox("Se ha editado el artículo correctamente");
+                        break;
+                    case (int)HttpStatusCode.BadRequest:
+                        DialogManager.ShowWarningMessageBox("No se ha podido editar el artículo.");
+                        break;
+                    case (int)HttpStatusCode.InternalServerError:
+                        DialogManager.ShowErrorMessageBox("Error interno del servidor. Inténtalo más tarde.");
+                        break;
+                }
+            }
+        }
+
+        private Video CreateVideo()
+        {
+            Video video = new Video();
+            video.title = txtTitle.Text;
+            video.creationDate = getCreationDate();
+            return video;
+        }
+
+        private String getCreationDate()
+        {
+            DateTime currentDate = DateTime.Now;
+            return currentDate.ToString("yyyy-MM-dd");
+        }
+
+        private void ShowErrors(List<int> errors)
+        {
+            foreach (var error in errors)
+            {
+                switch (error)
+                {
+                    case 0:
+                        lblTitleError.Visibility = Visibility.Visible;
+                        break;
+                    case 1:
+                        lblVideoError.Visibility = Visibility.Visible;
+                        break;
+                }
+            }
+        }
+
+        private void ClearErrors()
+        {
+            lblTitleError.Visibility = Visibility.Collapsed;
+            lblVideoError.Visibility = Visibility.Collapsed;
+        }
+
+        private List<int> ValidationData()
+        {
+            List<int> errors = new List<int>();
+            if (!isTitleValid())
+            {
+                errors.Add(0);
+            }
+
+            if(!isVideoSelected)
+            {
+                errors.Add(1);
+            }
+
+            return errors;
+        }
+
+        private bool isTitleValid()
+        {
+            return ValidationManager.IsTitleValid(txtTitle.Text);
         }
     }
 }

@@ -134,6 +134,7 @@
     <Compile Include="Models\Symptom.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\VaginalFlow.cs" />
+    <Compile Include="Models\Video.cs" />
     <Compile Include="Service\ContentService.cs" />
     <Compile Include="Service\CycleService.cs" />
     <Compile Include="Service\ReminderService.cs" />

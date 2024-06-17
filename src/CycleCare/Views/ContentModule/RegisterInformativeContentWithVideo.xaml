@@ -44,6 +44,8 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0"
@@ -61,14 +63,25 @@
                                      Style="{StaticResource EditTextStyle}" 
                                      Background="{StaticResource LightGrayBrush}"/>
 
+                            <TextBlock x:Name="lblTitleError" 
+                                       Grid.Row="3" 
+                                       Text="El título es incorrecto" 
+                                       Margin="0,0,0,20" 
+                                       FontSize="12"  
+                                       Width="450"
+                                       TextWrapping="Wrap" 
+                                       Style="{StaticResource InstructionsTextViewStyle}" 
+                                       Foreground="{StaticResource StrongPinkBrush}" 
+                                       Visibility="Collapsed"/>
+
                             <TextBlock Text="* Contenido Multimedia" 
                                        Margin="50,30,0,0" 
-                                       Grid.Row="3" 
+                                       Grid.Row="4" 
                                        Style="{StaticResource InstructionsTextViewStyle}" />
                             <Label x:Name="lblVideoUploaded" Content="Video subido" Grid.Row="4" Visibility="Collapsed">
                             </Label>
 
-                            <Grid Grid.Row="4" x:Name="videoGrid"
+                            <Grid Grid.Row="5" x:Name="videoGrid"
                                   Width="360"
                                   Height="120"
                                   Background="LightGray"
@@ -109,11 +122,22 @@
                                            Foreground="{StaticResource SoftPink94Brush}"/>
 
                             </Grid>
+                            
+                            <TextBlock x:Name="lblVideoError" 
+                                       Grid.Row="6" 
+                                       Text="Debe seleccionar un video" 
+                                       Margin="0,0,0,20" 
+                                       FontSize="12"  
+                                       Width="450"
+                                       TextWrapping="Wrap" 
+                                       Style="{StaticResource InstructionsTextViewStyle}" 
+                                       Foreground="{StaticResource StrongPinkBrush}" 
+                                       Visibility="Collapsed"/>
 
 
                             <Button x:Name="btnPublishContent" 
-                                    Margin="0,80,0,0" 
-                                    Grid.Row="5" 
+                                    Margin="0,50,0,0" 
+                                    Grid.Row="7" 
                                     Width="200" 
                                     Content="Publicar" 
                                     Style="{StaticResource ButtonStyle}" 

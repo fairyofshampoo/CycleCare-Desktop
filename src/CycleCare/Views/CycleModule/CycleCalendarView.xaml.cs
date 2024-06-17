@@ -1,6 +1,10 @@
-﻿using System;
+﻿using CycleCare.Models;
+using CycleCare.Service;
+using CycleCare.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,12 +28,35 @@ namespace CycleCare.Views.CycleModule
         {
             InitializeComponent();
             menuFrame.Content = new UserMenu(this);
+            SetPrediction();
+        }
+
+        private async SetPrediction()
+        {
         }
 
         private void BtnNewEntry_Click(object sender, RoutedEventArgs e)
         {
-            NewCycleLogView newCycleLogView = new NewCycleLogView();
-            NavigationService.Navigate(newCycleLogView);
+            AddNewCycleLog();
+        }
+
+        private async void AddNewCycleLog()
+        {
+            DateTime currentDate = DateTime.Now;
+            Response response = await CycleService.GetCycleLogByDay((int)currentDate.Year, (int)currentDate.Month, (int)currentDate.Day);
+            switch (response.Code)
+            {
+                case 200:
+                    DialogManager.ShowWarningMessageBox("Ya has realizado el registro de hoy");
+                    break;
+                case 404:
+                    NewCycleLogView newCycleLogView = new NewCycleLogView();
+                    NavigationService.Navigate(newCycleLogView);
+                    break;
+                default:
+                    DialogManager.ShowErrorMessageBox("Error al crear el recordatorio. Por favor, intente nuevamente.");
+                    break;
+            }
         }
     }
 }

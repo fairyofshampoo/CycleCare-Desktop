@@ -26,10 +26,13 @@ namespace CycleCare.Views
         private List<StackPanel> _moodsSelected = new List<StackPanel>();
         private StackPanel _selectedMenstrualFlowPanel = null;
         private StackPanel _selectedVaginalFlowPanel = null;
+        private DateTime _currentDate;
         public NewCycleLogView()
         {
             InitializeComponent();
             FillHoursComboBox();
+            _currentDate = DateTime.Now;
+            tvDate.Text = _currentDate.ToString("dd/MM/yyyy");
         }
 
         private void FillHoursComboBox()
@@ -54,8 +57,7 @@ namespace CycleCare.Views
         private void SaveCycleLog()
         {
             NewCycleLog newCycleLog = new NewCycleLog();
-            newCycleLog.CreationDate = DateTime.Now;
-
+            newCycleLog.CreationDate = _currentDate.ToString("yyyy-MM-dd");
             if (sleepHoursComboBox.SelectedItem != null)
             {
                 newCycleLog.SleepHours = int.Parse(sleepHoursComboBox.SelectedItem.ToString());
@@ -352,7 +354,6 @@ namespace CycleCare.Views
                 });
             }
 
-            Console.WriteLine("MANDÉ TANTAS PILLS: " + selectedPills.Count);
             return selectedPills;
         }
 
@@ -383,8 +384,6 @@ namespace CycleCare.Views
 
         private async void CreateNewCycleLog(NewCycleLog newCycleLog)
         {
-            Console.WriteLine("CREANDO NUEVO LOG");
-            Console.WriteLine("PILLS" + newCycleLog.Pills.Count);
             Response response = await CycleService.CreateCycleLog(newCycleLog);
             if (response.Code == (int)HttpStatusCode.Created)
             {

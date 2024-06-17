@@ -58,7 +58,6 @@ namespace CycleCare.Views
                 string username = txtUsername.Text;
                 string password = GetPassword();
                 string passwordHashed = EncriptionUtil.ToSHA2Hash(password);
-                Console.WriteLine(passwordHashed);
 
                 var user = new User()
                 {

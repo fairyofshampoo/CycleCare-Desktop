@@ -16,33 +16,33 @@ namespace CycleCare.Views.CycleModule
     {
         private DateTime _currentDate;
         private readonly Color _highlightColor = (Color)ColorConverter.ConvertFromString("#9AD0D3");
+        private readonly Color _predictionColor = (Color)ColorConverter.ConvertFromString("#FFE9BA");
         private readonly DateTime _today = DateTime.Today;
 
         public CustomCalendar()
         {
             InitializeComponent();
             _currentDate = DateTime.Now;
+            SetCalendarElements();
             SetCycleLogs();
         }
 
         public async void SetCycleLogs()
         {
-            Response cycleLogs = await CycleService.GetCycleLogsByUser((int)_currentDate.Month, (int)_currentDate.Year);
+            Response cycleLogs = await CycleService.GetCycleLogsByUser((int)_currentDate.Year, (int)_currentDate.Month);
             switch (cycleLogs.Code)
             {
                 case 200:
                     DisplayCycleLogs(cycleLogs);
                     break;
                 case 404:
-                    SetCalendarElements();
+                    Console.WriteLine("No se encontraron registros de ciclos.");
                     break;
                 case 500:
                     DialogManager.ShowErrorMessageBox("Error interno del servidor.");
-                    SetCalendarElements();
                     break;
                 default:
                     DialogManager.ShowErrorMessageBox("Error desconocido.");
-                    SetCalendarElements();
                     break;
             }
         }
@@ -51,10 +51,9 @@ namespace CycleCare.Views.CycleModule
         {
             foreach (var cycleLog in cycleLogs.CycleLogs)
             {
-                // Mostrar los cyclelogs en el calendario con un círculo color #FF0065 detrás del número cuyo foreground color debe ser blanco 
                 int day = cycleLog.CreationDate.Day;
                 TextBlock dayText = GetDayTextBlock(day);
-                Border dayBorder = CreateDayBorder(dayText, day, (int)cycleLog.CreationDate.DayOfWeek);
+                Border dayBorder = (Border)dayText.Parent;
                 dayBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF0065"));
                 dayText.Foreground = Brushes.White;
             }
@@ -148,7 +147,8 @@ namespace CycleCare.Views.CycleModule
             loadingStackPanel.Visibility = Visibility.Visible;
             calendarStackPanel.Visibility = Visibility.Collapsed;
             _currentDate = _currentDate.AddMonths(-1);
-            SetCycleLogs(); // Mostrar los cyclelogs del mes anterior
+            SetCalendarElements();
+            SetCycleLogs();
         }
 
         private void BtnNext_Click(object sender, RoutedEventArgs e)
@@ -156,7 +156,8 @@ namespace CycleCare.Views.CycleModule
             loadingStackPanel.Visibility = Visibility.Visible;
             calendarStackPanel.Visibility = Visibility.Collapsed;
             _currentDate = _currentDate.AddMonths(1);
-            SetCycleLogs(); // Mostrar los cyclelogs del mes siguiente
+            SetCalendarElements();
+            SetCycleLogs();
         }
     }
 }

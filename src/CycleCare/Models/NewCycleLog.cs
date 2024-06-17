@@ -16,7 +16,7 @@ namespace CycleCare.Models
         public int SleepHours { get; set; }
 
         [JsonProperty("creationDate")]
-        public DateTime CreationDate { get; set; }
+        public string CreationDate { get; set; }
 
         [JsonProperty("note")]
         public string Note { get; set; }

@@ -19,12 +19,12 @@ namespace CycleCare.Service
         private static readonly string TOKEN = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location).AppSettings.Settings["TOKEN"].Value;
         private static readonly string URL = string.Concat(Properties.Resources.BASE_URL, "logs/");
 
-        public static async Task<Response> GetCycleLogsByUser(int month, int year)
+        public static async Task<Response> GetCycleLogsByUser(int year, int month)
         {
             Response response = new Response();
             using (var httpClient = new HttpClient())
             {
-                string urlWithParam = string.Concat(URL, "user-cycle-logs/", Uri.EscapeDataString(month.ToString()), "/", Uri.EscapeDataString(year.ToString()));
+                string urlWithParam = string.Concat(URL, "user-cycle-logs/", Uri.EscapeDataString(year.ToString()), "/", Uri.EscapeDataString(month.ToString()));
                 try
                 {
                     httpClient.DefaultRequestHeaders.Add("token", TOKEN);
@@ -90,6 +90,63 @@ namespace CycleCare.Service
                         Method = HttpMethod.Post,
                         RequestUri = new Uri(string.Concat(URL, "register-cycle-log")),
                         Content = new StringContent(JsonConvert.SerializeObject(cycleLog), Encoding.UTF8, "application/json")
+                    };
+
+                    HttpResponseMessage httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+                    if (httpResponseMessage != null)
+                    {
+                        if (httpResponseMessage.IsSuccessStatusCode)
+                        {
+                            string json = await httpResponseMessage.Content.ReadAsStringAsync();
+                            response = JsonConvert.DeserializeObject<Response>(json);
+                        }
+                        response.Code = (int)httpResponseMessage.StatusCode;
+                    }
+                    else
+                    {
+                        response.Code = (int)HttpStatusCode.InternalServerError;
+                        response.Details = "No se recibió respuesta del servidor.";
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    response.Code = (int)HttpStatusCode.InternalServerError;
+                    response.Details = $"Error de red: {ex.Message}";
+                    DialogManager.ShowErrorMessageBox(response.Details);
+                }
+                catch (JsonException ex)
+                {
+                    response.Code = (int)HttpStatusCode.InternalServerError;
+                    response.Details = $"Error al procesar la respuesta JSON: {ex.Message}";
+                    Console.WriteLine(ex.Message);
+                    DialogManager.ShowErrorMessageBox(response.Details);
+                }
+                catch (Exception ex)
+                {
+                    response.Code = (int)HttpStatusCode.InternalServerError;
+                    response.Details = $"Error inesperado: {ex.Message}";
+
+                    Console.WriteLine(ex.Message);
+                    DialogManager.ShowErrorMessageBox(response.Details);
+                }
+            }
+            return response;
+        }
+
+        public static async Task<Response> GetCycleLogByDay(int year, int month, int day)
+        {
+            Response response = new Response();
+            using (var httpClient = new HttpClient())
+            {
+                string urlWithParam = string.Concat(URL, "user-cycle-logs/", Uri.EscapeDataString(year.ToString()), "/", Uri.EscapeDataString(month.ToString()), "/", Uri.EscapeDataString(day.ToString()));
+                try
+                {
+                    httpClient.DefaultRequestHeaders.Add("token", TOKEN);
+
+                    var httpRequestMessage = new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(urlWithParam),
                     };
 
                     HttpResponseMessage httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);

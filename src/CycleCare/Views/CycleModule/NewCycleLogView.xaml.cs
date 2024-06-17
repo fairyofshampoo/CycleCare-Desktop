@@ -79,12 +79,12 @@ namespace CycleCare.Views
 
         private int GetVaginalFlowId()
         {
-            return _selectedVaginalFlowPanel != null ? (int)_selectedVaginalFlowPanel.Tag : 0;
+            return (int)_selectedVaginalFlowPanel.Tag;
         }
 
         private int GetMenstrualFlowId()
         {
-            return _selectedMenstrualFlowPanel != null ? (int)_selectedMenstrualFlowPanel.Tag : 0;
+            return (int)_selectedMenstrualFlowPanel.Tag;
         }
 
         private List<Symptom> GetSelectedSymptoms()

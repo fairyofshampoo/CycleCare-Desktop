@@ -11,23 +11,22 @@
             <StackPanel Background="{StaticResource WhiteBrush}" Width="1280" Height="720">
                 <Grid Height="720">
                     <Grid Margin="0,20,0,0">
-                        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Height="70" Margin="28,11,0,0" BorderThickness="0" Click="BtnGoBack_Click" Cursor="Hand">
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Image Source="../Resources/Icons/goBackIcon.png" Stretch="UniformToFill">
-                                    </Image>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-
-                        <Button x:Name="btnSave" Content="Guardar" Style="{StaticResource ButtonStyle}" Width="100" HorizontalAlignment="Right" Background="ForestGreen" VerticalAlignment="Top" Margin="0,20,30,0" Click="BtnSave_Click"/>
                         <ScrollViewer>
                             <StackPanel Margin="16">
                                 <StackPanel HorizontalAlignment="Center">
                                     <TextBlock x:Name="tvTitle" Style="{StaticResource InstructionsTextViewStyle}" Text="Registro" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     <TextBlock x:Name="tvDate" Text="23 Mayo 2024" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource InstructionsTextViewStyle}"/>
                                 </StackPanel>
-                                
+                                <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Height="70" Margin="28,-100,0,0" BorderThickness="0" Click="BtnGoBack_Click" Cursor="Hand">
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <Image Source="../Resources/Icons/goBackIcon.png" Stretch="UniformToFill">
+                                            </Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Button x:Name="btnSave" Content="Guardar" Style="{StaticResource ButtonStyle}" Width="100" HorizontalAlignment="Right" Background="ForestGreen" VerticalAlignment="Top" Cursor="Hand" Margin="0,-100,30,0" Click="BtnSave_Click"/>
+
                                 <Border BorderThickness="0,0,0,1" BorderBrush="LightGray" Margin="0,16"/>
 
                                 <!-- Sección de flujo menstrual -->

@@ -76,7 +76,7 @@ namespace CycleCare.Service
             return response;
         }
 
-        public static async Task<Response> CreateCycleLog(CycleLog cycleLog)
+        public static async Task<Response> CreateCycleLog(NewCycleLog cycleLog)
         {
             Response response = new Response();
             using (var httpClient = new HttpClient())
@@ -88,7 +88,7 @@ namespace CycleCare.Service
                     var httpRequestMessage = new HttpRequestMessage()
                     {
                         Method = HttpMethod.Post,
-                        RequestUri = new Uri(URL),
+                        RequestUri = new Uri(string.Concat(URL, "register-cycle")),
                         Content = new StringContent(JsonConvert.SerializeObject(cycleLog), Encoding.UTF8, "application/json")
                     };
 

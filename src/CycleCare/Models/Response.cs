@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace CycleCare.Models
@@ -43,5 +44,12 @@ namespace CycleCare.Models
 
         [JsonProperty("InformativeContent")]
         public List<InformativeContentJSONResponse> Contents { get; set; }
+
+        [JsonProperty("nextPeriodStartDate")]
+        public DateTime NextPeriodStartDate { get; set; }
+
+        [JsonProperty("nextPeriodEndDate")]
+        public DateTime NextPeriodEndDate { get; set; }
+
     }
 }

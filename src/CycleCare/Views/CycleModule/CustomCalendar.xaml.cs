@@ -1,6 +1,7 @@
 ﻿using CycleCare.Models;
 using CycleCare.Service;
 using CycleCare.Utilities;
+using Grpc.Core;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,6 +26,49 @@ namespace CycleCare.Views.CycleModule
             _currentDate = DateTime.Now;
             SetCalendarElements();
             SetCycleLogs();
+            SetPrediction();
+        }
+
+        private async void SetPrediction()
+        {
+            Response response = await CycleService.GetCyclePrediction();
+            switch (response.Code)
+            {
+                case 200:
+                    ShowPredictionInCalendar(response);
+                    break;
+                case 404:
+                    Console.WriteLine("No hay predicción");
+                    break;
+                default:
+                    DialogManager.ShowErrorMessageBox("Error al obtener la predicción. Por favor, intente nuevamente.");
+                    break;
+            }
+        }
+        private void ShowPredictionInCalendar(Response response)
+        {
+            DateTime nextPeriodStartDate = response.NextPeriodStartDate;
+            DateTime nextPeriodEndDate = response.NextPeriodEndDate;
+
+            for (DateTime date = nextPeriodStartDate; date <= nextPeriodEndDate; date = date.AddDays(1))
+            {
+
+                if (date.Month == _currentDate.Month && date.Year == _currentDate.Year)
+                {
+
+                    int day = date.Day;
+
+                    TextBlock dayText = GetDayTextBlock(day);
+                    if (dayText != null)
+                    {
+
+                        Border dayBorder = (Border)dayText.Parent;
+
+                        dayBorder.Background = new SolidColorBrush(_predictionColor);
+                        dayText.Foreground = Brushes.Black;
+                    }
+                }
+            }
         }
 
         public async void SetCycleLogs()
@@ -121,8 +165,45 @@ namespace CycleCare.Views.CycleModule
             {
                 HighlightDay(dayText, dayBorder);
             }
+            dayBorder.MouseLeftButtonUp += (sender, e) => OnDayClicked(day);
 
             return dayBorder;
+        }
+
+        private async void OnDayClicked(int day)
+        {
+            CycleLog cycleLogResponse = await CycleService.GetCycleLogByDay(_currentDate.Year, _currentDate.Month, day);
+
+            switch (cycleLogResponse.Code)
+            {
+                case 200:
+                    NavigateToUpdateCycleLog(cycleLogResponse);
+                    break;
+                case 404:
+                    NavigateToNewCycleLog();
+                    break;
+                default:
+                    DialogManager.ShowErrorMessageBox("Error al obtener el registro del ciclo. Por favor, intente nuevamente.");
+                    break;
+            }
+        }
+
+        private void NavigateToUpdateCycleLog(CycleLog cycleLogResponse)
+        {
+            var parentWindow = Window.GetWindow(this) as MainWindow;
+            if (parentWindow != null)
+            {
+                parentWindow.NavigationFrame.Navigate(new UpdateCycleLog(cycleLogResponse));
+            }
+        }
+
+        private void NavigateToNewCycleLog()
+        {
+            var parentWindow = Window.GetWindow(this) as MainWindow;
+            if (parentWindow != null)
+            {
+                parentWindow.NavigationFrame.Navigate(new NewCycleLogView);
+            }
         }
 
         private Color GetBorderColor(int day)
@@ -149,6 +230,7 @@ namespace CycleCare.Views.CycleModule
             _currentDate = _currentDate.AddMonths(-1);
             SetCalendarElements();
             SetCycleLogs();
+            SetPrediction();
         }
 
         private void BtnNext_Click(object sender, RoutedEventArgs e)
@@ -158,6 +240,7 @@ namespace CycleCare.Views.CycleModule
             _currentDate = _currentDate.AddMonths(1);
             SetCalendarElements();
             SetCycleLogs();
+            SetPrediction();
         }
     }
 }

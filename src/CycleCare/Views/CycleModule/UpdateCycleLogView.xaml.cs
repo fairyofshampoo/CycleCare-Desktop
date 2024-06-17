@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CycleCare.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,15 @@ namespace CycleCare.Views
     /// </summary>
     public partial class UpdateCycleLog : Page
     {
-        public UpdateCycleLog()
+        public UpdateCycleLog(CycleLog cycleLog)
         {
             InitializeComponent();
+            SetCycleLogData(cycleLog);
+        }
+
+        private void SetCycleLogData(CycleLog cycleLog)
+        {
+            // Set cycle log data
         }
     }
 }

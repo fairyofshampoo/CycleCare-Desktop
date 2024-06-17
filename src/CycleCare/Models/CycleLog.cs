@@ -9,6 +9,12 @@ namespace CycleCare.Models
 {
     public class CycleLog
     {
+        [JsonProperty("statusCode")]
+        public int Code { get; set; }
+
+        [JsonProperty("message")]
+        public string Details { get; set; }
+
         [JsonProperty("cycleLogId")]
         public int CycleLogId { get; set; }
 

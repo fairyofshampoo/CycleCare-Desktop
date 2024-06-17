@@ -77,5 +77,15 @@ namespace CycleCare.Views.ContentModule
             RegisterInformativeContent registerInformativeContent = new RegisterInformativeContent(false, null);
             NavigationService.Navigate(registerInformativeContent);
         }
+
+        private void BtnArticles_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnVideos_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

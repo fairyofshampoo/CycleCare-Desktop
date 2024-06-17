@@ -16,16 +16,16 @@ using System.Windows.Shapes;
 namespace CycleCare.Views.ContentModule
 {
     /// <summary>
-    /// Interaction logic for VideosUC.xaml
+    /// Interaction logic for WatchVideo.xaml
     /// </summary>
-    public partial class VideosUC : UserControl
+    public partial class WatchVideo : Page
     {
-        public VideosUC()
+        public WatchVideo()
         {
             InitializeComponent();
         }
 
-        private void Content_Clicked(object sender, MouseButtonEventArgs e)
+        private void BtnGoBack_Click(object sender, RoutedEventArgs e)
         {
 
         }

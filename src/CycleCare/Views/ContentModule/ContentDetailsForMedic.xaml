@@ -5,19 +5,17 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CycleCare.Views.ContentModule"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="720" d:DesignWidth="1280"
       Title="ContentDetailsForMedic">
 
     <Viewbox Stretch="Fill">
-        <ScrollViewer VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Auto">
-            <StackPanel
+        <StackPanel
                 Background="{StaticResource WhiteBrush}" 
                 Width="1280" 
                 Height="720">
-                <Grid>
-                    <Grid Margin="0,20,0,0">
-                        <Button 
+            <Grid>
+                <Grid Margin="0,20,0,0">
+                    <Button 
                             HorizontalAlignment="Left" 
                             VerticalAlignment="Top" 
                             Width="70" 
@@ -26,16 +24,16 @@
                             BorderThickness="0" 
                             Click="BtnGoBack_Click" 
                             Cursor="Hand">
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Image Source="../Resources/Icons/goBackIcon.png" 
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Image Source="../Resources/Icons/goBackIcon.png" 
                                            Stretch="UniformToFill">
-                                    </Image>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
+                                </Image>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
 
-                        <Button x:Name="btnLogin" 
+                    <Button x:Name="btnLogin" 
                                 Width="200" 
                                 Content="Editar Contenido" 
                                 Style="{StaticResource ButtonStyle}" 
@@ -45,23 +43,23 @@
                                 HorizontalAlignment="Right"/>
 
 
-
-                        <Grid HorizontalAlignment="Center" 
+                    <ScrollViewer Height="700">
+                    <Grid HorizontalAlignment="Center" 
                               Margin="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                            <Image Grid.Row="0"
+                        <Image Grid.Row="0"
                                    x:Name="img_InformativeContent"
                                    Source="{Binding informativeContentImage}"
                                    Height="200"
                                    Width="Auto"/>
 
-                            <TextBlock     x:Name="txtTitle"
+                        <TextBlock     x:Name="txtTitle"
                                            Grid.Row="1"
                                            Width="800"
                                            Style="{StaticResource TitleTextViewStyle}" 
@@ -71,8 +69,7 @@
                                            TextWrapping="Wrap"
                                            Margin="0,80,0,0"
                                            Foreground="{StaticResource BlackBrush}"/>
-                            <ScrollViewer Grid.Row="2">
-                                <TextBlock     x:Name="txtDescription"
+                        <TextBlock     x:Name="txtDescription"
                                            Grid.Row="2"
                                            Width="700"
                                            Style="{StaticResource DescriptionTextViewStyle}" 
@@ -83,11 +80,10 @@
                                            Margin="50,25,0,0"
                                            HorizontalAlignment="Left"
                                            Foreground="{StaticResource BlackBrush}"/>
-                            </ScrollViewer>
-                        </Grid>
                     </Grid>
+                    </ScrollViewer>
                 </Grid>
-            </StackPanel>
-        </ScrollViewer>
+            </Grid>
+        </StackPanel>
     </Viewbox>
 </Page>

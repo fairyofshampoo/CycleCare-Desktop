@@ -1,39 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using CycleCare.GrpcClients;
 
 namespace CycleCare.Views.ContentModule
 {
-    /// <summary>
-    /// Interaction logic for WatchVideo.xaml
-    /// </summary>
     public partial class WatchVideo : Page
     {
-        public WatchVideo()
+        private GrpcVideoClient _grpcVideoClient;
+        private string _fileName;
+
+        public WatchVideo(string fileName)
         {
             InitializeComponent();
-            SetVideoInPage();
+            _grpcVideoClient = new GrpcVideoClient();
+            _fileName = fileName;
         }
 
-        private void SetVideoInPage()
+        private async void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            string fileName = _fileName;
+            await _grpcVideoClient.DownloadVideo(fileName, OnStreamStarted);
         }
 
-        private void BtnGoBack_Click(object sender, RoutedEventArgs e)
+        private void OnStreamStarted(string tempFilePath)
         {
+            Dispatcher.Invoke(() =>
+            {
+                videoPlayer.Source = new Uri(tempFilePath);
+                videoPlayer.Play();
+            });
+        }
 
+        private void BtnGoBack_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ContentsView contentsView = new ContentsView();
+            NavigationService.Navigate(contentsView);
         }
     }
 }

@@ -20,8 +20,10 @@ namespace CycleCare.GrpcClients
             _client = new VideoServiceClient(_channel);
         }
 
-        public async Task DownloadVideo(string fileName)
+        public async Task DownloadVideo(string fileName, Action<string> onStreamStarted = null)
         {
+            string tempFilePath = Path.Combine(Path.GetTempPath(), fileName);
+
             try
             {
                 using (var call = _client.streamVideo(new StreamVideoRequest
@@ -29,8 +31,10 @@ namespace CycleCare.GrpcClients
                     Filename = fileName
                 }))
                 {
-                    using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                    using (var fileStream = new FileStream(tempFilePath, FileMode.Create, FileAccess.Write))
                     {
+                        onStreamStarted?.Invoke(tempFilePath);
+
                         await foreach (var chunk in call.ResponseStream.ReadAllAsync())
                         {
                             fileStream.Write(chunk.Data.ToByteArray(), 0, chunk.Data.Length);

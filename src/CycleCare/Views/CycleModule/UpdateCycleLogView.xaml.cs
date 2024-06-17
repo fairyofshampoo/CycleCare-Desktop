@@ -29,6 +29,7 @@ namespace CycleCare.Views
         private StackPanel _selectedMenstrualFlowPanel = null;
         private StackPanel _selectedVaginalFlowPanel = null;
         private string _currentDate;
+        private int _cycleLogId;
 
         public UpdateCycleLogView(CycleLog cycleLog)
         {
@@ -43,20 +44,42 @@ namespace CycleCare.Views
             FillHoursComboBox(cycleLog.SleepHours);
 
             txtNote.Text = cycleLog.Note;
+            if(cycleLog.MenstrualFlowId != null)
+            {
+                SetSelectedMenstrualFlow(cycleLog.MenstrualFlowId.Value);
+            }
 
-            SetSelectedMenstrualFlow(cycleLog.MenstrualFlow.MenstrualFlowId);
+            if(cycleLog.VaginalFlowId != null)
+            {
+                SetSelectedVaginalFlow(cycleLog.VaginalFlowId.Value);
+            }
 
-            SetSelectedVaginalFlow(cycleLog.VaginalFlow.VaginalFlowId);
+            _cycleLogId = cycleLog.CycleLogId;
 
-            SetSelectedSymptoms(cycleLog.Symptoms);
+            if (cycleLog.Symptoms != null)
+            {
+                SetSelectedSymptoms(cycleLog.Symptoms);
+            }
 
-            SetSelectedMoods(cycleLog.Moods);
+            if(cycleLog.Moods != null)
+            {
+                SetSelectedMoods(cycleLog.Moods);
+            }
 
-            SetSelectedMedications(cycleLog.Medications);
+            if(cycleLog.Medications != null)
+            {
+                SetSelectedMedications(cycleLog.Medications);
+            }
 
-            SetSelectedPills(cycleLog.Pills);
+            if(cycleLog.Pills != null)
+            {
+                SetSelectedPills(cycleLog.Pills);
+            }
 
-            SetSelectedBirthControls(cycleLog.BirthControl);
+            if(cycleLog.BirthControl != null)
+            {
+                SetSelectedBirthControls(cycleLog.BirthControl);
+            }
         }
 
         private void FillHoursComboBox(int sleepHours)
@@ -78,7 +101,10 @@ namespace CycleCare.Views
             {
                 foreach (var panel in menstrualFlowPanels)
                 {
-                    panel.Background = (panel == selectedPanel) ? Brushes.LightGray : Brushes.White;
+                    if (panel == selectedPanel)
+                    {
+                        panel.Background = new SolidColorBrush(Colors.LightGray);
+                    }
                 }
             }
         }
@@ -99,7 +125,10 @@ namespace CycleCare.Views
             {
                 foreach (var panel in vaginalFlowPanels)
                 {
-                    panel.Background = (panel == selectedPanel) ? Brushes.LightGray : Brushes.White;
+                    if(panel == selectedPanel)
+                    {
+                        panel.Background = new SolidColorBrush(Colors.LightGray);
+                    }
                 }
             }
         }
@@ -276,6 +305,7 @@ namespace CycleCare.Views
             {
                 newCycleLog.SleepHours = int.Parse(sleepHoursComboBox.SelectedItem.ToString());
             }
+            newCycleLog.CycleLogId = _cycleLogId;
 
             newCycleLog.Note = txtNote.Text;
 
@@ -468,7 +498,7 @@ namespace CycleCare.Views
         private async void UpdateCycleLog(NewCycleLog newCycleLog)
         {
             Response response = await CycleService.UpdateCycleLog(newCycleLog);
-            if (response.Code == (int)HttpStatusCode.Created)
+            if (response.Code == (int)HttpStatusCode.OK)
             {
                 DialogManager.ShowSuccessMessageBox("Recordatorio actualizado exitosamente");
             }
@@ -495,6 +525,59 @@ namespace CycleCare.Views
             {
                 _moodsSelected.Add(selectedPanel);
                 selectedPanel.Background = new SolidColorBrush(Colors.LightGray);
+            }
+        }
+
+        private void UpdateMenstrualFlowSelection(StackPanel selectedPanel)
+        {
+            if (_selectedMenstrualFlowPanel != null)
+            {
+                _selectedMenstrualFlowPanel.Background = new SolidColorBrush(Colors.White);
+            }
+
+            _selectedMenstrualFlowPanel = selectedPanel;
+            _selectedMenstrualFlowPanel.Background = new SolidColorBrush(Colors.LightGray);
+        }
+
+        private void MenstrualFlow_Click(object sender, MouseButtonEventArgs e)
+        {
+            StackPanel selectedPanel = sender as StackPanel;
+            UpdateMenstrualFlowSelection(selectedPanel);
+        }
+
+        private void UpdateVaginalFlowSelection(StackPanel selectedPanel)
+        {
+            if (_selectedVaginalFlowPanel != null)
+            {
+                _selectedVaginalFlowPanel.Background = new SolidColorBrush(Colors.White);
+            }
+
+            _selectedVaginalFlowPanel = selectedPanel;
+            _selectedVaginalFlowPanel.Background = new SolidColorBrush(Colors.LightGray);
+        }
+
+        private void VaginalFlow_Click(object sender, MouseButtonEventArgs e)
+        {
+            StackPanel selectedPanel = sender as StackPanel;
+            UpdateVaginalFlowSelection(selectedPanel);
+        }
+
+        private void NoteTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox.Text.Length + e.Text.Length > 49)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void NoteTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox.Text.Length > 49)
+            {
+                textBox.Text = textBox.Text.Substring(0, 49);
+                textBox.CaretIndex = textBox.Text.Length;
             }
         }
     }

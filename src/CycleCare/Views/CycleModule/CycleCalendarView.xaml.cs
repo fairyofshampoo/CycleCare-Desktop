@@ -95,7 +95,7 @@ namespace CycleCare.Views.CycleModule
         private async void AddNewCycleLog()
         {
             DateTime currentDate = DateTime.Now;
-            Response response = await CycleService.GetCycleLogByDay((int)currentDate.Year, (int)currentDate.Month, (int)currentDate.Day);
+            CycleLog response = await CycleService.GetCycleLogByDay((int)currentDate.Year, (int)currentDate.Month, (int)currentDate.Day);
             switch (response.Code)
             {
                 case 200:

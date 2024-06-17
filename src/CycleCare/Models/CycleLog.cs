@@ -21,11 +21,11 @@ namespace CycleCare.Models
         [JsonProperty("creationDate")]
         public DateTime CreationDate { get; set; }
 
-        [JsonProperty("menstrualFlow")]
-        public MenstrualFlow MenstrualFlow { get; set; }
+        [JsonProperty("menstrualFlowId")]
+        public int? MenstrualFlowId { get; set; }
 
-        [JsonProperty("vaginalFlow")]
-        public VaginalFlow VaginalFlow { get; set; }
+        [JsonProperty("vaginalFlowId")]
+        public int? VaginalFlowId { get; set; }
 
         [JsonProperty("sleepHours")]
         public int SleepHours { get; set; }

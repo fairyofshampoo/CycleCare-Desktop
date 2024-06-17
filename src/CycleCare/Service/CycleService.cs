@@ -190,7 +190,7 @@ namespace CycleCare.Service
 
         public static async Task<CycleLog> GetCycleLogByDay(int year, int month, int day)
         {
-            Response response = new Response();
+            CycleLog response = new CycleLog();
             using (var httpClient = new HttpClient())
             {
                 string urlWithParam = string.Concat(URL, "user-cycle-logs/", Uri.EscapeDataString(year.ToString()), "/", Uri.EscapeDataString(month.ToString()), "/", Uri.EscapeDataString(day.ToString()));
@@ -210,7 +210,7 @@ namespace CycleCare.Service
                         if (httpResponseMessage.IsSuccessStatusCode)
                         {
                             string json = await httpResponseMessage.Content.ReadAsStringAsync();
-                            response = JsonConvert.DeserializeObject<Response>(json);
+                            response = JsonConvert.DeserializeObject<CycleLog>(json);
                         }
                         response.Code = (int)httpResponseMessage.StatusCode;
                     }

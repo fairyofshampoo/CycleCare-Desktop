@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace CycleCare.Views.CycleModule
@@ -152,7 +153,8 @@ namespace CycleCare.Views.CycleModule
             {
                 Child = dayText,
                 BorderBrush = new SolidColorBrush(GetBorderColor(day)),
-                BorderThickness = new Thickness(1)
+                BorderThickness = new Thickness(1),
+                Cursor = Cursors.Hand
             };
 
             int row = (day + startDayOfWeek - 1) / 7;
@@ -200,7 +202,6 @@ namespace CycleCare.Views.CycleModule
             }
             catch (Exception ex)
             {
-                // Manejo de excepciones
                 MessageBox.Show($"Ocurrió un error al navegar: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -217,7 +218,6 @@ namespace CycleCare.Views.CycleModule
             }
             catch (Exception ex)
             {
-                // Manejo de excepciones
                 MessageBox.Show($"Ocurrió un error al navegar: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

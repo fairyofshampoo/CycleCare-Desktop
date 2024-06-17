@@ -88,7 +88,7 @@ namespace CycleCare.Service
                     var httpRequestMessage = new HttpRequestMessage()
                     {
                         Method = HttpMethod.Post,
-                        RequestUri = new Uri(string.Concat(URL, "register-cycle")),
+                        RequestUri = new Uri(string.Concat(URL, "register-cycle-log")),
                         Content = new StringContent(JsonConvert.SerializeObject(cycleLog), Encoding.UTF8, "application/json")
                     };
 

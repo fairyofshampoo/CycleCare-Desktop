@@ -29,6 +29,15 @@ namespace CycleCare.Views
         public NewCycleLogView()
         {
             InitializeComponent();
+            FillHoursComboBox();
+        }
+
+        private void FillHoursComboBox()
+        {
+            for (int i = 1; i <= 24; i++)
+            {
+                sleepHoursComboBox.Items.Add(i);
+            }
         }
 
         private void BtnGoBack_Click(object sender, RoutedEventArgs e)
@@ -79,12 +88,14 @@ namespace CycleCare.Views
 
         private int GetVaginalFlowId()
         {
-            return (int)_selectedVaginalFlowPanel.Tag;
+            string selectedVaginalFlowId = _selectedVaginalFlowPanel.Tag.ToString();
+            return int.Parse(selectedVaginalFlowId);
         }
 
         private int GetMenstrualFlowId()
         {
-            return (int)_selectedMenstrualFlowPanel.Tag;
+            string selectedMenstrualFlowId = _selectedMenstrualFlowPanel.Tag.ToString();
+            return int.Parse(selectedMenstrualFlowId);
         }
 
         private List<Symptom> GetSelectedSymptoms()
@@ -217,10 +228,14 @@ namespace CycleCare.Views
 
             foreach (var moodPanel in _moodsSelected)
             {
-                if (moodPanel.Tag is Mood mood)
+                string selectedMoodId = moodPanel.Tag.ToString();
+
+                Mood mood = new Mood
                 {
-                    selectedMoods.Add(mood);
-                }
+                    MoodId = int.Parse(selectedMoodId)
+                };
+
+                selectedMoods.Add(mood);
             }
 
             return selectedMoods;
@@ -337,6 +352,7 @@ namespace CycleCare.Views
                 });
             }
 
+            Console.WriteLine("MANDÉ TANTAS PILLS: " + selectedPills.Count);
             return selectedPills;
         }
 
@@ -367,6 +383,8 @@ namespace CycleCare.Views
 
         private async void CreateNewCycleLog(NewCycleLog newCycleLog)
         {
+            Console.WriteLine("CREANDO NUEVO LOG");
+            Console.WriteLine("PILLS" + newCycleLog.Pills.Count);
             Response response = await CycleService.CreateCycleLog(newCycleLog);
             if (response.Code == (int)HttpStatusCode.Created)
             {

@@ -122,6 +122,9 @@
     <Compile Include="Views\ContentModule\VideosUC.xaml.cs">
       <DependentUpon>VideosUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ContentModule\WatchVideo.xaml.cs">
+      <DependentUpon>WatchVideo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CycleModule\CustomCalendar.xaml.cs">
       <DependentUpon>CustomCalendar.xaml</DependentUpon>
     </Compile>
@@ -210,6 +213,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ContentModule\VideosUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContentModule\WatchVideo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

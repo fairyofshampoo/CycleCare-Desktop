@@ -34,23 +34,28 @@ namespace CycleCare.Views.ContentModule
 
         private void ShowInformativeContentDetails()
         {
-            txtTitle.Text = informativeContent.title;
-            txtDescription.Text = informativeContent.description;
-            var bi = new BitmapImage();
-            bi.BeginInit();
-            bi.UriSource = new Uri("http://localhost:8085/images/" + informativeContent.media); 
-            bi.EndInit();
-            img_InformativeContent.Source = bi;
+            if(informativeContent != null)
+            {
+                txtTitle.Text = informativeContent.title;
+                txtDescription.Text = informativeContent.description;
+                var bi = new BitmapImage();
+                bi.BeginInit();
+                bi.UriSource = new Uri("http://localhost:8085/images/" + informativeContent.media);
+                bi.EndInit();
+                img_InformativeContent.Source = bi;
+            }
         }
 
         private void BtnEditContent_Click(object sender, RoutedEventArgs e)
         {
-            //Deberá llevarlo a la pantalla de registrar un artículo
+            RegisterInformativeContent registerInformativeContent = new RegisterInformativeContent(true, informativeContent);
+            NavigationService.Navigate(registerInformativeContent);
         }
 
         private void BtnGoBack_Click(object sender, RoutedEventArgs e)
         {
-
+            MyContentByMedic myContentByMedic = new MyContentByMedic();
+            NavigationService.Navigate(myContentByMedic);
         }
     }
 }

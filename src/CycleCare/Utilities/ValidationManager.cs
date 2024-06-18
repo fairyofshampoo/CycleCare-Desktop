@@ -56,7 +56,7 @@ namespace CycleCare.Utilities
             bool isValid = false;
             if(!string.IsNullOrEmpty(title))
             {
-                string titlePattern = "^(?!\\s)(.{1,24})$\r\n";
+                string titlePattern = "^(?!\\s)([\\s\\S]{1,65})$";
 
                 Regex regex = new Regex(titlePattern);
                 isValid = regex.IsMatch(title);
@@ -70,7 +70,7 @@ namespace CycleCare.Utilities
             bool isValid = false;
             if (!string.IsNullOrEmpty(description))
             {
-                string descriptionPattern = "^(?!\\s)(.{1,100})$\r\n";
+                string descriptionPattern = "^(?!\\s)([\\s\\S]{1,190})$";
                 Regex regex = new Regex(descriptionPattern);
                 isValid = regex.IsMatch(description);  
             }

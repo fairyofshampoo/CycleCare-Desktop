@@ -48,7 +48,7 @@
 
                             <TextBlock Grid.Row="0"
                                        Margin="0,20,0,0"
-                                       Text="Contenido informativo" 
+                                       Text="Video informativo" 
                                        HorizontalAlignment="Center" 
                                        Style="{StaticResource TitleTextViewStyle}"/>
 
@@ -56,7 +56,7 @@
                                        Margin="50,30,0,0" 
                                        Grid.Row="1" 
                                        Style="{StaticResource InstructionsTextViewStyle}" />
-                            <TextBox x:Name="txtTittle"  
+                            <TextBox x:Name="txtTitle"  
                                      Grid.Row="2" 
                                      Style="{StaticResource EditTextStyle}" 
                                      Background="{StaticResource LightGrayBrush}"/>
@@ -65,8 +65,10 @@
                                        Margin="50,30,0,0" 
                                        Grid.Row="3" 
                                        Style="{StaticResource InstructionsTextViewStyle}" />
+                            <Label x:Name="lblVideoUploaded" Content="Video subido" Grid.Row="4" Visibility="Collapsed">
+                            </Label>
 
-                            <Grid Grid.Row="4"
+                            <Grid Grid.Row="4" x:Name="videoGrid"
                                   Width="360"
                                   Height="120"
                                   Background="LightGray"

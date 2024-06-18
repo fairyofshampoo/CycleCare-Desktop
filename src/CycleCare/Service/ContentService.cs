@@ -19,7 +19,7 @@ namespace CycleCare.Service
         private static readonly string URL = string.Concat(Properties.Resources.BASE_URL, "content/");
 
 
-        public static async Task<Response> CreateReminder(Reminder reminder)
+        public static async Task<Response> PublishArticle(Article article)
         {
             Response response = new Response();
             using (var httpClient = new HttpClient())
@@ -29,9 +29,64 @@ namespace CycleCare.Service
                     httpClient.DefaultRequestHeaders.Add("token", TOKEN);
                     var httpRequestMessage = new HttpRequestMessage()
                     {
-                        Content = new StringContent(JsonConvert.SerializeObject(reminder), Encoding.UTF8, "application/json"),
+                        Content = new StringContent(JsonConvert.SerializeObject(article), Encoding.UTF8, "application/json"),
                         Method = HttpMethod.Post,
-                        RequestUri = new Uri(string.Concat(URL, "create-reminder"))
+                        RequestUri = new Uri(string.Concat(URL, "publish-article"))
+                    };
+
+                    HttpResponseMessage httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+
+                    if (httpResponseMessage != null)
+                    {
+                        if (httpResponseMessage.IsSuccessStatusCode)
+                        {
+                            string json = await httpResponseMessage.Content.ReadAsStringAsync();
+                            response = JsonConvert.DeserializeObject<Response>(json);
+                        }
+
+                        response.Code = (int)httpResponseMessage.StatusCode;
+                    }
+                    else
+                    {
+                        response.Code = (int)HttpStatusCode.InternalServerError;
+                        response.Details = "No se recibió respuesta del servidor.";
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    response.Code = (int)HttpStatusCode.InternalServerError;
+                    response.Details = $"Error de red: {ex.Message}";
+                    DialogManager.ShowErrorMessageBox(response.Details);
+                }
+                catch (JsonException ex)
+                {
+                    response.Code = (int)HttpStatusCode.InternalServerError;
+                    response.Details = $"Error al procesar la respuesta JSON: {ex.Message}";
+                    DialogManager.ShowErrorMessageBox(response.Details);
+                }
+                catch (Exception ex)
+                {
+                    response.Code = (int)HttpStatusCode.InternalServerError;
+                    response.Details = $"Error inesperado: {ex.Message}";
+                    DialogManager.ShowErrorMessageBox(response.Details);
+                }
+            }
+            return response;
+        }
+
+        public static async Task<Response> EditArticle(ArticleUpdated articleUpdated)
+        {
+            Response response = new Response();
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    httpClient.DefaultRequestHeaders.Add("token", TOKEN);
+                    var httpRequestMessage = new HttpRequestMessage()
+                    {
+                        Content = new StringContent(JsonConvert.SerializeObject(articleUpdated), Encoding.UTF8, "application/json"),
+                        Method = HttpMethod.Post,
+                        RequestUri = new Uri(string.Concat(URL, "update-informative-content"))
                     };
 
                     HttpResponseMessage httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
@@ -144,6 +199,62 @@ namespace CycleCare.Service
                         Content = new StringContent(JsonConvert.SerializeObject(ratingData), Encoding.UTF8, "application/json"),
                         Method = HttpMethod.Post,
                         RequestUri = new Uri(urlWithParam)
+                    };
+
+                    HttpResponseMessage httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+
+                    if (httpResponseMessage != null)
+                    {
+                        if (httpResponseMessage.IsSuccessStatusCode)
+                        {
+                            string json = await httpResponseMessage.Content.ReadAsStringAsync();
+                            response = JsonConvert.DeserializeObject<Response>(json);
+                        }
+
+                        response.Code = (int)httpResponseMessage.StatusCode;
+                    }
+                    else
+                    {
+                        response.Code = (int)HttpStatusCode.InternalServerError;
+                        response.Details = "No se recibió respuesta del servidor.";
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    response.Code = (int)HttpStatusCode.InternalServerError;
+                    response.Details = $"Error de red: {ex.Message}";
+                    DialogManager.ShowErrorMessageBox(response.Details);
+                }
+                catch (JsonException ex)
+                {
+                    response.Code = (int)HttpStatusCode.InternalServerError;
+                    response.Details = $"Error al procesar la respuesta JSON: {ex.Message}";
+                    DialogManager.ShowErrorMessageBox(response.Details);
+                }
+                catch (Exception ex)
+                {
+                    response.Code = (int)HttpStatusCode.InternalServerError;
+                    response.Details = $"Error inesperado: {ex.Message}";
+                    DialogManager.ShowErrorMessageBox(response.Details);
+                }
+            }
+            return response;
+        }
+
+
+        public static async Task<Response> GetInformativeContentByMedic()
+        {
+            Response response = new Response();
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    httpClient.DefaultRequestHeaders.Add("token", TOKEN);
+
+                    var httpRequestMessage = new HttpRequestMessage()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(string.Concat(URL, "get-articles-by-medic"))
                     };
 
                     HttpResponseMessage httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);

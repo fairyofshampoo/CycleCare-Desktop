@@ -2,6 +2,7 @@
 using CycleCare.Service;
 using CycleCare.Utilities;
 using CycleCare.Views.CycleModule;
+using Grpc.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,14 +21,26 @@ namespace CycleCare.Views
     /// <summary>
     /// Interaction logic for NewCycleLog.xaml
     /// </summary>
-    public partial class NewCycleLog : Page
+    public partial class NewCycleLogView : Page
     {
         private List<StackPanel> _moodsSelected = new List<StackPanel>();
         private StackPanel _selectedMenstrualFlowPanel = null;
         private StackPanel _selectedVaginalFlowPanel = null;
-        public NewCycleLog()
+        private DateTime _currentDate;
+        public NewCycleLogView()
         {
             InitializeComponent();
+            FillHoursComboBox();
+            _currentDate = DateTime.Now;
+            tvDate.Text = _currentDate.ToString("dd/MM/yyyy");
+        }
+
+        private void FillHoursComboBox()
+        {
+            for (int i = 1; i <= 24; i++)
+            {
+                sleepHoursComboBox.Items.Add(i);
+            }
         }
 
         private void BtnGoBack_Click(object sender, RoutedEventArgs e)
@@ -38,98 +51,208 @@ namespace CycleCare.Views
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (ValidateData())
-            {
-                SaveCycleLog();
-            } else
-            {
-                DialogManager.ShowWarningMessageBox("No dejé ningun campo vacío o sin seleccionar");
-            }
+            SaveCycleLog();
         }
 
         private void SaveCycleLog()
         {
-            // Crear un nuevo objeto CycleLog con los datos validados
-            CycleLog newCycleLog = new CycleLog
+            NewCycleLog newCycleLog = new NewCycleLog();
+            newCycleLog.CreationDate = _currentDate.ToString("yyyy-MM-dd");
+            if (sleepHoursComboBox.SelectedItem != null)
             {
-                Username = "nombre de usuario", // Asigna el nombre de usuario adecuado
-                CreationDate = DateTime.Now, // Asigna la fecha actual
-                SleepHours = GetSleepHours(), // Obtiene las horas de sueño del ComboBox
-                Note = txtNote.Text.Trim(), // Obtiene la nota del TextBox
+                newCycleLog.SleepHours = int.Parse(sleepHoursComboBox.SelectedItem.ToString());
+            }
 
-                // Asigna los valores seleccionados de los paneles de flujo menstrual y vaginal
-                MenstrualFlow = GetMenstrualFlow(),
-                VaginalFlow = GetVaginalFlow(),
+            newCycleLog.Note = txtNote.Text;
 
-                // Asigna los síntomas seleccionados de los CheckBoxes
-                Symptoms = GetSelectedSymptoms(),
+            if(_selectedMenstrualFlowPanel != null)
+            {
+                newCycleLog.MenstrualFlowId = GetMenstrualFlowId();
+            }
 
-                // Asigna los estados de ánimo seleccionados de los StackPanels
-                Moods = GetSelectedMoods(),
+            if(_selectedVaginalFlowPanel != null)
+            {
+                newCycleLog.VaginalFlowId = GetVaginalFlowId();
+            }
 
-                // Asigna las medicaciones seleccionadas de los CheckBoxes
-                Medications = GetSelectedMedications(),
+            newCycleLog.Symptoms = GetSelectedSymptoms();
 
-                // Asigna la píldora anticonceptiva seleccionada de los CheckBoxes
-                Pills = GetSelectedPills(),
+            newCycleLog.Moods = GetSelectedMoods();
 
-                // Asigna el método de control de nacimiento seleccionado de los RadioButtons
-                BirthControl = GetSelectedBirthControl()
-            };
+            newCycleLog.Medications = GetSelectedMedications();
 
-            // Llama al método para crear un nuevo registro de ciclo
+            newCycleLog.Pills = GetSelectedPills();
+
+            newCycleLog.BirthControls = GetSelectedBirthControl();
+
             CreateNewCycleLog(newCycleLog);
         }
 
-        // Métodos de obtención de datos de la interfaz de usuario (ejemplos)
-        private int GetSleepHours()
+        private int GetVaginalFlowId()
         {
-            // Implementa la lógica para obtener las horas de sueño del ComboBox
-            // Ejemplo: return int.Parse(sleepHoursComboBox.SelectedItem.ToString());
-            return 0;
+            string selectedVaginalFlowId = _selectedVaginalFlowPanel.Tag.ToString();
+            return int.Parse(selectedVaginalFlowId);
         }
 
-        private MenstrualFlow GetMenstrualFlow()
+        private int GetMenstrualFlowId()
         {
-            // Implementa la lógica para obtener el flujo menstrual seleccionado
-            // Ejemplo: return MenstrualFlow.Light;
-            MenstrualFlow menstrualFlow = new MenstrualFlow();
-            return menstrualFlow;
-        }
-
-        private VaginalFlow GetVaginalFlow()
-        {
-            // Implementa la lógica para obtener el flujo vaginal seleccionado
-            // Ejemplo: return VaginalFlow.Normal;
-            VaginalFlow vaginalFlow = new VaginalFlow();
-            return vaginalFlow;
+            string selectedMenstrualFlowId = _selectedMenstrualFlowPanel.Tag.ToString();
+            return int.Parse(selectedMenstrualFlowId);
         }
 
         private List<Symptom> GetSelectedSymptoms()
         {
-            // Implementa la lógica para obtener los síntomas seleccionados
-            // Ejemplo: return new List<Symptom> { Symptom.Fatigue, Symptom.Nausea };
-            return new List<Symptom>();
+            List<Symptom> selectedSymptoms = new List<Symptom>();
+
+            if (abdominalPainCheckBox.IsChecked == true)
+            {
+                selectedSymptoms.Add(new Symptom
+                {
+                    SymptomId = 1,
+                    Name = "Calambres"
+                });
+            }
+
+            if (breastTendernessCheckBox.IsChecked == true)
+            {
+                selectedSymptoms.Add(new Symptom
+                {
+                    SymptomId = 2,
+                    Name = "Sensibilidad en los senos"
+                });
+            }
+
+            if (acneCheckBox.IsChecked == true)
+            {
+                selectedSymptoms.Add(new Symptom
+                {
+                    SymptomId = 3,
+                    Name = "Acné"
+                });
+            }
+
+            if (bloatingCheckBox.IsChecked == true)
+            {
+                selectedSymptoms.Add(new Symptom
+                {
+                    SymptomId = 4,
+                    Name = "Hinchazón"
+                });
+            }
+
+            if (fatigueCheckBox.IsChecked == true)
+            {
+                selectedSymptoms.Add(new Symptom
+                {
+                    SymptomId = 5,
+                    Name = "Fatiga"
+                });
+            }
+
+            if(headacheCheckBox.IsChecked == true)
+            {
+                selectedSymptoms.Add(new Symptom
+                {
+                    SymptomId = 6,
+                    Name = "Dolor de cabeza"
+                });
+            }
+
+            if(nauseaCheckBox.IsChecked == true)
+            {
+                selectedSymptoms.Add(new Symptom
+                {
+                    SymptomId = 7,
+                    Name = "Náuseas"
+                });
+            }
+
+            if(dizzinessCheckBox.IsChecked == true)
+            {
+                selectedSymptoms.Add(new Symptom
+                {
+                    SymptomId = 8,
+                    Name = "Mareos"
+                });
+            }
+
+            if (cravingsCheckBox.IsChecked == true)
+            {
+                selectedSymptoms.Add(new Symptom
+                {
+                    SymptomId = 9,
+                    Name = "Antojos"
+                });
+            }
+
+            if (constipationCheckBox.IsChecked == true)
+            {
+                selectedSymptoms.Add(new Symptom
+                {
+                    SymptomId = 10,
+                    Name = "Estreñimiento"
+                });
+            }
+
+            if(diarrheaCheckBox.IsChecked == true)
+            {
+                selectedSymptoms.Add(new Symptom
+                {
+                    SymptomId = 11,
+                    Name = "Diarrea"
+                });
+            }
+
+            if(vaginalItchingCheckBox.IsChecked == true)
+            {
+                selectedSymptoms.Add(new Symptom
+                {
+                    SymptomId = 12,
+                    Name = "Picazón vaginal"
+                });
+            }
+
+            if(vulvaPainCheckBox.IsChecked == true)
+            {
+                selectedSymptoms.Add(new Symptom
+                {
+                    SymptomId = 13,
+                    Name = "Dolor en vulva"
+                });
+            }
+
+            return selectedSymptoms;
         }
 
         private List<Mood> GetSelectedMoods()
         {
-            // Implementa la lógica para obtener los estados de ánimo seleccionados
-            // Ejemplo: return new List<Mood> { Mood.Happy, Mood.Sad };
-            return new List<Mood>();
+            List<Mood> selectedMoods = new List<Mood>();
+
+            foreach (var moodPanel in _moodsSelected)
+            {
+                string selectedMoodId = moodPanel.Tag.ToString();
+
+                Mood mood = new Mood
+                {
+                    MoodId = int.Parse(selectedMoodId)
+                };
+
+                selectedMoods.Add(mood);
+            }
+
+            return selectedMoods;
         }
 
         private List<Medication> GetSelectedMedications()
         {
             List<Medication> selectedMedications = new List<Medication>();
 
-            // Verificar si alguna medicación está seleccionada y agregarla a la lista
             if (hormoneTherapyCheckBox.IsChecked == true)
             {
                 selectedMedications.Add(new Medication
                 {
-                    MedicationId = 1, // ID de la medicación "Terapia hormonal" (ajustar según tu lógica)
-                    Name = "Terapia hormonal" // Nombre de la medicación "Terapia hormonal" (ajustar según tu lógica)
+                    MedicationId = 1,
+                    Name = "Terapia hormonal"
                 });
             }
 
@@ -137,12 +260,46 @@ namespace CycleCare.Views
             {
                 selectedMedications.Add(new Medication
                 {
-                    MedicationId = 2, // ID de la medicación "Pastilla de emergencia" (ajustar según tu lógica)
-                    Name = "Pastilla de emergencia" // Nombre de la medicación "Pastilla de emergencia" (ajustar según tu lógica)
+                    MedicationId = 2,
+                    Name = "Pastilla de emergencia"
                 });
             }
 
-            // Agregar más condiciones según sea necesario para otras medicaciones
+            if(painkillersCheckBox.IsChecked == true)
+            {
+                selectedMedications.Add(new Medication
+                {
+                    MedicationId = 3,
+                    Name = "Analgésicos"
+                });
+            }
+
+            if(antidepressantsCheckBox.IsChecked == true)
+            {
+                selectedMedications.Add(new Medication
+                {
+                    MedicationId = 4,
+                    Name = "Antidepresivos"
+                });
+            }
+
+            if(antibioticsCheckBox.IsChecked == true)
+            {
+                selectedMedications.Add(new Medication
+                {
+                    MedicationId = 5,
+                    Name = "Antibióticos"
+                });
+            }
+
+            if(antihistaminesCheckBox.IsChecked == true)
+            {
+                selectedMedications.Add(new Medication
+                {
+                    MedicationId = 6,
+                    Name = "Antihistamínicos"
+                });
+            }
 
             return selectedMedications;
         }
@@ -151,13 +308,12 @@ namespace CycleCare.Views
         {
             List<Pill> selectedPills = new List<Pill>();
 
-            // Verificar si alguna píldora está seleccionada y agregarla a la lista
             if (pillTakenCheckBox.IsChecked == true)
             {
                 selectedPills.Add(new Pill
                 {
-                    PillId = 1, // ID de la píldora "Tomada" (ajustar según tu lógica)
-                    Status = "Tomada" // Estado de la píldora "Tomada" (ajustar según tu lógica)
+                    PillId = 1,
+                    Status = "Tomada"
                 });
             }
 
@@ -165,40 +321,68 @@ namespace CycleCare.Views
             {
                 selectedPills.Add(new Pill
                 {
-                    PillId = 2, // ID de la píldora "Olvidada" (ajustar según tu lógica)
-                    Status = "Olvidada" // Estado de la píldora "Olvidada" (ajustar según tu lógica)
+                    PillId = 2,
+                    Status = "Olvidada"
+
+                });
+            }
+
+            if (doubleDoseCheckBox.IsChecked == true)
+            {
+                selectedPills.Add(new Pill
+                {
+                    PillId = 3,
+                    Status = "Dosis doble"
+                });
+            }
+
+            if(noDoseCheckBox.IsChecked == true)
+            {
+                selectedPills.Add(new Pill
+                {
+                    PillId = 4,
+                    Status = "Sin dosis"
+                });
+            }
+
+            if(lateDoseCheckBox.IsChecked == true)
+            {
+                selectedPills.Add(new Pill
+                {
+                    PillId = 5,
+                    Status = "Tarde"
                 });
             }
 
             return selectedPills;
         }
 
-        private BirthControl GetSelectedBirthControl()
+        private List<BirthControl> GetSelectedBirthControl()
         {
-            // Verificar si el RadioButton de "Insertado" está seleccionado
+            List<BirthControl> selectedBirthControl = new List<BirthControl>();
+
             if (insertedRadioButton.IsChecked == true)
             {
-                // Crear un objeto BirthControl con el método "Insertado"
-                return new BirthControl
+                selectedBirthControl.Add( new BirthControl
                 {
-                    BirthControlId = 1, // ID del método "Insertado" (ajustar según tu lógica)
-                    Name = "Insertado",
-                    Status = "Activo" // Estado del método "Insertado" (ajustar según tu lógica)
-                };
+                    BirthControlId = 1,
+                    Name = "Insertado"
+                });
             }
-            else
+
+            if (removedRadioButton.IsChecked == true)
             {
-                // Crear un objeto BirthControl con el método "Removido"
-                return new BirthControl
+                selectedBirthControl.Add(new BirthControl
                 {
-                    BirthControlId = 2, // ID del método "Removido" (ajustar según tu lógica)
-                    Name = "Removido",
-                    Status = "Inactivo" // Estado del método "Removido" (ajustar según tu lógica)
-                };
+                    BirthControlId = 2,
+                    Name = "Removido"
+                });
             }
+
+            return selectedBirthControl;
         }
 
-        private async void CreateNewCycleLog(CycleLog newCycleLog)
+        private async void CreateNewCycleLog(NewCycleLog newCycleLog)
         {
             Response response = await CycleService.CreateCycleLog(newCycleLog);
             if (response.Code == (int)HttpStatusCode.Created)
@@ -210,140 +394,6 @@ namespace CycleCare.Views
                 DialogManager.ShowErrorMessageBox("Error al crear el recordatorio. Por favor, intente nuevamente.");
             }
         }
-
-        private bool ValidateData()
-        {
-            // Validar nota
-            if (!ValidateNoteText())
-            {
-                return false;
-            }
-
-            // Validar al menos un CheckBox seleccionado en el WrapPanel de síntomas
-            if (!ValidateCheckBoxesSelected(symptomsWrapPanel))
-            {
-                return false;
-            }
-
-            // Validar al menos un RadioButton seleccionado en el StackPanel de actividad sexual
-            if (!ValidateRadioButtonSelected(sexualActivityStackPanel))
-            {
-                return false;
-            }
-
-            // Validar al menos un CheckBox seleccionado en el WrapPanel de medicación
-            if (!ValidateCheckBoxesSelected(medicationWrapPanel))
-            {
-                return false;
-            }
-
-            // Validar que la hora de sueño no esté vacía
-            if (!ValidateSleepTime())
-            {
-                return false;
-            }
-
-            // Validar que solo un RadioButton esté seleccionado en el WrapPanel de control de nacimiento
-            if (!ValidateSingleRadioButtonSelected(birthControlWrapPanel))
-            {
-                return false;
-            }
-
-            if (_moodsSelected == null || _moodsSelected.Count == 0)
-            {
-                return false;
-            }
-            if (_selectedMenstrualFlowPanel == null)
-            {
-                return false;
-            }
-
-            // Validar que el panel de flujo vaginal seleccionado no sea nulo
-            if (_selectedVaginalFlowPanel == null)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool ValidateCheckBoxesSelected(WrapPanel wrapPanel)
-        {
-            foreach (var child in wrapPanel.Children)
-            {
-                if (child is CheckBox checkBox && checkBox.IsChecked == true)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-
-        private bool ValidateNoteText()
-        {
-            // Obtener el texto del TextBox de la nota
-            string noteText = txtNote.Text.Trim();
-
-            // Validar que el campo de texto de la nota no esté vacío
-            if (string.IsNullOrWhiteSpace(noteText))
-            {
-                txtNote.BorderBrush = new SolidColorBrush(Colors.Red);
-                return false;
-            }
-
-            // Validar que el texto de la nota cumpla con el regex
-            Regex regex = new Regex(@"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$");
-            if (!regex.IsMatch(noteText))
-            {
-                DialogManager.ShowWarningMessageBox("La nota solo puede contener caracteres en español y espacios.");
-                return false;
-            }
-
-            return true;
-        }
-
-
-        private bool ValidateSingleRadioButtonSelected(WrapPanel wrapPanel)
-        {
-            int radioButtonCheckedCount = 0;
-            foreach (var child in wrapPanel.Children)
-            {
-                if (child is RadioButton radioButton && radioButton.IsChecked == true)
-                {
-                    radioButtonCheckedCount++;
-                }
-            }
-            if (radioButtonCheckedCount != 1)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        private bool ValidateRadioButtonSelected(StackPanel stackPanel)
-        {
-            foreach (var child in stackPanel.Children)
-            {
-                if (child is RadioButton radioButton && radioButton.IsChecked == true)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-
-        private bool ValidateSleepTime()
-        {
-            if (sleepHoursComboBox.SelectedItem == null || sleepMinutesComboBox.SelectedItem == null)
-            {
-                MessageBox.Show("Por favor, selecciona una hora de sueño.");
-                return false;
-            }
-            return true;
-        }
-
 
         private void UpdateMenstrualFlowSelection(StackPanel selectedPanel)
         {

@@ -26,6 +26,7 @@ namespace CycleCare.Views
         {
             InitializeComponent();
             SetInformativeContentInPage();
+            menuFrame.Content = new UserMenu(this);
         }
 
         private async void SetInformativeContentInPage()
@@ -34,8 +35,7 @@ namespace CycleCare.Views
             switch (response.Code)
             {
                 case(int) HttpStatusCode.OK:
-                    DialogManager.ShowWarningMessageBox("Sí te los regresé we.");
-                    ShowInformativeContent(response.contents);
+                    ShowInformativeContent(response.Contents);
                     break;
                 case (int)HttpStatusCode.NotFound:
                     DialogManager.ShowWarningMessageBox("No hay contenido disponible.");
@@ -63,9 +63,19 @@ namespace CycleCare.Views
             lstInformativeContent.Items.Add(informativeContentUC);
         }
 
-        private void BtnGoBack_Click(object sender, RoutedEventArgs e)
+        private void BtnArticles_Click(object sender, RoutedEventArgs e)
         {
+            SetInformativeContentInPage();
+        }
 
+        private void BtnVideos_Click(object sender, RoutedEventArgs e)
+        {
+            ShowVideos();
+        }
+
+        private void ShowVideos()
+        {
+            lstInformativeContent.Items.Clear();
         }
     }
 }

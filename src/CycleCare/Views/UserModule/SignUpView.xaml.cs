@@ -25,11 +25,6 @@ namespace CycleCare.Views
             NavigationService.GoBack();
         }
 
-        private void BtnGoBack_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
-        }
-
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
             clearErrorLabels();
@@ -69,7 +64,8 @@ namespace CycleCare.Views
             account.firstLastName = txtFirstLastName.Text;
             account.secondLastName = txtSecondLastName.Text;
             account.email = txtEmail.Text;
-            account.password = txtPassword.Text;
+            string passwordHashed = EncriptionUtil.ToSHA2Hash(txtPassword.Text);
+            account.password = passwordHashed;
             account.role = "USER";
             account.aproxCycleDuration = stringToNumber(txtCycleDuration.Text);
             account.aproxPeriodDuration = stringToNumber(txtPeriodDuration.Text);

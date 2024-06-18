@@ -6,8 +6,7 @@
       xmlns:local="clr-namespace:CycleCare.Views.ChartModule"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" 
       mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="1280"
-      Title="ViewSleepChart">
+      d:DesignHeight="720" d:DesignWidth="1280">
 
     <Viewbox Stretch="Fill">
         <ScrollViewer VerticalScrollBarVisibility="Auto" 
@@ -16,25 +15,13 @@
                 Background="{StaticResource WhiteBrush}" 
                 Width="1280" 
                 Height="720">
-                <Grid>
-                    <Grid Margin="0,20,0,0">
-                        <Button 
-                            HorizontalAlignment="Left" 
-                            VerticalAlignment="Top" 
-                            Width="70" 
-                            Height="70" 
-                            Margin="28,11,0,0"
-                            BorderThickness="0" 
-                            Click="BtnGoBack_Click" 
-                            Cursor="Hand">
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Image Source="../Resources/Icons/goBackIcon.png" 
-                                           Stretch="UniformToFill">
-                                    </Image>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
+                <Grid Height="720">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="1180"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame x:Name="menuFrame" />
+                    <Grid Grid.Column="1" Margin="0,20,0,0">
 
                         <Grid HorizontalAlignment="Center" Margin="10">
                             <Grid.RowDefinitions>
@@ -58,32 +45,29 @@
                                        Style="{StaticResource DescriptionTextViewStyle}"
                                        FontSize="30"/>
 
-                            <TextBlock Grid.Row="2"
+                            <TextBlock x:Name="SleepHoursAVG"
+                                       Grid.Row="2"
                                        Margin="0,20,0,0"
                                        Text="XX Horas" 
                                        HorizontalAlignment="Center" 
                                        Style="{StaticResource TitleTextViewStyle}"
                                        FontSize="40"/>
 
-                            <lvc:CartesianChart Grid.Row="3" 
-                                                Margin="0,200,0,0">
-                                <lvc:CartesianChart.Series>
-                                    <lvc:ColumnSeries Title="Horas de sueño" 
-                                                      Values="{Binding Results}"
-                                                      Configuration="{Binding Mapper}"/>
-                                </lvc:CartesianChart.Series>
+                            <lvc:CartesianChart Grid.Row="3"
+                                                Margin="0,50,0,0"
+                                                Height="360"
+                                                Width="600"
+                                                Series="{Binding SeriesCollection}"
+                                                LegendLocation="Bottom">
+
                                 <lvc:CartesianChart.AxisX>
-                                    <lvc:Axis LabelsRotation="-20" 
-                                              Labels="{Binding Labels}" 
-                                              DisableAnimations="True"> 
-                                        <lvc:Axis.Separator>
-                                            <lvc:Separator Step="2"></lvc:Separator>
-                                        </lvc:Axis.Separator>
-                                    </lvc:Axis>
+                                    <lvc:Axis Title="Día" Labels="{Binding Labels}"></lvc:Axis>
                                 </lvc:CartesianChart.AxisX>
+
                                 <lvc:CartesianChart.AxisY>
-                                    <lvc:Axis LabelFormatter="{Binding MillionFormatter}"></lvc:Axis>
+                                    <lvc:Axis Title="Horas de sueño" Labels="{Binding values}"></lvc:Axis>
                                 </lvc:CartesianChart.AxisY>
+
                             </lvc:CartesianChart>
 
                         </Grid>

@@ -101,6 +101,7 @@ namespace CycleCare.Views
 
         private bool IsDateValid(DateTime? selectedDate)
         {
+            Console.WriteLine(selectedDate);
             if (!selectedDate.HasValue)
             {
                 Console.WriteLine("Date is not valid");

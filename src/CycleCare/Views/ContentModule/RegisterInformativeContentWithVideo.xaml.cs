@@ -4,18 +4,15 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
-using CycleCare.GrpcClients;
 
 namespace CycleCare.Views.ContentModule
 {
     public partial class RegisterInformativeContentWithVideo : Page
     {
-        private GrpcVideoClient _grpcVideoClient;
 
         public RegisterInformativeContentWithVideo()
         {
             InitializeComponent();
-            _grpcVideoClient = new GrpcVideoClient();
         }
 
         private void BtnGoBack_Click(object sender, RoutedEventArgs e)
@@ -46,7 +43,6 @@ namespace CycleCare.Views.ContentModule
             try
             {
                 byte[] fileData = await ReadFileAsync(fileName);
-                await _grpcVideoClient.UploadVideo(fileName, fileData);
                 MessageBox.Show("Video subido exitosamente.");
             }
             catch (Exception ex)

@@ -1,0 +1,115 @@
+﻿<Page x:Class="CycleCare.Views.ContentDetailView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CycleCare.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ContentDetailView">
+
+    <Viewbox Stretch="Fill">
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Auto">
+            <StackPanel
+                Background="{StaticResource WhiteBrush}" 
+                Width="1280" 
+                Height="720">
+                <Grid>
+                    <Grid Margin="0,20,0,0">
+                        <ScrollViewer>
+                            <Grid HorizontalAlignment="Center" 
+                              Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Button 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Top" 
+                            Width="70" 
+                            Height="70" 
+                            Margin="-200,11,0,0"
+                            BorderThickness="0" 
+                            Click="BtnGoBack_Click" 
+                            Cursor="Hand">
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <Image Source="../Resources/Icons/goBackIcon.png" 
+                                           Stretch="UniformToFill">
+                                            </Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Image x:Name="img_informativeContent"
+                                       Grid.Row="0"
+                                       Source="{Binding imageContent}"
+                                       Height="200"/>
+
+                                <TextBlock x:Name="txtTitle"
+                                           Grid.Row="1"
+                                           Width="800"
+                                           Style="{StaticResource TitleTextViewStyle}" 
+                                           Text="¿Sabes las diferencias entre un condón masculino y uno femenino?" 
+                                           FontSize="30"
+                                           HorizontalAlignment="Center"
+                                           TextWrapping="Wrap"
+                                           Margin="0,40,0,0"
+                                           Foreground="{StaticResource BlackBrush}"/>
+
+                                <TextBlock x:Name="txtAuthor"
+                                           Grid.Row="2"
+                                           Width="800"
+                                           Style="{StaticResource DescriptionTextViewStyle}" 
+                                           Text="Por: Eduardo Carrera Colorado" 
+                                           FontSize="20"
+                                           HorizontalAlignment="Center"
+                                           TextWrapping="Wrap"
+                                           Margin="0,30,0,0"
+                                           Foreground="{StaticResource SoftPink94Brush}"/>
+
+                                <ComboBox Grid.Row="4"
+                                      x:Name="RateContentCB"
+                                      Width="200"
+                                      Height="30"
+                                      Margin="0,0,44,0"
+                                      HorizontalAlignment="Right"
+                                      SelectionChanged="RateContentCB_SelectionChanged">
+                                <ComboBoxItem Content="1"/>
+                                <ComboBoxItem Content="2"/>
+                                <ComboBoxItem Content="3"/>
+                                <ComboBoxItem Content="4"/>
+                                <ComboBoxItem Content="5"/>
+                                </ComboBox>
+
+                                <TextBlock Grid.Row="3"
+                                           Width="280"
+                                           Style="{StaticResource DescriptionTextViewStyle}" 
+                                           Text="¡Califica esta información!" 
+                                           FontSize="20"
+                                           HorizontalAlignment="Right"
+                                           Foreground="{StaticResource StrongPinkBrush}"/>
+
+                            <TextBlock     x:Name="txtDescription"
+                                           Grid.Row="5"
+                                           Width="700"
+                                           Style="{StaticResource DescriptionTextViewStyle}" 
+                                           Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu. Aliquam consequat. Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi. Aenean magna nisl, mollis quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst."
+                                           TextWrapping="Wrap"
+                                           FontSize="20"
+                                           Margin="50,25,0,0"
+                                           HorizontalAlignment="Left"
+                                           Foreground="{StaticResource BlackBrush}"/>
+                        </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Viewbox>
+</Page>

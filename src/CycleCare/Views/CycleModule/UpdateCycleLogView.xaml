@@ -1,0 +1,234 @@
+﻿<Page x:Class="CycleCare.Views.UpdateCycleLogView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CycleCare.Views"      mc:Ignorable="d" d:DesignHeight="720" d:DesignWidth="1280">
+
+    <Viewbox Stretch="Fill">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <StackPanel Background="{StaticResource WhiteBrush}" Width="1280" Height="720">
+                <Grid Height="720">
+                    <Grid Margin="0,20,0,0">
+                        <ScrollViewer>
+                            <StackPanel Margin="16">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock x:Name="tvTitle" Style="{StaticResource InstructionsTextViewStyle}" Text="Edición del registro" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBlock x:Name="tvDate" Text="23 Mayo 2024" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource InstructionsTextViewStyle}"/>
+                                </StackPanel>
+                                <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Height="70" Margin="28,-100,0,0" BorderThickness="0" Click="BtnGoBack_Click" Cursor="Hand">
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <Image Source="../Resources/Icons/goBackIcon.png" Stretch="UniformToFill">
+                                            </Image>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Button x:Name="btnSave" Content="Guardar" Style="{StaticResource ButtonStyle}" Width="100" HorizontalAlignment="Right" Background="ForestGreen" VerticalAlignment="Top" Cursor="Hand" Margin="0,-100,30,0" Click="BtnSave_Click"/>
+
+                                <Border BorderThickness="0,0,0,1" BorderBrush="LightGray" Margin="0,16"/>
+
+                                <!-- Sección de flujo menstrual -->
+                                <TextBlock Text="FLUJO MENSTRUAL" HorizontalAlignment="Center" Style="{StaticResource InstructionsTextViewStyle}"   FontSize="22" FontWeight="Bold" Margin="20,8"/>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20,0">
+                                    <!-- Opciones de flujo menstrual -->
+                                    <StackPanel x:Name="lightFlowPanel" Tag="1" Width="100" Height="90" Background="White" Margin="0,0,8,0" MouseDown="MenstrualFlow_Click">
+                                        <Image Source="../Resources/Icons/ic_flow_light.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="Ligero" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    </StackPanel>
+
+                                    <StackPanel x:Name="mediumFlowPanel" Tag="2" Width="100" Height="90" Background="White" Margin="0,0,8,0" MouseDown="MenstrualFlow_Click">
+                                        <Image Source="../Resources/Icons/ic_flow_medium.png" Width="48" Height="48" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="Moderado" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    </StackPanel>
+
+                                    <StackPanel x:Name="heavyFlowPanel" Tag="3" Width="100" Height="90" Background="White" MouseDown="MenstrualFlow_Click">
+                                        <Image Source="../Resources/Icons/ic_flow_heavy.png" Width="48" Height="48" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="Abundante" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <!-- Sección para añadir una nota -->
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,16">
+                                    <Image ToolTip="Añade una nota" Source="../Resources/Icons/ic_note.png" Width="24" Height="24" Margin="0,0,10,0"/>
+                                    <TextBox x:Name="txtNote" Background="Transparent" Style="{StaticResource EditTextStyle}" Padding="8" ToolTip="Añade una nota" VerticalAlignment="Center"  PreviewTextInput="NoteTextBox_PreviewTextInput" TextChanged="NoteTextBox_TextChanged"/>
+                                    <Image ToolTip="Añade una nota" Source="../Resources/Icons/ic_edit.png" Width="24" Height="24" Margin="10,0,0,0"/>
+                                </StackPanel>
+
+                                <!-- Sección de síntomas -->
+                                <TextBlock Text="SÍNTOMAS" HorizontalAlignment="Center" Style="{StaticResource InstructionsTextViewStyle}"   FontSize="22" FontWeight="Bold" Margin="20,8"/>
+
+                                <!-- Layout para los síntomas -->
+                                <WrapPanel x:Name="symptomsWrapPanel" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20,0,20,0">
+                                    <CheckBox x:Name="abdominalPainCheckBox" Content="Dolor abdominal" Margin="4" Background="LightGray" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    <CheckBox x:Name="breastTendernessCheckBox" Content="Sensibilidad en los senos" Margin="4" Background="LightGray" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    <CheckBox x:Name="acneCheckBox" Content="Acné" Margin="4" Background="LightGray" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    <CheckBox x:Name="bloatingCheckBox" Content="Hinchazón abdominal" Margin="4" Background="LightGray" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    <CheckBox x:Name="fatigueCheckBox" Content="Fatiga" Margin="4" Background="LightGray" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    <CheckBox x:Name="headacheCheckBox" Content="Dolor de cabeza" Margin="4" Background="LightGray" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    <CheckBox x:Name="nauseaCheckBox" Content="Náuseas" Margin="4" Background="LightGray" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    <CheckBox x:Name="dizzinessCheckBox" Content="Mareos" Margin="4" Background="LightGray" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    <CheckBox x:Name="cravingsCheckBox" Content="Antojos" Margin="4" Background="LightGray" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    <CheckBox x:Name="constipationCheckBox" Content="Estreñimiento" Margin="4" Background="LightGray" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    <CheckBox x:Name="diarrheaCheckBox" Content="Diarrea" Margin="4" Background="LightGray" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    <CheckBox x:Name="insomniaCheckBox" Content="Insomnio" Margin="4" Background="LightGray" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    <CheckBox x:Name="vaginalItchingCheckBox" Content="Picazón vaginal" Margin="4" Background="LightGray" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    <CheckBox x:Name="vulvaPainCheckBox" Content="Dolor en vulva" Margin="4" Background="LightGray" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                </WrapPanel>
+
+                                <StackPanel>
+
+                                    <!-- Sección de flujo vaginal -->
+                                    <TextBlock Text="FLUJO VAGINAL" HorizontalAlignment="Center" Style="{StaticResource InstructionsTextViewStyle}"   FontSize="22" FontWeight="Bold" Margin="20,8"/>
+
+                                    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <!-- Opciones de flujo vaginal -->
+                                            <StackPanel Tag="1" x:Name="dryFlowStackPanel" Width="100" Height="90" Margin="0,0,8,0" MouseDown="VaginalFlow_Click">
+                                                <Image x:Name="dryFlowImage" Source="../Resources/Icons/ic_flow_dry.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                                <TextBlock x:Name="dryFlowText" Text="Seco" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                            </StackPanel>
+
+                                            <StackPanel Tag="2" x:Name="stickyFlowStackPanel" Width="100" Height="90" Margin="0,0,8,0" MouseDown="VaginalFlow_Click">
+                                                <Image x:Name="stickyFlowImage" Source="../Resources/Icons/ic_flow_sticky.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                                <TextBlock x:Name="stickyFlowText" Text="Pegajoso" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                            </StackPanel>
+
+                                            <StackPanel Tag="3" x:Name="creamyFlowStackPanel" Width="100" Height="90" Margin="0,0,8,0" MouseDown="VaginalFlow_Click">
+                                                <Image x:Name="creamyFlowImage" Source="../Resources/Icons/ic_flow_cream.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                                <TextBlock x:Name="creamyFlowText" Text="Cremoso" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                            </StackPanel>
+
+                                            <StackPanel Tag="4" x:Name="aqueousFlowStackPanel" Width="100" Height="90" Margin="0,0,8,0" MouseDown="VaginalFlow_Click">
+                                                <Image x:Name="aqueousFlowImage" Source="../Resources/Icons/ic_flow_aqueous.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                                <TextBlock x:Name="aqueousFlowText" Text="Acuoso" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                            </StackPanel>
+
+                                            <StackPanel Tag="5" x:Name="elasticFlowStackPanel" Width="100" Height="90" MouseDown="VaginalFlow_Click">
+                                                <Image x:Name="elasticFlowImage" Source="../Resources/Icons/ic_flow_elastic.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                                <TextBlock x:Name="elasticFlowText" Text="Elástico" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </StackPanel>
+
+                                <StackPanel>
+                                    <!-- Sección de estado de ánimo -->
+                                    <TextBlock Text="ESTADO DE ÁNIMO" HorizontalAlignment="Center" Style="{StaticResource InstructionsTextViewStyle}"   FontSize="22" FontWeight="Bold" Margin="20,8"/>
+
+                                    <!-- Carrusel de opciones de estados de ánimo -->
+                                    <ScrollViewer HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal">
+                                            <!-- Opciones de estados de ánimo -->
+                                            <StackPanel x:Name="happyMoodStackPanel" Width="100" Tag="1" Height="90" Margin="0,0,8,0" MouseDown="Mood_Click">
+                                                <Image Source="../Resources/Icons/ic_happy.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="Feliz" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                            </StackPanel>
+
+                                            <StackPanel x:Name="sadMoodStackPanel" Width="100" Tag="2" Height="90" Margin="0,0,8,0" MouseDown="Mood_Click">
+                                                <Image Source="../Resources/Icons/ic_sad.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="Triste" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                            </StackPanel>
+
+                                            <StackPanel x:Name="anxiousMoodStackPanel" Tag="3" Width="100" Height="90" Margin="0,0,8,0" MouseDown="Mood_Click">
+                                                <Image Source="../Resources/Icons/ic_anxious.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="Ansiosa" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                            </StackPanel>
+
+                                            <StackPanel x:Name="angryMoodStackPanel" Width="100" Tag="4" Height="90" Margin="0,0,8,0" MouseDown="Mood_Click">
+                                                <Image Source="../Resources/Icons/ic_angry.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="Enojada" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                            </StackPanel>
+
+                                            <StackPanel x:Name="tiredMoodStackPanel" Width="100" Tag="5" Height="90" Margin="0,0,8,0" MouseDown="Mood_Click">
+                                                <Image Source="../Resources/Icons/ic_tired.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="Cansada" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                            </StackPanel>
+
+                                            <StackPanel x:Name="energeticMoodStackPanel" Width="100" Tag="6" Height="90" Margin="0,0,8,0" MouseDown="Mood_Click">
+                                                <Image Source="../Resources/Icons/ic_energetic.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="Energética" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                            </StackPanel>
+
+                                            <StackPanel x:Name="relaxedMoodStackPanel" Width="100" Tag="7" Height="90" Margin="0,0,8,0" MouseDown="Mood_Click">
+                                                <Image Source="../Resources/Icons/ic_relaxed.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="Relajada" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                            </StackPanel>
+
+                                            <StackPanel x:Name="focusedMoodStackPanel" Width="100" Tag="8" Height="90" Margin="0,0,8,0" MouseDown="Mood_Click">
+                                                <Image Source="../Resources/Icons/ic_focused.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="Concentrada" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                            </StackPanel>
+
+                                            <StackPanel x:Name="stressedMoodStackPanel" Width="100" Tag="9" Height="90" Margin="0,0,8,0" MouseDown="Mood_Click">
+                                                <Image Source="../Resources/Icons/ic_stressed.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="Estresada" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                            </StackPanel>
+
+                                            <StackPanel x:Name="irritatedMoodStackPanel" Width="100" Tag="10" Height="90" MouseDown="Mood_Click">
+                                                <Image Source="../Resources/Icons/ic_irritable.png" Width="60" Height="50" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="Irritada" TextAlignment="Center" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </StackPanel>
+
+                                <StackPanel HorizontalAlignment="Center">
+                                    <!-- Sección de medicación -->
+                                    <TextBlock Text="MEDICACIÓN" HorizontalAlignment="Center" Style="{StaticResource InstructionsTextViewStyle}"   FontSize="22" FontWeight="Bold" Margin="20,8"/>
+
+                                    <!-- Layout para la lista de medicación -->
+                                    <WrapPanel x:Name="medicationWrapPanel">
+                                        <!-- Opciones de medicación -->
+                                        <CheckBox x:Name="hormoneTherapyCheckBox" Content="Terapia hormonal" Margin="4" Background="#E0E0E0" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                        <CheckBox x:Name="emergencyPillCheckBox" Content="Pastilla de emergencia" Margin="4" Background="#E0E0E0" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                        <CheckBox x:Name="painkillersCheckBox" Content="Analgésicos" Margin="4" Background="#E0E0E0" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                        <CheckBox x:Name="antidepressantsCheckBox" Content="Antidepresivos" Margin="4" Background="#E0E0E0" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                        <CheckBox x:Name="antibioticsCheckBox" Content="Antibióticos" Margin="4" Background="#E0E0E0" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                        <CheckBox x:Name="antihistaminesCheckBox" Content="Antihistamínicos" Margin="4" Background="#E0E0E0" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    </WrapPanel>
+                                </StackPanel>
+                                <!-- Sección de Píldora anticonceptiva -->
+                                <StackPanel Margin="0,10,0,0" HorizontalAlignment="Center">
+                                    <TextBlock Text="PÍLDORA ANTICONCEPTIVA" HorizontalAlignment="Center" Style="{StaticResource InstructionsTextViewStyle}"   FontSize="22" FontWeight="Bold" Margin="20,8"/>
+                                    <!-- Layout para la lista de opciones de la píldora anticonceptiva -->
+                                    <WrapPanel>
+                                        <!-- Opciones de la píldora anticonceptiva -->
+                                        <CheckBox x:Name="pillTakenCheckBox" Content="Tomada" Margin="4" Background="#E0E0E0" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                        <CheckBox x:Name="pillForgottenCheckBox" Content="Olvidada" Margin="4" Background="#E0E0E0" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                        <CheckBox x:Name="doubleDoseCheckBox" Content="Dosis doble" Margin="4" Background="#E0E0E0" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                        <CheckBox x:Name="noDoseCheckBox" Content="Sin dosis" Margin="4" Background="#E0E0E0" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                        <CheckBox x:Name="lateDoseCheckBox" Content="Tarde" Margin="4" Background="#E0E0E0" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    </WrapPanel>
+                                </StackPanel>
+
+                                <!-- Sección de Horas de Sueño -->
+                                <StackPanel Margin="0,10,0,0" HorizontalAlignment="Center">
+                                    <TextBlock Text="HORAS DE SUEÑO" HorizontalAlignment="Center" Style="{StaticResource InstructionsTextViewStyle}"   FontSize="22" FontWeight="Bold" Margin="20,8"/>
+
+                                    <!-- Layout para la selección de horas de sueño -->
+                                    <WrapPanel HorizontalAlignment="Center">
+                                        <ComboBox x:Name="sleepHoursComboBox" Width="60" Height="30" Margin="4"/>
+                                    </WrapPanel>
+                                </StackPanel>
+
+                                <!-- Sección de Control de Nacimiento -->
+                                <StackPanel Margin="0,10,0,0">
+                                    <TextBlock Text="BIRTH CONTROL" HorizontalAlignment="Center" Style="{StaticResource InstructionsTextViewStyle}"   FontSize="22" FontWeight="Bold" Margin="20,8"/>
+
+                                    <!-- Layout para el control de nacimiento -->
+                                    <WrapPanel x:Name="birthControlWrapPanel" HorizontalAlignment="Center">
+                                        <RadioButton x:Name="insertedRadioButton" Content="Insertado" Margin="4" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                        <RadioButton x:Name="removedRadioButton" Content="Removido" Margin="4" Foreground="{StaticResource DarkGrayBrush}" FontFamily="{StaticResource PoppinsFont}" FontSize="15"/>
+                                    </WrapPanel>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Viewbox>
+</Page>

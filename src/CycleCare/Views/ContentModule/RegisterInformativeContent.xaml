@@ -1,0 +1,204 @@
+﻿<Page x:Class="CycleCare.Views.ContentModule.RegisterInformativeContent"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CycleCare.Views.ContentModule"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="RegisterInformativeContent">
+
+
+    <Viewbox Stretch="Fill">
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Auto">
+            <StackPanel
+                Background="{StaticResource WhiteBrush}" 
+                Width="1280" 
+                Height="720">
+                <Grid>
+                    <Grid Margin="0,20,0,0">
+                        <Button 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Top" 
+                            Width="70" 
+                            Height="70" 
+                            Margin="28,11,0,0"
+                            BorderThickness="0" 
+                            Click="BtnGoBack_Click" 
+                            Cursor="Hand">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Image Source="../Resources/Icons/goBackIcon.png" 
+                                           Stretch="UniformToFill">
+                                    </Image>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <Grid HorizontalAlignment="Center" 
+                              Margin="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0"
+                                       Margin="0,10,0,0"
+                                       Text="Contenido informativo" 
+                                       HorizontalAlignment="Center" 
+                                       Style="{StaticResource TitleTextViewStyle}"/>
+
+                            <TextBlock Text="* TÍTULO" 
+                                       Margin="50,10,0,0" 
+                                       Grid.Row="1" 
+                                       Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtTittle"  
+                                     Grid.Row="2" 
+                                     Style="{StaticResource EditTextStyle}" 
+                                     Background="{StaticResource LightGrayBrush}"/>
+                            
+                            <TextBlock x:Name="lblTitleError" 
+                                       Grid.Row="3" 
+                                       Text="El título es incorrecto" 
+                                       Margin="0,0,0,20" 
+                                       FontSize="12"  
+                                       Width="450"
+                                       TextWrapping="Wrap" 
+                                       Style="{StaticResource InstructionsTextViewStyle}" 
+                                       Foreground="{StaticResource StrongPinkBrush}" 
+                                       Visibility="Collapsed"/>
+
+
+
+
+                            <TextBlock Text="* Contenido Multimedia" 
+                                       Margin="50,10,0,0" 
+                                       Grid.Row="4" 
+                                       Style="{StaticResource InstructionsTextViewStyle}" />
+
+                            
+                            <Image x:Name="informativeContentImage" 
+                                   Grid.Row="5"
+                                   Height="120" Width="360" 
+                                   Visibility="Visible"/>
+                            
+                            <Grid Grid.Row="5"
+                                  Width="360"
+                                  Height="120"
+                                  Background="LightGray"
+                                  Visibility="Visible">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Image Grid.Row="0"
+                                       Margin="0,10,0,0"
+                                       Source="../Resources/Icons/UploadContentIcon.png" 
+                                       Stretch="UniformToFill"
+                                       HorizontalAlignment="Center"
+                                       Height="40"
+                                       Width="40"/>
+
+                                <TextBlock Grid.Row="1"
+                                           Width="200"
+                                           Style="{StaticResource DescriptionTextViewStyle}" 
+                                           Text="Agrega una imagen, este será la portada del contenido informativo" 
+                                           FontSize="10"
+                                           HorizontalAlignment="Center"
+                                           TextWrapping="Wrap"
+                                           Margin="40,5,0,0"
+                                           Foreground="{StaticResource BlackBrush}"/>
+
+                                <TextBlock Grid.Row="2"
+                                           Width="200"
+                                           Style="{StaticResource DescriptionTextViewStyle}" 
+                                           Text="Formatos permitidos PNG y JPG" 
+                                           FontSize="10"
+                                           HorizontalAlignment="Center"
+                                           TextWrapping="Wrap"
+                                           Margin="40,5,0,0"
+                                           Foreground="{StaticResource SoftPink94Brush}"/>
+
+                            </Grid>
+                            
+                            <TextBlock x:Name="lblImageError" 
+                                       Grid.Row="6" 
+                                       Text="Debes seleccionar una imagen" 
+                                       Margin="0,0,0,20" 
+                                       FontSize="12"  
+                                       Width="450"
+                                       TextWrapping="Wrap" 
+                                       Style="{StaticResource InstructionsTextViewStyle}" 
+                                       Foreground="{StaticResource StrongPinkBrush}" 
+                                       Visibility="Collapsed"/>
+
+
+
+                            <Button x:Name="btnAddImage" 
+                                    Margin="0,10,0,0" 
+                                    Grid.Row="7" 
+                                    Width="200" 
+                                    Content="Seleccionar imagen" 
+                                    Style="{StaticResource ButtonStyle}" 
+                                    Click="BtnUploadImage_Click" />
+
+                            <TextBlock Text="* DESCRIPCIÓN" 
+                                       Margin="50,10,0,0" 
+                                       Grid.Row="8" 
+                                       Style="{StaticResource InstructionsTextViewStyle}" />
+                            <TextBox x:Name="txtDescription"   
+                                     Grid.Row="9" 
+                                     Style="{StaticResource EditTextForLongDescriptionStyle}" 
+                                     Background="{StaticResource LightGrayBrush}"/>
+
+                            <TextBlock x:Name="lblDescriptionError" 
+                                       Grid.Row="10" 
+                                       Text="La descripción es incorrecta" 
+                                       Margin="0,0,0,20" 
+                                       FontSize="12"  
+                                       Width="450"
+                                       TextWrapping="Wrap" 
+                                       Style="{StaticResource InstructionsTextViewStyle}" 
+                                       Foreground="{StaticResource StrongPinkBrush}" 
+                                       Visibility="Collapsed"/>
+
+                            <Button x:Name="btnPublishContent" 
+                                    Margin="0,20,0,0" 
+                                    Grid.Row="11" 
+                                    Width="200" 
+                                    Content="Publicar" 
+                                    Style="{StaticResource ButtonStyle}" 
+                                    Click="BtnPublishContent_Click"
+                                    Visibility="Collapsed"/>
+
+                            <Button x:Name="btnEditContent" 
+                                    Margin="0,20,0,0" 
+                                    Grid.Row="11" 
+                                    Width="200" 
+                                    Content="Editar" 
+                                    Style="{StaticResource ButtonStyle}" 
+                                    Click="BtnEditContent_Click"
+                                    Visibility="Collapsed"/>
+
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </StackPanel> 
+        </ScrollViewer>
+        
+    </Viewbox>
+</Page>
